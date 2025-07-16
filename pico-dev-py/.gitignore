@@ -1,0 +1,29 @@
+# python
+
+.venv
+__pycache__
+
+## coverage
+
+.coverage*
+
+## pdm
+
+.pdm-python
+
+## rope
+
+.ropeproject
+
+## mypy
+
+.dmypy.json
+
+# direnv
+
+/.direnv
+
+# environments
+
+/.venv-*
+/_build*

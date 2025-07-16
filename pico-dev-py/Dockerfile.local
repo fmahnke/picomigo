@@ -1,0 +1,16 @@
+FROM registry.mahnke.tech/mktech/build:latest
+
+RUN --mount=type=cache,id=pacman-cache,target=/var/cache/pacman,sharing=locked \
+    pacman --noconfirm -Syu \
+    udisks2
+
+# RUN pacman --noconfirm -Scc
+
+ARG source_name=pico-dev
+ARG source_dir=/usr/local/src/$source_name
+
+RUN mkdir -p $source_dir && chmod 777 $source_dir
+
+WORKDIR $source_dir
+
+COPY . .

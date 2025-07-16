@@ -1,0 +1,67 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+name = "pico-dev"
+dynamic = ["version"]
+description = ""
+authors = [{name = "Fritz Mahnke", email = "fritz@mahnke.tech"}]
+license = {text = "GPL-3.0"}
+readme = "README.md"
+requires-python = ">=3.12"
+keywords = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Documentation",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+dependencies = [
+    "click>=8.1.7",
+    "mktech @ git+http://git.mahnke.tech/lib/python/mktech/mktech.git@0.19.0",
+    "rshell>=0.0.36",
+]
+
+[project.urls]
+Homepage = "https://fmahnke.github.io/pico-dev"
+Documentation = "https://fmahnke.github.io/pico-dev"
+Changelog = "https://fmahnke.github.io/pico-dev/changelog"
+Repository = "https://github.com/fmahnke/pico-dev"
+Issues = "https://github.com/fmahnke/pico-dev/issues"
+Discussions = "https://github.com/fmahnke/pico-dev/discussions"
+
+[project.scripts]
+pico-dev = "pico_dev.cli:main"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.version]
+source = "scm"
+fallback_version = "0.0.0"
+
+[dependency-groups]
+dev = [
+    "micropython-rp2-rpi-pico2-w-stubs>=1.25.0.post4",
+    "mktech-dev-tools[check,debug,doc,lsp-pyright,lsp-python-lsp-server] @ git+http://git.mahnke.tech/lib/python/mktech/dev-tools.git@0.1.0",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = [ "src" ]
+
+[tool.pylsp-mypy]
+enabled = false
+follow-imports = "normal"
