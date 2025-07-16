@@ -1,0 +1,2 @@
+cp -r src/pico_dev/pico/* /pyboard
+repl ~ import main
