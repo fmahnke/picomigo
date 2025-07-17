@@ -1,2 +1,2 @@
-rsync --mirror src/ /pyboard/
+rsync --mirror src/pico_dev/pico /pyboard/
 repl ~ import main
