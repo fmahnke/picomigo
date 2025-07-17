@@ -1,0 +1,6 @@
+# kicad
+
+/kicad/#auto_saved_files#
+/kicad/*.lck
+/kicad/picomigo-backups
+fp-info-cache
