@@ -1,10 +1,10 @@
 # from dataclasses import dataclass
 # from enum import Enum, auto
 
-from machine import Pin
+from machine import ADC, Pin
 from pico.rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
-__all__ = ['init', 'is_on', 'switches']
+__all__ = ['init', 'is_on', 'pot_0', 'switches']
 
 # @dataclass
 # class Switch:
@@ -25,6 +25,8 @@ __all__ = ['init', 'is_on', 'switches']
 #     ROTARY_ENCODER = auto()
 #     BUTTON_0 = auto()
 #     BUTTON_1 = auto()
+
+pot_0 = ADC(28)
 
 switches = {}
 
