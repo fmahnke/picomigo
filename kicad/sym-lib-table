@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "display")(type "KiCad")(uri "${KIPRJMOD}/lib/display/display.kicad_sym")(options "")(descr ""))
+  (lib (name "logic")(type "KiCad")(uri "${KIPRJMOD}/lib/logic/logic.kicad_sym")(options "")(descr ""))
+  (lib (name "MCU_Module_RaspberryPi_Pico")(type "KiCad")(uri "${KIPRJMOD}/lib/RaspberryPi_Pico/MCU_Module_RaspberryPi_Pico.kicad_sym")(options "")(descr ""))
+)
