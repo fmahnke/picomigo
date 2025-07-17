@@ -1,9 +1,14 @@
 from time import sleep
+import utime
 
 from pico.modules import switches
 
 switches.init()
 
+while True:
+    switches._encoder.raw_tick()  # handle encoder events
+    utime.sleep_ms(1)  # delay'''
+'''
 count = 0
 
 while True:
@@ -19,4 +24,9 @@ while True:
 
         print(f'Switch {it} is: {state}')
 
+        encoder_value = switches._encoder.value()
+
+        print(f'Encoder: {encoder_value}')
+
     sleep(1.0)
+'''
