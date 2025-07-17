@@ -1,0 +1,3 @@
+# ideas
+
+- continuity/resistance check
