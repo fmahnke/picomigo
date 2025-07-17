@@ -8,6 +8,22 @@
 
   "allowedUntypedLibraries": [],
 
+  "executionEnvironments": [
+    {
+      "root": "src/pico_dev/pico",
+      "reportMissingModuleSource": false,
+      "reportMissingTypeStubs": false,
+    }
+  ],
+
+  "executionEnvironments": [
+    {
+      "root": "src/pico_dev/examples",
+      "reportMissingModuleSource": false,
+      "reportMissingTypeStubs": false,
+    }
+  ],
+
   "pythonVersion": "3.12",
   "pythonPlatform": "Linux",
 }
