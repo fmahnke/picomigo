@@ -511,6 +511,18 @@ lsp-python-lsp-server = [
 ]
 
 [[package]]
+name = "mpremote"
+version = "1.25.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyserial" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/86/1d/4a194eb385133349954cbf269e673e59e28b9510c7805e955da1cd32f4c6/mpremote-1.25.0.tar.gz", hash = "sha256:d0dcd8ab364d87270e1766308882e536e541052efd64aadaac83bc7ebbea2815", size = 29082, upload-time = "2025-04-15T14:38:04.012Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ff/77/d43d7bf9aa637c7b2788c48fc4eb131a9bb4cb24568297453c2537fd621d/mpremote-1.25.0-py3-none-any.whl", hash = "sha256:42691ff8f7ea4b5f2fc1b51de99609995d383671a4b4d4daad8cbd486d26aa23", size = 33555, upload-time = "2025-04-15T14:38:02.68Z" },
+]
+
+[[package]]
 name = "mypy"
 version = "1.17.0"
 source = { registry = "https://pypi.org/simple" }
@@ -636,6 +648,7 @@ source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "mktech" },
+    { name = "mpremote" },
     { name = "rshell" },
 ]
 
@@ -649,6 +662,7 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
     { name = "mktech", git = "http://git.mahnke.tech/lib/python/mktech/mktech.git?rev=0.19.0" },
+    { name = "mpremote", specifier = ">=1.25.0" },
     { name = "rshell", specifier = ">=0.0.36" },
 ]
 
