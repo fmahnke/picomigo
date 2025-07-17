@@ -5,6 +5,8 @@ from pico.modules import switches
 switches.init()
 
 while True:
-    print('pico-dev ready...')
+    val = switches.pot_0.read_u16()
 
-    sleep(5)
+    print(f'Pot value: {val}')
+
+    sleep(0.1)
