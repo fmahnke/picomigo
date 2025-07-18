@@ -12,18 +12,29 @@ else
     dry_run=
 fi
 
-do_rsync () {
-    rsync $dry_run "$@"
+do_build_rsync () {
+    name="$1"
+
+    shift
+
+    printf "\n--- build $name... ---\n\n"
+
+    rsync $dry_run --progress --delete "$@"
 }
 
-do_rsync -avzr --progress --delete \
+do_build_rsync pico \
+    -avzr \
     --exclude='examples' --exclude='lib' --exclude='__pycache__' \
     src/pico_dev/pico/ \
     _build
 
-do_rsync -avzr --progress --delete \
+do_build_rsync neopixel \
+    -avzr \
     lib/pi_pico_neopixel/neopixel.py _build/lib/neopixel2.py
-do_rsync -avzr --progress --delete \
+do_build_rsync rotary_encoder \
+    -avzr \
     lib/micropython_rotary_encoder/micropython_rotary_encoder/ _build/lib/rotary_encoder
+
+printf "\n--- install to board... ---\n\n"
 
 rshell -f rshell_build
