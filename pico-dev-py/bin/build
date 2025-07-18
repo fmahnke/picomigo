@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+dry_run="${1:-0}"
+
+build_dir=_build
+
+if [ "$dry_run" = -n ]; then
+    dry_run='--dry-run'
+else
+    dry_run=
+fi
+
+do_rsync () {
+    rsync $dry_run "$@"
+}
+
+do_rsync -avzr --progress --delete \
+    --exclude='examples' --exclude='lib' --exclude='__pycache__' \
+    src/pico_dev/pico/ \
+    _build
+
+do_rsync -avzr --progress --delete \
+    lib/pi_pico_neopixel/neopixel.py _build/lib/neopixel2.py
+do_rsync -avzr --progress --delete \
+    lib/micropython_rotary_encoder/micropython_rotary_encoder/ _build/lib/rotary_encoder
+
+rshell -f rshell_build

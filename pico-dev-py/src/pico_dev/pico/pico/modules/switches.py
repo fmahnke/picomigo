@@ -2,7 +2,7 @@
 # from enum import Enum, auto
 
 from machine import ADC, Pin
-from pico.rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
+from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
 __all__ = ['init', 'is_on', 'pot_0', 'switches']
 
