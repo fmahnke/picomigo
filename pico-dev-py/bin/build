@@ -31,9 +31,14 @@ do_build_rsync pico \
 do_build_rsync neopixel \
     -avzr \
     lib/pi_pico_neopixel/neopixel.py _build/lib/neopixel2.py
+
 do_build_rsync rotary_encoder \
     -avzr \
     lib/micropython_rotary_encoder/micropython_rotary_encoder/ _build/lib/rotary_encoder
+
+do_build_rsync typing \
+    -avzr \
+    lib/typing/* _build/lib
 
 printf "\n--- install to board... ---\n\n"
 
