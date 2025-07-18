@@ -11,6 +11,9 @@
       "rotary_encoder"
   ],
 
+  "reportAny": false,
+  "reportExplicitAny": false,
+
   "executionEnvironments": [
     {
       "root": "src/pico_dev/pico",

@@ -25,7 +25,7 @@ else:
 neoRing = neopixel.NeoPixel(Pin(ws_pin), led_num, bpp=_bpp, timing=1)
 
 
-def set_brightness(color):
+def set_brightness(color: tuple[int, ...]):
     r, g, b = color
     r = int(r * BRIGHTNESS)
     g = int(g * BRIGHTNESS)
@@ -45,7 +45,7 @@ def off():
 colors = [red, green, blue]
 
 
-def set_color(color) -> None:
+def set_color(_color: tuple[int, ...]) -> None:
     # color = set_brightness(color)
 
     # for it in range(0, 3):
