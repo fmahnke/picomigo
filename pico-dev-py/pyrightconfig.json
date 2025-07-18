@@ -6,19 +6,24 @@
 
   "typeCheckingMode": "recommended",
 
-  "allowedUntypedLibraries": [],
+  "allowedUntypedLibraries": [
+      "neopixel2",
+      "rotary_encoder"
+  ],
 
   "executionEnvironments": [
     {
       "root": "src/pico_dev/pico",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,
-    }
-  ],
-
-  "executionEnvironments": [
+    },
     {
       "root": "src/pico_dev/examples",
+      "reportMissingModuleSource": false,
+      "reportMissingTypeStubs": false,
+    },
+    {
+      "root": "lib",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,
     }
