@@ -1,10 +1,10 @@
 switches = {
-    'button_0': 14,
-    'button_1': 13,
-    'potentiometer_0': 28,
+    'button_0': 15,
+    'button_1': 14,
+    'potentiometer_0': 26,
     'rotary_encoder': {
-        'clk': 9,
-        'dt': 6,
-        'sw': 17,
+        'clk': 18,
+        'dt': 17,
+        'sw': 19,
     },
 }
