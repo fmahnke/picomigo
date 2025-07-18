@@ -1,11 +1,16 @@
-import utime
+import asyncio
+
 from pico.modules import switches
 
-switches.init()
 
-while True:
-    switches.encoder.raw_tick()
+async def async_some_other_task():
+    print("async_some_other_task")
+    while True:
+        await asyncio.sleep(1)
 
-    utime.sleep_ms(  # pyright: ignore[reportAttributeAccessIssue,reportUnknownMemberType] # noqa: E501
-        1
-    )
+
+async def main():
+    _ = await switches.init()
+
+
+asyncio.run(main())
