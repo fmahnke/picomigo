@@ -2,6 +2,7 @@
 # from enum import Enum, auto
 
 from machine import ADC, Pin
+from pico.config import switches as config
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
 __all__ = ['init', 'is_on', 'pot_0', 'switches']
@@ -26,13 +27,13 @@ __all__ = ['init', 'is_on', 'pot_0', 'switches']
 #     BUTTON_0 = auto()
 #     BUTTON_1 = auto()
 
-pot_0 = ADC(28)
+pot_0 = ADC(config['potentiometer_0'])
 
 switches = {}
 
-_encoder_pin_clk = Pin(9, Pin.IN, Pin.PULL_UP)
-_encoder_pin_dt = Pin(6, Pin.IN, Pin.PULL_UP)
-_encoder_pin_sw = Pin(17, Pin.IN, Pin.PULL_UP)
+_encoder_pin_clk = Pin(config['rotary_encoder']['clk'], Pin.IN, Pin.PULL_UP)
+_encoder_pin_dt = Pin(config['rotary_encoder']['dt'], Pin.IN, Pin.PULL_UP)
+_encoder_pin_sw = Pin(config['rotary_encoder']['sw'], Pin.IN, Pin.PULL_UP)
 
 _encoder = RotaryEncoderRP2(_encoder_pin_clk, _encoder_pin_dt, _encoder_pin_sw)
 
@@ -85,8 +86,8 @@ _encoder.on(RotaryEncoderEvent.ANY, on_any)
 
 def init() -> None:
     # switches['rotary encoder'] = Pin(17, Pin.IN)
-    switches['button_0'] = Pin(14, Pin.IN)
-    switches['button_1'] = Pin(13, Pin.IN)
+    switches['button_0'] = Pin(config['button_0'], Pin.IN)
+    switches['button_1'] = Pin(config['button_1'], Pin.IN)
 
 
 def is_on(switch: str) -> bool:
