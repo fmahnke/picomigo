@@ -3,7 +3,8 @@ import nox
 
 @nox.session(reuse_venv=True)
 def typing(session):
-    session.run('mypy', external=True)
+    session.run('basedpyright', external=True)
+    # session.run('mypy', external=True)
 
 
 @nox.session(reuse_venv=True)
