@@ -66,3 +66,6 @@ source = [ "src" ]
 [tool.pylsp-mypy]
 enabled = false
 follow-imports = "normal"
+
+[tool.pytest.ini_options]
+testpaths = [ "tests" ]
