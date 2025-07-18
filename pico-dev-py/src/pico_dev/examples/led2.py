@@ -2,7 +2,9 @@ from time import sleep
 
 from neopixel2 import Neopixel, slice_maker
 
-pixels = Neopixel(64, 0, 0, "GRB")
+# from pico.config import led as config
+
+pixels = Neopixel(64, 0, 20, "GRB")
 
 print('start pixels')
 

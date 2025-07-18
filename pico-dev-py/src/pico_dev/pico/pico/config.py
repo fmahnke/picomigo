@@ -1,3 +1,5 @@
+__all__ = ['led', 'switches']
+
 switches = {
     'button_0': 15,
     'button_1': 14,
@@ -8,3 +10,5 @@ switches = {
         'sw': 19,
     },
 }
+
+led = 20
