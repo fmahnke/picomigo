@@ -19,12 +19,12 @@ do_build_rsync () {
 
     printf "\n--- build $name... ---\n\n"
 
-    rsync $dry_run --progress --delete "$@"
+    rsync $dry_run --progress --delete  --exclude='__pycache__' "$@"
 }
 
 do_build_rsync pico \
     -avzr \
-    --exclude='examples' --exclude='lib' --exclude='__pycache__' \
+    --exclude='examples' --exclude='lib' \
     src/pico_dev/pico/ \
     _build
 
