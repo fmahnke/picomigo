@@ -31,6 +31,10 @@ do_build_rsync pico \
     src/picomigo/pico/ \
     _build
 
+do_build_rsync ssd1306 \
+    -avzr \
+    lib/ssd1306/ssd1306.py _build/lib
+
 do_build_rsync neopixel \
     -avzr \
     lib/pi_pico_neopixel/neopixel.py _build/lib/neopixel2.py
