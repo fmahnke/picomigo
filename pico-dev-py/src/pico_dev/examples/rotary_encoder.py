@@ -10,7 +10,7 @@ async def async_some_other_task():
 
 
 async def main():
-    _ = await switches.init()
+    await switches.init()
 
 
 asyncio.run(main())
