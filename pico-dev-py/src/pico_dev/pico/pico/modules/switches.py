@@ -4,8 +4,6 @@
 # from dataclasses import dataclass
 # from enum import Enum, auto
 
-import asyncio
-import time
 from typing import Any
 
 from machine import ADC, Pin
@@ -91,24 +89,14 @@ encoder.on(RotaryEncoderEvent.ANY, on_any)
 '''
 
 
-async def init() -> None:
+def init() -> None:
     # switches['rotary encoder'] = Pin(17, Pin.IN)
     switches['button_0'] = Pin(config['button_0'], Pin.IN)
     switches['button_1'] = Pin(config['button_1'], Pin.IN)
 
-    print('init')
-    # _ = await asyncio.gather(encoder.async_tick(1))
-
-    # while encoder.alive:
-    #     _ = await encoder.async_tick(1)
-    print('inited')
-
 
 async def tick() -> None:
-    print('tick')
-    time.sleep(1)
-    print('tickdone')
-    encoder.async_tick(1)
+    await encoder.async_tick(1)
 
 
 def is_on(switch: str) -> bool:

@@ -1,39 +1,44 @@
-from time import sleep
+import asyncio
 
+import pico
 from neopixel2 import Neopixel, slice_maker
 
+
 # from pico.config import led as config
+async def main():
+    pixels = Neopixel(64, 0, 20, "GRB")
 
-pixels = Neopixel(64, 0, 20, "GRB")
+    print('start pixels')
 
-print('start pixels')
+    end = 8
 
-end = 8
-
-while True:
-    pixels.fill((0, 0, 0))
-    pixels.show()
-
-    sleep(1.0)
-
-    for index in range(0, end):
-        start = (0, 2, 0)
-        stop = (0, 50, 0)
-
-        pixels.set_pixel_line_gradient(0, end - 1, start, stop)
-
-        print(f'index {index}')
-        if index < end - 1:
-            pixels.set_pixel(
-                slice_maker[index + 1:end
-                            ],  # pyright: ignore[reportUnknownArgumentType]
-                (0, 0, 0)
-            )
-
+    while True:
+        pixels.fill((0, 0, 0))
         pixels.show()
 
-        sleep(0.5)
+        await asyncio.sleep(1.0)
 
+        for index in range(0, end):
+            start = (0, 2, 0)
+            stop = (0, 50, 0)
+
+            pixels.set_pixel_line_gradient(0, end - 1, start, stop)
+
+            print(f'index {index}')
+            if index < end - 1:
+                pixels.set_pixel(
+                    slice_maker[
+                        index
+                        + 1:end],  # pyright: ignore[reportUnknownArgumentType]
+                    (0, 0, 0)
+                )
+
+            pixels.show()
+
+            await asyncio.sleep(0.5)
+
+
+pico.run(main)
 # while True:
 #     pixels.set_pixel(0, (20, 0, 0))
 #     pixels.show()

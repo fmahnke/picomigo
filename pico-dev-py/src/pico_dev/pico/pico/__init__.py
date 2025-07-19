@@ -1,3 +1,5 @@
+# pyright: reportDeprecated=false
+
 import asyncio
 # from collections.abc import Coroutine
 from typing import Callable, Coroutine
@@ -12,10 +14,9 @@ def run(callback: Callable[..., Coroutine[None, None, None]]) -> None:
 async def _async_run(
     callback: Callable[..., Coroutine[None, None, None]]
 ) -> None:
-    await switches.init()
+    switches.init()
 
-    while True:
-        _ = await asyncio.gather(
-            asyncio.create_task(switches.tick()),
-            asyncio.create_task(callback()),
-        )
+    _ = await asyncio.gather(
+        switches.tick(),
+        callback(),
+    )

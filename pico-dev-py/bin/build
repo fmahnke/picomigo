@@ -5,6 +5,7 @@ set -eu
 dry_run="${1:-0}"
 
 build_dir=_build
+lib_dir="$build_dir/lib"
 
 if [ "$dry_run" = -n ]; then
     dry_run='--dry-run'
@@ -21,6 +22,8 @@ do_build_rsync () {
 
     rsync $dry_run --progress --delete  --exclude='__pycache__' "$@"
 }
+
+mkdir -p "$build_dir" "$lib_dir"
 
 do_build_rsync pico \
     -avzr \

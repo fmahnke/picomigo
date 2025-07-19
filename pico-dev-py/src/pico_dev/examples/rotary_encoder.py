@@ -1,16 +1,11 @@
 import asyncio
 
-from pico.modules import switches
+import pico
 
 
-async def async_some_other_task():
-    print("async_some_other_task")
+async def main():
     while True:
         await asyncio.sleep(1)
 
 
-async def main():
-    await switches.init()
-
-
-asyncio.run(main())
+pico.run(main)
