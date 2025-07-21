@@ -27,3 +27,7 @@ __pycache__
 
 /.venv-*
 /_build*
+
+# libs
+
+lib/st7789_mpy

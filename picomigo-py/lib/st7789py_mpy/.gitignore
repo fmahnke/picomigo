@@ -1,0 +1,10 @@
+.vscode
+.idea
+__pycache__
+*~
+*.pyc
+*.o
+*.P
+.history
+*.mpy
+sphinx/source/_build
