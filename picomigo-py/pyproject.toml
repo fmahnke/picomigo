@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "pico-dev"
+name = "picomigo"
 dynamic = ["version"]
 description = ""
 authors = [{name = "Fritz Mahnke", email = "fritz@mahnke.tech"}]
@@ -35,15 +35,15 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://fmahnke.github.io/pico-dev"
-Documentation = "https://fmahnke.github.io/pico-dev"
-Changelog = "https://fmahnke.github.io/pico-dev/changelog"
-Repository = "https://github.com/fmahnke/pico-dev"
-Issues = "https://github.com/fmahnke/pico-dev/issues"
-Discussions = "https://github.com/fmahnke/pico-dev/discussions"
+Homepage = "https://fmahnke.github.io/picomigo"
+Documentation = "https://fmahnke.github.io/picomigo"
+Changelog = "https://fmahnke.github.io/picomigo/changelog"
+Repository = "https://github.com/fmahnke/picomigo"
+Issues = "https://github.com/fmahnke/picomigo/issues"
+Discussions = "https://github.com/fmahnke/picomigo/discussions"
 
 [project.scripts]
-pico-dev = "pico_dev.cli:main"
+picomigo = "picomigo.cli:main"
 
 [tool.pdm]
 distribution = true

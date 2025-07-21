@@ -1,4 +1,4 @@
-# pico-dev
+# picomigo
 
 ## Copy library to board
 
@@ -9,7 +9,7 @@ rshell -f rshell_build
 ## Run examples
 
 ```bash
-mpremote run src/pico_dev/examples/<example>.py
+mpremote run src/picomigo/examples/<example>.py
 ```
 
 ## Run main

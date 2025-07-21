@@ -1,6 +1,6 @@
 import pytest
 
-from pico_dev import cli
+from picomigo import cli
 
 
 def test_main() -> None:

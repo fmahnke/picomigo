@@ -5,6 +5,6 @@ from pico.modules import switches
 switches.init()
 
 while True:
-    print('pico-dev ready...')
+    print('picomigo ready...')
 
     sleep(5)

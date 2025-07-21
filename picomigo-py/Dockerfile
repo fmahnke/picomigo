@@ -6,7 +6,7 @@ FROM registry.mahnke.tech/dbox/python:latest
 
 # RUN pacman --noconfirm -Scc
 
-ARG source_name=pico-dev
+ARG source_name=picomigo
 ARG source_dir=/usr/local/src/$source_name
 ARG build_dir=/build
 

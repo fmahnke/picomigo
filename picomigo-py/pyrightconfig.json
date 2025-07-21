@@ -16,12 +16,12 @@
 
   "executionEnvironments": [
     {
-      "root": "src/pico_dev/pico",
+      "root": "src/picomigo/pico",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,
     },
     {
-      "root": "src/pico_dev/examples",
+      "root": "src/picomigo/examples",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,
     },

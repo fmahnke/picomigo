@@ -10,11 +10,11 @@ copyright_license: GNU General Public License v3.0
 docker_registry: registry.mahnke.tech
 docker_registry_path: application
 project_description: ''
-project_name: pico-dev
-python_package_command_line_name: pico-dev
-python_package_distribution_name: pico-dev
-python_package_import_name: pico_dev
-repository_name: pico-dev
+project_name: picomigo
+python_package_command_line_name: picomigo
+python_package_distribution_name: picomigo
+python_package_import_name: picomigo
+repository_name: picomigo
 repository_namespace: fmahnke
 repository_provider: github.com
 

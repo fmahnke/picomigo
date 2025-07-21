@@ -28,7 +28,7 @@ mkdir -p "$build_dir" "$lib_dir"
 do_build_rsync pico \
     -avzr \
     --exclude='examples' --exclude='lib' \
-    src/pico_dev/pico/ \
+    src/picomigo/pico/ \
     _build
 
 do_build_rsync neopixel \
