@@ -1728,7 +1728,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Potentiometer_THT:Potentiometer_TT_P0915N"
 			(at 58.42 101.6 0)
 			(effects
 				(font
@@ -1801,7 +1801,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P1.90mm_Vertical"
 			(at 39.624 44.704 90)
 			(effects
 				(font
@@ -1868,7 +1868,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_THT:SW_PUSH-12mm"
 			(at 58.42 52.07 0)
 			(effects
 				(font
@@ -1935,7 +1935,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm"
 			(at 54.61 78.486 0)
 			(effects
 				(font
@@ -2080,7 +2080,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P1.90mm_Vertical"
 			(at 39.624 56.134 90)
 			(effects
 				(font
@@ -2148,7 +2148,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_THT:SW_PUSH-12mm"
 			(at 58.42 40.64 0)
 			(effects
 				(font
