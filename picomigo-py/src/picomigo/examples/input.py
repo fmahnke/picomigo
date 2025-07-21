@@ -1,7 +1,7 @@
 import asyncio
 
 import pico
-from pico.modules import switches
+from pico.modules import input
 
 
 async def main():
@@ -13,7 +13,7 @@ async def main():
         count += 1
 
         for it in ['button_0', 'button_1']:
-            if switches.is_on(it):
+            if input.is_on(it):
                 state = 'on'
             else:
                 state = 'off'

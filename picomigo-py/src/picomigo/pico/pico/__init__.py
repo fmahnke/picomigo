@@ -5,7 +5,7 @@ import asyncio
 from typing import Callable, Coroutine
 
 from pico.modules import display as display_module
-from pico.modules import switches
+from pico.modules import input
 
 
 def run(callback: Callable[..., Coroutine[None, None, None]]) -> None:
@@ -19,10 +19,10 @@ def display():
 async def _async_run(
     callback: Callable[..., Coroutine[None, None, None]]
 ) -> None:
-    switches.init()
+    input.init()
     display_module.init()
 
     _ = await asyncio.gather(
-        switches.tick(),
+        input.tick(),
         callback(),
     )

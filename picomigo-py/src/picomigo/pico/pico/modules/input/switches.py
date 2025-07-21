@@ -10,7 +10,15 @@ from machine import ADC, Pin
 from pico.config import switches as config
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
-__all__ = ['RotaryEncoderEvent', 'init', 'is_on', 'pot_0', 'switches']
+__all__ = [
+    'RotaryEncoderEvent',
+    'encoder',
+    'init',
+    'is_on',
+    'pot_0',
+    'switches',
+    'tick'
+]
 
 # @dataclass
 # class Switch:

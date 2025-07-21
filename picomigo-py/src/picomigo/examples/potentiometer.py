@@ -1,11 +1,11 @@
 from time import sleep
 
-from pico.modules import switches
+from pico.modules import input
 
-switches.init()
+input.init()
 
 while True:
-    val = switches.pot_0.read_u16()
+    val = input.pot_0.read_u16()
 
     print(f'Pot value: {val}')
 

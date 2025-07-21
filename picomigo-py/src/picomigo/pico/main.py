@@ -1,8 +1,8 @@
 from time import sleep
 
-from pico.modules import switches
+from pico.modules import input
 
-switches.init()
+input.init()
 
 while True:
     print('picomigo ready...')
