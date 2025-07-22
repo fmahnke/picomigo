@@ -23,8 +23,8 @@ https://www.youtube.com/watch?v=atBa0BYPAAc
 
 import random
 
-import st7789py as st7789
-import vga2_16x32 as font
+import st7789
+import vga1_16x32 as font
 from pico.modules.display import display
 
 
@@ -33,13 +33,13 @@ def main():
     The big show!
     """
     tft = display.display()
+    tft.init()
 
     while True:
         for rotation in range(4):
             tft.rotation(rotation)
-            tft.fill(0)
-            col_max = tft.width - font.WIDTH * 5
-            row_max = tft.height - font.HEIGHT
+            col_max = tft.width() - font.WIDTH * 5
+            row_max = tft.height() - font.HEIGHT
             if col_max < 0 or row_max < 0:
                 raise RuntimeError(
                     "This font is too big to display on this screen."

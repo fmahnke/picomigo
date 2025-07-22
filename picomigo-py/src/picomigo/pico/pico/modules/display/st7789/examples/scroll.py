@@ -1,67 +1,85 @@
 """
 scroll.py
-=========
 
-.. figure:: ../_static/scroll.jpg
-    :align: center
-
-    Test for hardware scrolling.
-
-Smoothly scrolls all font characters up the screen.
-Only works with fonts with heights that are even multiples of the screen height,
-(i.e. 8 or 16 pixels high)
-
-.. note:: This example requires the following modules:
-
-  .. hlist::
-    :columns: 3
-
-    - `st7789py`
-    - `tft_config`
-    - `vga2_bold_16x16`
-
+    Smoothly scroll all characters of a font up the display.
+    Fonts heights must be even multiples of the screen height
+    (i.e. 8 or 16 pixels high).
 """
 
-import st7789py as st7789
+import st7789
 import utime
-import vga2_16x32 as font
+import vga1_16x32 as font
 from pico.modules.display import display
 
 
+def cycle(p):
+    try:
+        len(p)
+    except TypeError:
+        cache = []
+        for i in p:
+            yield i
+            cache.append(i)
+        p = cache
+    while p:
+        yield from p
+
+
 def main():
-    """ main """
-
     tft = display.display()
+    tft.init()
 
-    last_line = tft.height - font.HEIGHT
-    tfa = 0
-    bfa = 0
-    tft.vscrdef(tfa, 240, bfa)
+    colors = cycle([0xe000, 0xece0, 0xe7e0, 0x5e0, 0x00d3, 0x7030])
+    foreground = next(colors)
+    background = st7789.BLACK
 
-    tft.fill(st7789.BLUE)
+    tft.fill(background)
+
+    height = tft.height()
+    width = tft.width()
+    last_line = height - font.HEIGHT
+
+    tfa = 0  # top free area
+    bfa = 0  # bottom free area
+
+    tft.vscrdef(tfa, height, bfa)
+
     scroll = 0
-    character = 0
-    col = tft.width // 2 - 5 * font.WIDTH // 2
+    character = font.FIRST
 
     while True:
-        tft.fill_rect(0, scroll, tft.width, 1, st7789.BLUE)
+        # clear top line before scrolling off display
+        tft.fill_rect(0, scroll, width, 1, background)
 
+        # Write new line when we have scrolled the height of a character
         if scroll % font.HEIGHT == 0:
+            line = (scroll + last_line) % height
+
+            # write character hex value as a string
             tft.text(
                 font,
-                f'x{character:02x} {chr(character)}',
-                col, (scroll + last_line) % tft.height,
-                st7789.WHITE,
-                st7789.BLUE
+                'x{:02x}'.format(character),
+                16,
+                line,
+                foreground,
+                background
             )
 
-            character = character + 1 if character < 256 else 0
+            # write character using a integer (could be > 0x7f)
+            tft.text(font, character, 90, line, foreground, background)
 
+            # change color for next line
+            foreground = next(colors)
+
+            # next character with rollover at 256
+            character += 1
+            if character > font.LAST:
+                character = font.FIRST
+
+        # scroll the screen up 1 row
         tft.vscsad(scroll + tfa)
         scroll += 1
-
-        if scroll == tft.height:
-            scroll = 0
+        scroll %= height
 
         utime.sleep(0.01)
 
