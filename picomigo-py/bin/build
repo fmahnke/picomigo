@@ -35,17 +35,17 @@ do_build_rsync logging \
     -avzr \
     lib/micropython_logging/micropython_logging.py _build/lib
 
-do_build_rsync ssd1306 \
-    -avzr \
-    lib/ssd1306/ssd1306.py _build/lib
+# do_build_rsync ssd1306 \
+#     -avzr \
+#     lib/ssd1306/ssd1306.py _build/lib
 
-do_build_rsync st7789py \
-    -avzr \
-    lib/st7789py_mpy/lib/st7789py.py _build/lib/st7789py.py
-
-do_build_rsync st7789py \
-    -avzr \
-    lib/st7789py_mpy/romfonts/vga2_16x32.py _build/lib/vga2_16x32.py
+# do_build_rsync st7789py \
+#     -avzr \
+#     lib/st7789py_mpy/lib/st7789py.py _build/lib/st7789py.py
+# 
+# do_build_rsync st7789py \
+#     -avzr \
+#     lib/st7789py_mpy/romfonts/vga2_16x32.py _build/lib/vga2_16x32.py
 
 do_build_rsync neopixel \
     -avzr \

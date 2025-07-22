@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -eu
+
+BUILD_DIR="$PWD/_build_st7789_mpy"
+
+SOURCE_DIR="$PWD/lib/st7789_mpy"
+
+BUILD_MODULES_DIR="$BUILD_DIR/modules"
+
+mkdir -p "$BUILD_MODULES_DIR"
+
+cp \
+    "$SOURCE_DIR/fonts/bitmap/vga1_16x32.py" \
+    "$BUILD_MODULES_DIR"
+
+export FROZEN_MANIFEST="$SOURCE_DIR/manifest.py"
+
+export USER_C_MODULES="$SOURCE_DIR/st7789/micropython.cmake"
+
+./bin/build_upython
