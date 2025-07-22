@@ -42,6 +42,8 @@ class InputExample:
     async def main(self):
         display = display_module.display()
 
+        display.init()
+
         display.rotation(3)
         display.fill(0)
 

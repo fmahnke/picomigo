@@ -1,14 +1,13 @@
 # pyright: reportArgumentType=false,reportIndexIssue=false
 # pyright: reportUnknownMemberType=false,reportUnknownVariableType=false
 
-# from dataclasses import dataclass
-# from enum import Enum, auto
-
 from typing import Any
 
 from machine import ADC, Pin
 from pico.config import switches as config
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
+
+# from enum import Enum, auto
 
 __all__ = [
     'RotaryEncoderEvent',
@@ -19,6 +18,19 @@ __all__ = [
     'switches',
     'tick'
 ]
+
+
+class SwitchState:
+    NONE: int = 0
+    ON: int = 1
+    OFF: int = 2
+
+
+class Switch:
+    def __init__(self, pin: Pin) -> None:
+        self.pin: Pin = pin
+        self.state: int = SwitchState.NONE
+
 
 # @dataclass
 # class Switch:
@@ -99,8 +111,8 @@ encoder.on(RotaryEncoderEvent.ANY, on_any)
 
 def init() -> None:
     # switches['rotary encoder'] = Pin(17, Pin.IN)
-    switches['button_0'] = Pin(config['button_0'], Pin.IN)
-    switches['button_1'] = Pin(config['button_1'], Pin.IN)
+    switches['button_0'] = Switch(Pin(config['button_0'], Pin.IN))
+    switches['button_1'] = Switch(Pin(config['button_1'], Pin.IN))
 
 
 async def tick() -> None:
@@ -108,4 +120,4 @@ async def tick() -> None:
 
 
 def is_on(switch: str) -> bool:
-    return switches[switch].value() == 1
+    return switches[switch].pin.value() == 1
