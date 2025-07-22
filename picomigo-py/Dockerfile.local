@@ -2,7 +2,12 @@ FROM registry.mahnke.tech/mktech/build:latest
 
 RUN --mount=type=cache,id=pacman-cache,target=/var/cache/pacman,sharing=locked \
     pacman --noconfirm -Syu \
-    udisks2
+    udisks2 \
+    arm-none-eabi-gcc \
+    cmake \
+    gcc14
+
+# aur picotool arm-none-eabi-newlib
 
 # RUN pacman --noconfirm -Scc
 
