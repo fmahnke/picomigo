@@ -31,9 +31,21 @@ do_build_rsync pico \
     src/picomigo/pico/ \
     _build
 
+do_build_rsync collections \
+    -avzr \
+    lib/collections/collections _build/lib
+
+do_build_rsync inspect \
+    -avzr \
+    lib/inspect/inspect.mpy _build/lib
+
 do_build_rsync logging \
     -avzr \
     lib/micropython_logging/micropython_logging.py _build/lib
+
+do_build_rsync blinker \
+    -avzr \
+    lib/blinker/blinker _build/lib
 
 # do_build_rsync ssd1306 \
 #     -avzr \
