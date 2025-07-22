@@ -31,6 +31,11 @@ do_build_rsync pico \
     src/picomigo/pico/ \
     _build
 
+
+do_build_rsync lib \
+    -avzr \
+    lib/argparse.mpy lib/fnmatch.mpy _build/lib
+
 do_build_rsync collections \
     -avzr \
     lib/collections/collections _build/lib
@@ -42,6 +47,13 @@ do_build_rsync inspect \
 do_build_rsync logging \
     -avzr \
     lib/micropython_logging/micropython_logging.py _build/lib
+
+do_build_rsync unittest \
+    -avzr \
+    lib/unittest/unittest/__init__.py \
+    lib/unittest/unittest/__main__.py \
+    lib/unittest/unittest/discover.py \
+    _build/lib/unittest
 
 do_build_rsync blinker \
     -avzr \
