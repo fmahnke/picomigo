@@ -6,7 +6,8 @@ import asyncio
 from machine import ADC, Pin
 from pico.config import switches as config
 from pico.modules.events import signal
-from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
+
+from .rotary_encoder import RotaryEncoderEvent, encoder
 
 __all__ = [
     'RotaryEncoderEvent',
@@ -45,12 +46,6 @@ _button_1_off = signal('button_1_off')
 pot_0 = ADC(config['potentiometer_0'])
 
 switches: dict[str, Switch] = {}
-
-_encoder_pin_clk = Pin(config['rotary_encoder']['clk'], Pin.IN, Pin.PULL_UP)
-_encoder_pin_dt = Pin(config['rotary_encoder']['dt'], Pin.IN, Pin.PULL_UP)
-_encoder_pin_sw = Pin(config['rotary_encoder']['sw'], Pin.IN, Pin.PULL_UP)
-
-encoder = RotaryEncoderRP2(_encoder_pin_clk, _encoder_pin_dt, _encoder_pin_sw)
 
 
 def init() -> None:
