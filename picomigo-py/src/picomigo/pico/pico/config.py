@@ -1,5 +1,7 @@
 __all__ = ['led', 'switches']
 
+log = {'level': 'WARNING'}
+
 switches = {
     'button_0': 15,
     'button_1': 14,
