@@ -255,6 +255,18 @@ wheels = [
 ]
 
 [[package]]
+name = "griffe"
+version = "1.8.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dd/72/10c5799440ce6f3001b7913988b50a99d7b156da71fe19be06178d5a2dd5/griffe-1.8.0.tar.gz", hash = "sha256:0b4658443858465c13b2de07ff5e15a1032bc889cfafad738a476b8b97bb28d7", size = 401098, upload-time = "2025-07-22T23:45:54.629Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bf/c4/a839fcc28bebfa72925d9121c4d39398f77f95bcba0cf26c972a0cfb1de7/griffe-1.8.0-py3-none-any.whl", hash = "sha256:110faa744b2c5c84dd432f4fa9aa3b14805dd9519777dd55e8db214320593b02", size = 132487, upload-time = "2025-07-22T23:45:52.778Z" },
+]
+
+[[package]]
 name = "importlib-metadata"
 version = "8.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -370,6 +382,19 @@ wheels = [
 ]
 
 [[package]]
+name = "loguru"
+version = "0.7.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "win32-setctime", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3a/05/a1dae3dffd1116099471c643b8924f5aa6524411dc6c63fdae648c4f1aca/loguru-0.7.3.tar.gz", hash = "sha256:19480589e77d47b8d85b2c827ad95d49bf31b0dcde16593892eb51dd18706eb6", size = 63559, upload-time = "2024-12-06T11:20:56.608Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/29/0348de65b8cc732daa3e33e67806420b2ae89bdce2b04af740289c5c6c8c/loguru-0.7.3-py3-none-any.whl", hash = "sha256:31a33c10c8e1e10422bfd431aeb5d351c7cf7fa671e3c4df004162264b28220c", size = 61595, upload-time = "2024-12-06T11:20:54.538Z" },
+]
+
+[[package]]
 name = "mako"
 version = "1.3.10"
 source = { registry = "https://pypi.org/simple" }
@@ -471,15 +496,40 @@ wheels = [
 
 [[package]]
 name = "mktech"
-version = "0.19.0"
-source = { git = "http://git.mahnke.tech/lib/python/mktech/mktech.git?rev=0.19.0#c1aa4809034e62bfbbdff7de2f70bde8872fa155" }
+source = { editable = "../../lib/python/mktech/mktech" }
 dependencies = [
     { name = "click" },
     { name = "jsonschema" },
+    { name = "loguru" },
     { name = "pexpect" },
+    { name = "pydanclick", extra = ["griffe"] },
     { name = "pydantic-settings" },
     { name = "result" },
+    { name = "sarge" },
     { name = "tomlkit" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.1.8" },
+    { name = "jsonschema", specifier = ">=4.23.0" },
+    { name = "loguru", specifier = ">=0.7.3" },
+    { name = "pexpect", specifier = ">=4.9.0" },
+    { name = "pydanclick", extras = ["griffe"], specifier = ">=0.5.1" },
+    { name = "pydantic-settings", specifier = ">=2.8.1" },
+    { name = "pyserial", marker = "extra == 'serial'", specifier = ">=3.5" },
+    { name = "result", specifier = ">=0.17.0" },
+    { name = "sarge", specifier = ">=0.1.7.post1" },
+    { name = "tomlkit", specifier = ">=0.13.2" },
+]
+provides-extras = ["serial"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mktech-dev-tools", extras = ["check", "debug", "doc", "lsp-pyright", "lsp-python-lsp-server"], git = "https://github.com/fmahnke/py-mktech-dev-tools?rev=0.1.0" },
+    { name = "types-jsonschema", specifier = ">=4.23.0.20240813" },
+    { name = "types-pexpect", specifier = ">=4.9.0.20241208" },
+    { name = "types-pyserial", specifier = ">=3.5.0.20250326" },
 ]
 
 [[package]]
@@ -643,7 +693,7 @@ wheels = [
 ]
 
 [[package]]
-name = "pico-dev"
+name = "picomigo"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -661,7 +711,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
-    { name = "mktech", git = "http://git.mahnke.tech/lib/python/mktech/mktech.git?rev=0.19.0" },
+    { name = "mktech", editable = "../../lib/python/mktech/mktech" },
     { name = "mpremote", specifier = ">=1.25.0" },
     { name = "rshell", specifier = ">=0.0.36" },
 ]
@@ -727,6 +777,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/43/aa/210b2c9aedd8c1cbeea31a50e42050ad56187754b34eb214c46709445801/pycodestyle-2.12.1.tar.gz", hash = "sha256:6838eae08bbce4f6accd5d5572075c63626a15ee3e6f842df996bf62f6d73521", size = 39232, upload-time = "2024-08-04T20:26:54.576Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3a/d8/a211b3f85e99a0daa2ddec96c949cac6824bd305b040571b82a03dd62636/pycodestyle-2.12.1-py2.py3-none-any.whl", hash = "sha256:46f0fb92069a7c28ab7bb558f05bfc0110dac69a0cd23c61ea0040283a9d78b3", size = 31284, upload-time = "2024-08-04T20:26:53.173Z" },
+]
+
+[[package]]
+name = "pydanclick"
+version = "0.5.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/b5/4de7da87d181c8809e3be95a61256a9efa557030b097f50bb6ddeefcd126/pydanclick-0.5.1.tar.gz", hash = "sha256:ddbf2ec8ce3086b0e011bd1b7cd13474de7210d27e031a37c9cec4a76971d518", size = 20911, upload-time = "2025-02-26T07:39:21.603Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/99/45/a7e33af2da5d4396e974f33ed7ed406e2cc218427cf8fdbe01c9491e51f8/pydanclick-0.5.1-py3-none-any.whl", hash = "sha256:9ef7dd384f0e04c9db3908251db8f5fe7c05d52a8824c659778036cc671f416a", size = 22163, upload-time = "2025-02-26T07:39:19.926Z" },
+]
+
+[package.optional-dependencies]
+griffe = [
+    { name = "griffe" },
 ]
 
 [[package]]
@@ -1106,6 +1170,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c7/ce/d802cd6363e709f36652c27c47d1ec411bc11eeb25bb472c711855e56038/rshell-0.0.36.tar.gz", hash = "sha256:4a66d835207479550e59d0dd3e83003d04c4eca78a4e49250f887ed2dd4b0bf5", size = 48786, upload-time = "2024-12-04T06:43:02.993Z" }
 
 [[package]]
+name = "sarge"
+version = "0.1.7.post1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3e/03/937f1f848ffe04c48e2dd0bd6c93da1a583d58695bb74a8957650ea6f0d0/sarge-0.1.7.post1.tar.gz", hash = "sha256:64ff42ae6ef90acbded6318ed440ed63b31a669302fb60cf41265debea282a3d", size = 25736, upload-time = "2021-12-11T22:41:38.668Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7b/fd/691a7a847559747d122a25f454b6dc4eb2a83c23ba44d161a1fdff5ede92/sarge-0.1.7.post1-py2.py3-none-any.whl", hash = "sha256:6da81592eac3fdb55708baddaf28deaad3a18f8719e3c082ea3b0405647ae72c", size = 18506, upload-time = "2021-12-11T22:41:37.016Z" },
+]
+
+[[package]]
 name = "snowballstemmer"
 version = "3.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1225,6 +1298,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/06/28/55bc3e107a56fdcf7d5022cb32b8c21d98a9cc2df5cd9f3b93e10419099e/whatthepatch-1.0.7.tar.gz", hash = "sha256:9eefb4ebea5200408e02d413d2b4bc28daea6b78bb4b4d53431af7245f7d7edf", size = 34612, upload-time = "2024-11-16T17:21:22.153Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8e/93/af1d6ccb69ab6b5a00e03fa0cefa563f9862412667776ea15dd4eece3a90/whatthepatch-1.0.7-py3-none-any.whl", hash = "sha256:1b6f655fd31091c001c209529dfaabbabdbad438f5de14e3951266ea0fc6e7ed", size = 11964, upload-time = "2024-11-16T17:21:20.761Z" },
+]
+
+[[package]]
+name = "win32-setctime"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b3/8f/705086c9d734d3b663af0e9bb3d4de6578d08f46b1b101c2442fd9aecaa2/win32_setctime-1.2.0.tar.gz", hash = "sha256:ae1fdf948f5640aae05c511ade119313fb6a30d7eabe25fef9764dca5873c4c0", size = 4867, upload-time = "2024-12-07T15:28:28.314Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e1/07/c6fe3ad3e685340704d314d765b7912993bcb8dc198f0e7a89382d37974b/win32_setctime-1.2.0-py3-none-any.whl", hash = "sha256:95d644c4e708aba81dc3704a116d8cbc974d70b3bdb8be1d150e36be6e9d1390", size = 4083, upload-time = "2024-12-07T15:28:26.465Z" },
 ]
 
 [[package]]
