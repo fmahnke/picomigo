@@ -19,10 +19,15 @@ def display():
 async def _async_run(
     callback: Callable[..., Coroutine[None, None, None]]
 ) -> None:
-    input.init()
-    display_module.init()
-
     _ = await asyncio.gather(
         input.tick(),
         callback(),
     )
+
+
+def _init() -> None:
+    input.init()
+    display_module.init()
+
+
+_init()
