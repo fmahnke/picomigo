@@ -6,20 +6,24 @@ scroll.py
     (i.e. 8 or 16 pixels high).
 """
 
+from typing import Generator  # pyright: ignore[reportDeprecated]
+
 import st7789
 import utime
 import vga1_16x32 as font
 from pico.modules.display import display
 
 
-def cycle(p):
+def cycle(p: list[int]) -> Generator[int, list[int], None]:
     try:
-        len(p)
+        _ = len(p)
     except TypeError:
-        cache = []
+        cache: list[int] = []
+
         for i in p:
             yield i
             cache.append(i)
+
         p = cache
     while p:
         yield from p
@@ -66,7 +70,7 @@ def main():
             )
 
             # write character using a integer (could be > 0x7f)
-            tft.text(font, character, 90, line, foreground, background)
+            tft.text(font, str(character), 90, line, foreground, background)
 
             # change color for next line
             foreground = next(colors)
