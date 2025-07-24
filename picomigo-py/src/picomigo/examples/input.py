@@ -6,10 +6,17 @@ import vga2_16x32 as font
 from pico.modules import display as display_module
 from pico.modules import input
 from pico.modules.events import signal
-from pico.modules.input import RotaryEncoderEvent, encoder
 
 _button_on = signal('button_on')
 _button_off = signal('button_off')
+
+_encoder_click = signal('encoder_click')
+_encoder_multiple_click = signal('encoder_multiple_click')
+_encoder_any = signal('encoder_any')
+_encoder_turn_left = signal('encoder_turn_left')
+_encoder_turn_left_fast = signal('encoder_turn_left_fast')
+_encoder_turn_right = signal('encoder_turn_right')
+_encoder_turn_right_fast = signal('encoder_turn_right_fast')
 
 
 class InputExample:
@@ -21,15 +28,11 @@ class InputExample:
     def __init__(self) -> None:
         self._last_event = None
 
-        encoder.on(RotaryEncoderEvent.CLICK, self._click_event_listener)
-        encoder.on(RotaryEncoderEvent.TURN_LEFT, self._turn_left_listener)
-        encoder.on(
-            RotaryEncoderEvent.TURN_LEFT_FAST, self._turn_left_fast_listener
-        )
-        encoder.on(RotaryEncoderEvent.TURN_RIGHT, self._turn_right_listener)
-        encoder.on(
-            RotaryEncoderEvent.TURN_RIGHT_FAST, self._turn_right_fast_listener
-        )
+        _ = _encoder_click.connect(self._click_event_listener)
+        _ = _encoder_turn_left.connect(self._turn_left_listener)
+        _ = _encoder_turn_left_fast.connect(self._turn_left_fast_listener)
+        _ = _encoder_turn_right.connect(self._turn_right_listener)
+        _ = _encoder_turn_right_fast.connect(self._turn_right_fast_listener)
 
         self._display = display_module.display()
 
@@ -37,22 +40,25 @@ class InputExample:
 
         self._display.rotation(3)
 
-        self._display.fill(0)
-
-    def _click_event_listener(self):
+    def _click_event_listener(self, _: object):
         self._last_event = 'click'
+        self._print_status()
 
-    def _turn_left_listener(self):
+    def _turn_left_listener(self, _: object):
         self._last_event = 'left'
+        self._print_status()
 
-    def _turn_left_fast_listener(self):
+    def _turn_left_fast_listener(self, _: object):
         self._last_event = 'left ! '
+        self._print_status()
 
-    def _turn_right_listener(self):
+    def _turn_right_listener(self, _: object):
         self._last_event = 'right'
+        self._print_status()
 
-    def _turn_right_fast_listener(self):
+    def _turn_right_fast_listener(self, _: object):
         self._last_event = 'right !'
+        self._print_status()
 
     def _print_status(self) -> None:
         print(f'--- {self._count}')
