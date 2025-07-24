@@ -3,6 +3,7 @@ from typing import Any
 
 import pico
 import vga2_16x32 as font
+from pico.logger import log
 from pico.modules import display as display_module
 from pico.modules import input
 from pico.modules.events import signal
@@ -27,6 +28,8 @@ class InputExample:
 
     def __init__(self) -> None:
         self._last_event = None
+        self._rotation: int = 0
+        self._need_update: bool = True
 
         _ = _encoder_click.connect(self._click_event_listener)
         _ = _encoder_turn_left.connect(self._turn_left_listener)
@@ -42,23 +45,38 @@ class InputExample:
 
     def _click_event_listener(self, _: object):
         self._last_event = 'click'
-        self._print_status()
+
+        self._need_update = True
 
     def _turn_left_listener(self, _: object):
+        log.debug('turn left')
+
         self._last_event = 'left'
-        self._print_status()
+        self._rotation -= 1
+
+        self._need_update = True
 
     def _turn_left_fast_listener(self, _: object):
+        log.debug('turn left fast')
+
         self._last_event = 'left ! '
-        self._print_status()
+
+        self._need_update = True
 
     def _turn_right_listener(self, _: object):
+        log.debug('turn right')
+
         self._last_event = 'right'
-        self._print_status()
+        self._rotation += 1
+
+        self._need_update = True
 
     def _turn_right_fast_listener(self, _: object):
+        log.debug('turn right fast')
+
         self._last_event = 'right !'
-        self._print_status()
+
+        self._need_update = True
 
     def _print_status(self) -> None:
         print(f'--- {self._count}')
@@ -80,7 +98,7 @@ class InputExample:
 
             y += self._line_height
 
-        message = f'Encoder: {self._last_event}'
+        message = f'Encoder: {self._last_event} ({self._rotation})'
 
         print(message)
 
@@ -101,6 +119,11 @@ class InputExample:
         _ = _button_off.connect(button_off)
 
         while True:
+            if self._need_update:
+                self._print_status()
+
+                self._need_update = False
+
             await asyncio.sleep(1)
 
     async def main(self):
