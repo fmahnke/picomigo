@@ -4,6 +4,10 @@
     "tests"
   ],
 
+  "exclude": [
+    "src/picomigo/serial.py"
+  ],
+
   "typeCheckingMode": "recommended",
 
   "allowedUntypedLibraries": [
