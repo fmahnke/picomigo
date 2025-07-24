@@ -8,6 +8,8 @@ from typing import Callable, Coroutine
 
 import vga2_16x32 as font
 from machine import ADC
+from pico import config
+from pico.logger import log
 from pico.modules import display as display_module
 from pico.modules import input
 
@@ -51,6 +53,8 @@ async def _async_run(
 
 
 def _init() -> None:
+    log.add(level=config.log['level'])
+
     input.init()
     display_module.init()
 
