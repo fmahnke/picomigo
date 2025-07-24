@@ -30,6 +30,11 @@
       "reportMissingTypeStubs": false,
     },
     {
+      "root": "src/picomigo/tests",
+      "reportMissingModuleSource": false,
+      "reportMissingTypeStubs": false,
+    },
+    {
       "root": "lib",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,

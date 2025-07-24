@@ -31,6 +31,9 @@ do_build_rsync pico \
     src/picomigo/pico/ \
     _build
 
+do_build_rsync tests \
+    -avzr \
+    src/picomigo/tests/* _build/tests
 
 do_build_rsync lib \
     -avzr \
