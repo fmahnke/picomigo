@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -eu
+
+: ${CLEAN:=0}
+
+TOP_BUILD_DIR=_build
+
+if [ "$CLEAN" -eq 1 ]; then
+    rm -rf "$TOP_BUILD_DIR"/*
+fi
+
+# export PICO_SDK_PATH=/usr/share/pico-sdk
+
+compile_commands_path=compile_commands.json
+
+do_cmake () {
+    cd "$TOP_BUILD_DIR"
+
+    export PICO_SDK_PATH=/usr/share/pico-sdk
+
+    cmake -DPICO_BOARD=pico2_w -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+
+    make
+
+    cd -
+
+    mv "$TOP_BUILD_DIR/compile_commands.json" "$compile_commands_path"
+}
+
+do_make () {
+    bear --append --output "$compile_commands_path" -- make -B
+}
+
+do_install () {
+    mpremote cp -r build/sound.native.mpy :lib/sound.mpy
+}
+
+step="${1:-all}"
+
+if [ "$step" = all ]; then
+    do_cmake
+
+    do_make
+
+    do_install
+else
+    "$step"
+fi

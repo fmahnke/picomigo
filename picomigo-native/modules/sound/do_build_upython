@@ -1,0 +1,77 @@
+#!/bin/sh
+
+set -eu
+
+TOP_SOURCE_DIR="$PWD"
+
+BUILD_DIR="$DIRENV_DIR/_build_upython"
+
+CLEAN=0
+
+# 17fbc5a builds under gcc 14/15
+# v1.25.0 builds under gcc 14 with patch
+
+# export CC=clang
+# export CXX=clang++
+
+GCC_VERSION=14
+
+if [ "$GCC_VERSION" = 15 ]; then
+    export CC=gcc
+    export CXX=g++
+    export CMAKE_C_COMPILER=gcc
+    export CMAKE_CXX_COMPILER=g++
+elif [ "$GCC_VERSION" = 14 ]; then
+    export CC=gcc-14
+    export CXX=g++-14
+    export CMAKE_C_COMPILER=gcc-14
+    export CMAKE_CXX_COMPILER=g++-14
+else
+    echo "invalid GCC version $GCC_VERSION"
+
+    exit 1
+fi
+
+# export MICROPY_CPP_FLAGS_EXTRA="-Wno-error=unterminated-string-initialization"
+# export CFLAGS_EXTRA="-Wno-error=unterminated-string-initialization"
+
+cd "$UPYTHON_PATH"
+
+git restore .
+
+git format-patch 9f86005~..9f86005
+
+git apply 0001-py-emitinlinethumb-Refactor-string-literal-as-array-.patch
+
+cd "$UPYTHON_PATH/ports/rp2"
+
+if [ "$CLEAN" -eq 1 ]; then
+    rm -rf "$UPYTHON_PATH/ports/rp2/build-RPI_PICO2_W"
+fi
+
+do_make () {
+    bear --output "$TOP_SOURCE_DIR/compile_commands.json" --append -- make V=0 BOARD=RPI_PICO2_W "$@"
+}
+
+if [ "$CLEAN" -eq 1 ]; then
+    do_make submodules
+
+    do_make clean
+fi
+
+do_make
+
+# CXXFLAGS="-Wno-error=unterminated-string-initialization ${CXXFLAGS:-}" do_make
+
+# BUILD_MODULES_DIR="$BUILD_DIR/modules"
+
+# mkdir -p "$BUILD_MODULES_DIR"
+
+# cp \
+#     "$SOURCE_DIR/fonts/bitmap/vga1_16x32.py" \
+#     "$BUILD_MODULES_DIR"
+# 
+# make \
+#     USER_C_MODULES="$SOURCE_DIR/st7789/micropython.cmake \
+#     FROZEN_MANIFEST="" \
+#     FROZEN_MPY_DIR=$UPYDIR/modules

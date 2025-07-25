@@ -1,3 +1,17 @@
+# build and install
+
+## native modules
+
+### sound module
+
+```
+cd pico-native/modules/sound
+
+./do_build_module
+
+picotool load -f $UPYTHON_BUILD_PATH/firmware.uf2 && picotool reboot && sleep 2; mpremote run py/demo.py
+```
+
 # TODO
 
 - main board schematic
