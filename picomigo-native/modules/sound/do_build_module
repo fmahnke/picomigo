@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -eu
+
+BUILD_DIR="$PWD/_build_picomigo_sound"
+
+SOURCE_DIR="$PWD"
+
+# BUILD_MODULES_DIR="$BUILD_DIR/modules"
+# 
+# mkdir -p "$BUILD_MODULES_DIR"
+# 
+# cp \
+#     "$SOURCE_DIR/fonts/bitmap/vga1_16x32.py" \
+#     "$BUILD_MODULES_DIR"
+
+# export FROZEN_MANIFEST="$SOURCE_DIR/manifest.py"
+
+export USER_C_MODULES="$SOURCE_DIR/micropython.cmake"
+
+./do_build_upython
