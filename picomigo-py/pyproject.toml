@@ -28,9 +28,11 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "ar>=1.0.0",
     "click>=8.1.7",
     "mktech",
     "mpremote>=1.25.0",
+    "pyelftools>=0.32",
     "rshell>=0.0.36",
 ]
 
