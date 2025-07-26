@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -eu
+
+: ${CLEAN:=0}
+
+TOP_BUILD_DIR=_build
+
+if [ "$CLEAN" -eq 1 ]; then
+    rm -rf "$TOP_BUILD_DIR"/*
+fi
+
+mkdir -p "$TOP_BUILD_DIR"
+
+cd "$TOP_BUILD_DIR"
+
+export PICO_SDK_PATH=/usr/share/pico-sdk
+
+cmake -DPICO_BOARD=pico2_w -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+
+make pico_audio_demo
+
+cd -
+
+mv "$TOP_BUILD_DIR/compile_commands.json" .
+
