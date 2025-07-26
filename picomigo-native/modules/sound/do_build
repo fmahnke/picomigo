@@ -28,16 +28,23 @@ sound () {
     mv "$TOP_BUILD_DIR/compile_commands.json" "$compile_commands_path"
 }
 
-do_install () {
-    picotool load -f "$TOP_BUILD_DIR/picomigo_sound_demo.uf2"
+sound_install () {
+    picotool load -f "$TOP_BUILD_DIR/picomigo_sound_demo.uf2" && \
+    picotool reboot
 }
+
+sound_module () {
+    ./do_build_module
+}
+
+. ./.build
 
 step="${1:-all}"
 
 if [ "$step" = all ]; then
     sound
 
-    do_install
+    sound_module
 else
     "$step"
 fi

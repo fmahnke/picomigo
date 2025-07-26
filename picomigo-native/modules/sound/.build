@@ -1,0 +1,13 @@
+upython_install () {
+    load_uf2 "$UPYTHON_BUILD_PATH/firmware.uf2"
+}
+
+load_uf2 () {
+    path="$1"
+
+    printf "\nWaiting for user to reset into BOOTSEL...\n"
+
+    sleep 5
+
+    picotool load -f "$path" && picotool reboot
+}
