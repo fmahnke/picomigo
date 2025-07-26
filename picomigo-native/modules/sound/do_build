@@ -10,8 +10,6 @@ if [ "$CLEAN" -eq 1 ]; then
     rm -rf "$TOP_BUILD_DIR"/*
 fi
 
-# export PICO_SDK_PATH=/usr/share/pico-sdk
-
 compile_commands_path=compile_commands.json
 
 sound () {
@@ -19,18 +17,16 @@ sound () {
 
     export PICO_SDK_PATH=/usr/share/pico-sdk
 
-    cmake -DPICO_BOARD=pico2_w -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+    cmake -DPICO_BOARD=pico2_w -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+        -DCMAKE_VERBOSE_MAKEFILE=OFF ..
 
-    make
+    # make V=1
+    cmake --build . --parallel 6
 
     cd -
 
     mv "$TOP_BUILD_DIR/compile_commands.json" "$compile_commands_path"
 }
-
-# do_make () {
-#     bear --append --output "$compile_commands_path" -- make -B
-# }
 
 do_install () {
     picotool load -f "$TOP_BUILD_DIR/picomigo_sound_demo.uf2"
@@ -40,8 +36,6 @@ step="${1:-all}"
 
 if [ "$step" = all ]; then
     sound
-
-    # do_make
 
     do_install
 else
