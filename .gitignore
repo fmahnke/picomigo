@@ -4,3 +4,11 @@
 /kicad/*.lck
 /kicad/picomigo-backups
 fp-info-cache
+
+# build
+
+_build
+
+# direnv
+
+.direnv
