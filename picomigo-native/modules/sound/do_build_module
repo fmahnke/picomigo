@@ -16,6 +16,8 @@ SOURCE_DIR="$PWD"
 
 # export FROZEN_MANIFEST="$SOURCE_DIR/manifest.py"
 
+echo "prepare module..."
+
 export USER_C_MODULES="$SOURCE_DIR/micropython.cmake"
 
 ./do_build_upython
