@@ -14,7 +14,7 @@ fi
 
 compile_commands_path=compile_commands.json
 
-do_cmake () {
+sound () {
     cd "$TOP_BUILD_DIR"
 
     export PICO_SDK_PATH=/usr/share/pico-sdk
@@ -28,20 +28,20 @@ do_cmake () {
     mv "$TOP_BUILD_DIR/compile_commands.json" "$compile_commands_path"
 }
 
-do_make () {
-    bear --append --output "$compile_commands_path" -- make -B
-}
+# do_make () {
+#     bear --append --output "$compile_commands_path" -- make -B
+# }
 
 do_install () {
-    mpremote cp -r build/sound.native.mpy :lib/sound.mpy
+    picotool load -f "$TOP_BUILD_DIR/picomigo_sound_demo.uf2"
 }
 
 step="${1:-all}"
 
 if [ "$step" = all ]; then
-    do_cmake
+    sound
 
-    do_make
+    # do_make
 
     do_install
 else
