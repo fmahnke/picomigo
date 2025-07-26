@@ -22,6 +22,8 @@ static void blink_led(void) {
     }
 }
 
+static uint64_t next_drums;
+
 int main() {
     bi_decl(bi_program_description("Audio demo"));
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
@@ -48,12 +50,31 @@ int main() {
     printf("playing synth loop as %d\n", id);
 
     uint64_t btn_press_time = 0;
+    next_drums = time_us_64() + 5000000;
+
     while (1) {
         sleep_ms(20);
         blink_led();
 
+        uint64_t cur_time = time_us_64();
+
+        if (cur_time > 10000000) {
+            break;
+        }
+
+        if (cur_time > next_drums) {
+            int id = audio_play_once(snd_drum, sizeof(snd_drum));
+            printf("playing drums as %d\n", id);
+            if (id >= 0) {
+                audio_source_set_volume(id, 1024);
+            }
+
+            next_drums = cur_time + 5000000;
+        }
+
+#if 0
         if (gpio_get(BTN_PIN) == 0) {
-            uint64_t cur_time = time_us_64();
+
             if (btn_press_time + 300000 < cur_time) {
                 btn_press_time = cur_time;
                 int id = audio_play_once(snd_drum, sizeof(snd_drum));
@@ -62,7 +83,7 @@ int main() {
                     audio_source_set_volume(id, 1024);
                 }
             }
-        }
+#endif
 
         audio_mixer_step();
     }

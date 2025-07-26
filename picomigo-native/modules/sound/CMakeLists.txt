@@ -15,6 +15,12 @@ add_executable(
     src/demo.c
 )
 
+target_compile_definitions(
+    picomigo_sound_demo PRIVATE
+
+    PICO_ENTER_USB_BOOT_ON_EXIT=1
+)
+
 target_link_libraries(
     picomigo_sound_demo
 
