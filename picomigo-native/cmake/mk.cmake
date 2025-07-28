@@ -52,7 +52,7 @@ endfunction()
 
 set(propagated_cache_path "${CMAKE_BINARY_DIR}/propagated_cache.cmake")
 
-block()
+function(propagate_cache_vars)
     set(
         propagated_cache_vars
 
@@ -64,6 +64,9 @@ block()
         CMAKE_TOOLCHAIN_FILE
         CMAKE_VERBOSE_MAKEFILE
         CMAKE_EXPORT_COMPILE_COMMANDS
+        PICO_SDK_PATH
+        PICO_BOARD
+        PICO_PLATFORM
     )
 
     get_cmake_property(CACHE_VARS CACHE_VARIABLES)
@@ -84,4 +87,5 @@ block()
             )
         endif()
     endforeach()
-endblock()
+endfunction()
+
