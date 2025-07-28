@@ -1,5 +1,6 @@
 #include "hardware/gpio.h"
 #include "pico/binary_info.h"
+#include "pico/stdio.h"
 #include "pico/stdlib.h"
 #include <stdio.h>
 
@@ -62,6 +63,12 @@ int main() {
             break;
         }
 
+        int ch = stdio_getchar_timeout_us(20000);
+
+        if (ch == 'q') {
+            break;
+        }
+
         if (cur_time > next_drums) {
             int id = audio_play_once(snd_drum, sizeof(snd_drum));
             printf("playing drums as %d\n", id);
@@ -88,4 +95,3 @@ int main() {
         audio_mixer_step();
     }
 }
-
