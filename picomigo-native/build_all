@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -eu
+
+: ${CLEAN:=0}
+
+TOP_BUILD_DIR="$PWD/_build"
+TOP_SOURCE_DIR="$PWD"
+
+parallel='--parallel 6'
+
+do_configure () {
+    mkdir -p "$TOP_BUILD_DIR"
+
+    cd "$TOP_BUILD_DIR"
+
+    cmake --warn-uninitialized -Werror=dev -Werror=deprecated \
+        "$TOP_SOURCE_DIR"
+}
+
+do_build () {
+    cd "$TOP_BUILD_DIR"
+
+    cmake --build . $parallel
+
+    # TODO do this in cmake instead
+
+    cp "$TOP_BUILD_DIR/modules_sound/src/modules_sound-build/compile_commands.json" \
+        "$TOP_SOURCE_DIR/modules/sound"
+    cp "$TOP_BUILD_DIR/pico_sdk/src/pico_sdk-build/compile_commands.json" \
+        "$TOP_SOURCE_DIR/lib/pico-sdk"
+}
+
+do_clean () {
+    rm -rf "$TOP_BUILD_DIR"/*
+}
+
+if [ "$CLEAN" -eq 1 ]; then
+    do_clean
+fi
+
+do_configure
+
+do_build
