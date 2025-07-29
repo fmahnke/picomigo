@@ -1,0 +1,8 @@
+CompileFlags:
+    Add:
+      - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/common/pico_base_headers/include
+      - -isystem/p/picomigo/picomigo-native/lib/pico-sdk/src/common/pico_base_headers/include/pico 
+      - -I/p/picomigo/picomigo-native/_build/pico_sdk/src/pico_sdk-build/generated/pico_base
+      - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2350/pico_platform/include
+      - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/pico_platform_compiler/include
+      - -isystem/usr/arm-none-eabi/include
