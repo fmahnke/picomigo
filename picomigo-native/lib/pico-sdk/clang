@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -eu
+
+# sysroot=/usr/lib/llvm18
+sysroot=/usr
+clang_bin_dir=$sysroot/bin
+
+export CC=$clang_bin_dir/clang
+export CXX=$clang_bin_dir/clang++
+export CMAKE_C_COMPILER=$clang_bin_dir/clang
+export CMAKE_CXX_COMPILER=$clang_bin_dir/clang++
+
+rm -rf build_clang
+
+cmake --toolchain cmake/preload/toolchains/pico_arm_cortex_m33_clang.cmake \
+    -B build_clang -G Ninja \
+    -D PICO_BOARD=pico2_w \
+    -D PICO_COMPILER_CC=$CC \
+    -D PICO_COMPILER_CXX=$CXX \
+    -D PICO_CLIB=llvm_libc
