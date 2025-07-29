@@ -31,16 +31,6 @@ fi
 
 export MAKE_ARGS=-j6
 
-cd "$UPYTHON_PATH"
-
-echo "prepare upython repo..."
-
-git restore .
-
-git format-patch 9f86005~..9f86005
-
-git apply 0001-py-emitinlinethumb-Refactor-string-literal-as-array-.patch
-
 cd "$UPYTHON_PATH/ports/rp2"
 
 if [ "$CLEAN" -eq 1 ]; then
