@@ -2,12 +2,26 @@
 
 ## native modules
 
+### all
+
+```
+cd picomigo-native; ./build_all
+```
+
 ### sound module
 
 ```
-cd pico-native/modules/sound
+cd picomigo-native/modules/sound
 
-./do_build_module
+./do_build sound
+```
+
+### sound module (upython)
+
+```
+cd picomigo-native/modules/sound
+
+./do_build sound_module
 
 picotool load -f $UPYTHON_BUILD_PATH/firmware.uf2 && picotool reboot && sleep 2; mpremote run py/demo.py
 ```
