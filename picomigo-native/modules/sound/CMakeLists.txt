@@ -26,6 +26,13 @@ target_link_libraries(
 
     picomigo_sound
     pico_stdlib
+
+    # TODO might need these
+
+    # pico_base
+    # hardware_dma
+    # hardware_pwm
+    # hardware_gpio
 )
 
 add_library(
