@@ -29,6 +29,8 @@ else
     exit 1
 fi
 
+export CMAKE_EXPORT_COMPILE_COMMANDS=ON
+
 export MAKE_ARGS=-j6
 
 cd "$UPYTHON_PATH/ports/rp2"
@@ -40,7 +42,6 @@ fi
 do_make () {
     echo "make upython..."
 
-    bear --output "$TOP_SOURCE_DIR/compile_commands.json" --append -- \
     make V=0 BOARD=RPI_PICO2_W "$@"
 }
 
