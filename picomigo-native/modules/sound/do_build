@@ -15,9 +15,6 @@ compile_commands_path=compile_commands.json
 sound () {
     cd "$TOP_BUILD_DIR"
 
-    # export PICO_SDK_PATH=/usr/share/pico-sdk
-    export PICO_SDK_PATH="$HOME/src/lib/pico/pico-sdk"
-
     cmake -DPICO_BOARD=pico2_w -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
         -DCMAKE_VERBOSE_MAKEFILE=OFF ..
 
