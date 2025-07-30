@@ -3,28 +3,30 @@ CompileFlags:
       - --target=arm-none-eabi
       - -mcpu=cortex-m33
       - -mthumb
-      - -isystem/home/boss/src/lib/pico/pico-sdk/src/common/pico_base_headers/include 
-      - -isystem/home/boss/src/lib/pico/pico-sdk/src/common/pico_base_headers/include/pico 
-      - -isystem/home/boss/src/lib/pico/pico-sdk/src/rp2_common/pico_clib_interface/include/llvm_libc
-      - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/hardware_base/include
-      - -I_build/generated/pico_base
-    Compiler: /usr/bin/arm-none-eabi-gcc
+      - -isystem/usr/arm-none-eabi/include
+    Remove: [-f*]
+    Compiler: clang
 
+# For <assert.h>
+# For "hardware/address_mapped.h"
+# gcc compiler
+# newlib
+# For <sys/cdefs.h>, <stdio.h>
 # ---
 # 
 # If:
-#     PathMatch: /home/boss/src/lib/pico/pico-sdk/.*
+#     PathMatch: /p/picomigo/picomigo-native/lib/pico-sdk/.*
 # 
 # CompileFlags:
 #     Add:
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/hardware_base/include
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/common/pico_base_headers/include
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/hardware_base/include
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/hardware_base/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/hardware_base/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/common/pico_base_headers/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/hardware_base/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/hardware_base/include
 #       - -I/p/picomigo/picomigo-native/modules/sound/_build/generated/pico_base
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2350/pico_platform/include
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include
-#       - -I/home/boss/src/lib/pico/pico-sdk/src/rp2_common/pico_clib_interface/include/llvm_libc
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2350/pico_platform/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/pico_platform_compiler/include
+#       - -I/p/picomigo/picomigo-native/lib/pico-sdk/src/rp2_common/pico_clib_interface/include/llvm_libc
 # 
 # Diagnostics:
 #     Suppress:
@@ -35,6 +37,6 @@ CompileFlags:
 # ---
 # 
 # If:
-#     PathMatch: /home/boss/src/lib/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/accessctrl.h
+#     PathMatch: /p/picomigo/picomigo-native/lib/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/accessctrl.h
 # Index:
 #     Background: Skip
