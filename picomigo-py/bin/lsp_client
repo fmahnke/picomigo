@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -eu
+
+send() {
+    msg=$(jq -n "$@")
+
+    request "$msg"
+}
+
+send_raw() {
+    msg=$(echo "$@" | jq)
+
+    request "$msg"
+}
+
+request () {
+    msg="$1"
+
+    request=$(printf "%s\r\n\r\n%s" "Content-Length: ${#msg}" "$msg")
+
+    printf "$request" > request.json
+
+    # echo "request: $request"
+
+    printf "$request"
+
+    # cat "$request" >> clang_fifo
+}
+
+# send '{ jsonrpc: "2.0", id: 1, method: "exit" }'
+send_raw '{"id":0,"jsonrpc":"2.0","method":"initialize","params":{"capabilities":{"general":{"markdown":{"parser":"kakoune-lsp","version":"18.1.3"},"positionEncodings":["utf-8","utf-16"],"regularExpressions":{"engine":"Rust regex"}},"offsetEncoding":["utf-8","utf-16"],"textDocument":{"callHierarchy":{"dynamicRegistration":false},"codeAction":{"codeActionLiteralSupport":{"codeActionKind":{"valueSet":["quickfix","refactor","refactor.extract","refactor.inline","refactor.rewrite","source","source.fixAll","source.organizeImports"]}},"dynamicRegistration":false,"isPreferredSupport":false,"resolveSupport":{"properties":["edit"]}},"codeLens":{"dynamicRegistration":false},"colorProvider":{"dynamicRegistration":false},"completion":{"completionItem":{"commitCharactersSupport":false,"deprecatedSupport":false,"documentationFormat":["markdown","plaintext"],"preselectSupport":false,"resolveSupport":{"properties":["additionalTextEdits","detail","documentation"]},"snippetSupport":true},"completionItemKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]},"contextSupport":false,"dynamicRegistration":false},"declaration":{"dynamicRegistration":false,"linkSupport":false},"definition":{"dynamicRegistration":false,"linkSupport":false},"documentHighlight":{"dynamicRegistration":false},"documentLink":{"dynamicRegistration":false,"tooltipSupport":false},"documentSymbol":{"dynamicRegistration":false,"hierarchicalDocumentSymbolSupport":true,"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}},"formatting":{"dynamicRegistration":false},"hover":{"contentFormat":["markdown","plaintext"],"dynamicRegistration":false},"implementation":{"dynamicRegistration":false,"linkSupport":false},"inlayHint":{"dynamicRegistration":false},"onTypeFormatting":{"dynamicRegistration":false},"publishDiagnostics":{"relatedInformation":true,"tagSupport":{"valueSet":[1,2]}},"rangeFormatting":{"dynamicRegistration":false},"references":{"dynamicRegistration":false},"rename":{"dynamicRegistration":false,"prepareSupport":false},"selectionRange":{},"semanticTokens":{"dynamicRegistration":true,"formats":["relative"],"requests":{"full":true,"range":false},"serverCancelSupport":true,"tokenModifiers":[],"tokenTypes":[]},"signatureHelp":{"contextSupport":false,"dynamicRegistration":false,"signatureInformation":{"documentationFormat":["plaintext"],"parameterInformation":{"labelOffsetSupport":false}}},"synchronization":{"didSave":true,"dynamicRegistration":false,"willSave":false,"willSaveWaitUntil":false},"typeDefinition":{"dynamicRegistration":false,"linkSupport":false}},"window":{"showMessage":{"messageActionItem":{"additionalPropertiesSupport":true}},"workDoneProgress":true},"workspace":{"applyEdit":true,"codeLens":{"refreshSupport":true},"configuration":true,"didChangeConfiguration":{"dynamicRegistration":false},"executeCommand":{"dynamicRegistration":false},"inlayHint":{"refreshSupport":true},"semanticTokens":{"refreshSupport":true},"symbol":{"dynamicRegistration":false,"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}},"workspaceEdit":{"changeAnnotationSupport":{},"documentChanges":true,"failureHandling":"abort","normalizesLineEndings":false,"resourceOperations":["create","delete","rename"]},"workspaceFolders":false}},"clientInfo":{"name":"kakoune-lsp","version":"18.1.3"},"processId":3724374,"rootPath":"/p/picomigo","rootUri":"file:///p/picomigo","trace":"off","workspaceFolders":[{"name":"/p/picomigo","uri":"file:///p/picomigo"}]}}'
+send_raw '{"jsonrpc":"2.0","method":"initialized","params":{}}'
+# send_raw '{"id":1,"jsonrpc":"2.0","method":"initialized","params":{}}'
+send_raw '{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"languageId":"c_cpp","text":"#include <stdio.h>int main() {    printf();}","uri":"file:///p/picomigo/picomigo-native/modules/sound/src/demo2.c","version":1}}}'
+send_raw '{"id":2,"jsonrpc":"2.0","method":"textDocument/codeAction","params":{"context":{"diagnostics":[],"triggerKind":2},"range":{"end":{"character":0,"line":0},"start":{"character":0,"line":0}},"textDocument":{"uri":"file:///p/picomigo/picomigo-native/modules/sound/src/demo2.c"}}}'
+send_raw '{"id":3,"jsonrpc":"2.0","method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///p/picomigo/picomigo-native/modules/sound/src/demo2.c"}}}'
+
+# request="Content-Length: $(wc -c lsp_request.json | cut -f 1 -d ' ')\r\n
+# \r\n
+# $(cat lsp_request.json)"
+# 
+# echo "request:\n$request"
+# 
+# echo "$request" | clangd
