@@ -46,8 +46,6 @@ do_make () {
 }
 
 if [ "$CLEAN" -eq 1 ]; then
-    do_make submodules
-
     do_make clean
 fi
 
