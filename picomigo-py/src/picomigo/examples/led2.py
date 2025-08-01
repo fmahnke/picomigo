@@ -6,7 +6,7 @@ from neopixel2 import Neopixel, slice_maker
 
 # from pico.config import led as config
 async def main():
-    pixels = Neopixel(64, 0, 20, "GRB")
+    pixels = Neopixel(8, 0, 20, "GRB")
 
     print('start pixels')
 
