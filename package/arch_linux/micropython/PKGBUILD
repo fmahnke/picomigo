@@ -15,6 +15,8 @@ source=("https://micropython.org/resources/source/micropython-$pkgver.tar.xz")
 md5sums=('54b2304d6147f47da1e2de2b32468c62')
 
 build() {
+  export CFLAGS="$CFLAGS -Wno-error=unterminated-string-initialization"
+
   cd "$srcdir/micropython-$pkgver/mpy-cross"
   make
   cd "$srcdir/micropython-$pkgver/ports/unix"
