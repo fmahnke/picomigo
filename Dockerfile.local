@@ -7,7 +7,8 @@ RUN --mount=type=cache,id=pacman-cache,target=/var/cache/pacman,sharing=locked \
     cmake \
     gcc14
 
-# TODO aur picotool arm-none-eabi-newlib pico-sdk
+# TODO aur picotool arm-none-eabi-newlib pico-sdk rshell
+# micropython
 
 # RUN pacman --noconfirm -Scc
 
