@@ -1,10 +1,24 @@
+import logging
 import sys
+from dataclasses import dataclass
+from typing import Required
 
 import click
+import sarge
+from mktech.cli import from_config
+from mktech.error import Err, Ok
 from mktech.log import log
 from mktech.path import Path
 
-from . import build, native_check, run, serial
+from . import board as board_module
+from . import build, load, native_check, run, serial
+from .config import BuildConfig
+
+
+@dataclass
+class CliContext():
+    config: BuildConfig
+
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -13,9 +27,24 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
     context_settings=CONTEXT_SETTINGS,
     no_args_is_help=True,
 )
-def cli() -> None:
-    log.remove()
-    _ = log.add(sys.stderr, level='INFO')
+@from_config(BuildConfig, shorten={'log_level': '-l'})
+@click.pass_context
+def cli(ctx: click.Context, build_config: BuildConfig) -> None:
+    _ = log.configure(
+        **{
+            'handlers':
+                [{
+                    'sink': sys.stderr,
+                    'level': build_config.log_level,
+                }, ],
+            'activation': [
+                ('sarge', False),
+                ('sarge.parse', False),
+            ]
+        }
+    )
+
+    ctx.obj = CliContext(build_config)
 
 
 @cli.command()
@@ -28,6 +57,20 @@ def build_command() -> None:
 @click.option('--verbose', '-v', count=True)
 def native_check_command(path: Path | None, verbose: int) -> None:
     native_check.main(path, verbose)
+
+
+@cli.command()
+@click.pass_context
+@click.option('--board', '-b', required=True)
+@click.argument('target')
+def load_command(ctx: click.Context, target: str, board: str) -> None:
+    board_ = board_module.from_name(board)
+
+    match load.execute(target, board_, ctx.obj.config):
+        case Err(e):
+            print(e)
+        case Ok(_):
+            pass
 
 
 @cli.command()
