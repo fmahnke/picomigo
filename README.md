@@ -1,3 +1,12 @@
+# setup development environment
+
+## sync python environment
+
+```
+cd picomigo-py
+uv sync
+```
+
 # build and install
 
 ## native modules
