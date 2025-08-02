@@ -73,4 +73,4 @@ follow-imports = "normal"
 testpaths = [ "tests" ]
 
 [tool.uv.sources]
-mktech = { path = "../../lib/python/mktech/mktech", editable = true }
+mktech = { git = "http://git.mahnke.tech/lib/python/mktech/mktech.git", rev = "0.21.0-dev" }
