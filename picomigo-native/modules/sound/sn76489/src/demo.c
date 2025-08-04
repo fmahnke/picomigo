@@ -1,8 +1,8 @@
-#include "blink.pio.h"
 #include "hardware/clocks.h"
 #include "hardware/pio.h"
 #include "pico/stdio.h"
 #include "pico/stdlib.h"
+#include "sn76489.pio.h"
 #include <hardware/gpio.h>
 #include <stdio.h>
 
@@ -71,7 +71,7 @@ int main() {
 
     // Add PIO program to PIO instruction memory. SDK will find location and
     // return with the memory offset of the program.
-    uint offset = pio_add_program(pio, &blink_program);
+    uint offset = pio_add_program(pio, &sn76489_program);
 
     float clock_hz = (float) clock_get_hz(clk_sys);
 
@@ -79,17 +79,23 @@ int main() {
     float div = clock_hz / pio_freq;
 
     // Initialize the program using the helper function in our .pio file
-    blink_program_init(pio, sm, offset, clock_pin, div);
+    sn76489_program_init(pio, sm, offset, clock_pin, div);
 
     // Start running our PIO program in the state machine
     pio_sm_set_enabled(pio, sm, true);
 
     size_t step = 0;
 
-    sleep_ms(3000);
+    sleep_ms(2000);
 
     // Do nothing
     while (true) {
+        uint64_t time_ms = time_us_64() / 1000.0f;
+
+        if (time_ms > 5000) {
+            break;
+        }
+
         uint16_t note = data_from_frequency(440.0f);
 
         uint8_t first = (0b1000 << 4) | (note & 0xF);

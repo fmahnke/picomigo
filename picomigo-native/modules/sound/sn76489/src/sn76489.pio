@@ -1,4 +1,4 @@
-.program blink
+.program sn76489
 
 .wrap_target
     set pins, 1
@@ -8,11 +8,11 @@
 % c-sdk {
 
 // Helper function (for use in C program) to initialize this PIO program
-void blink_program_init(PIO pio, uint sm, uint offset, uint pin, float div) {
+void sn76489_program_init(PIO pio, uint sm, uint offset, uint pin, float div) {
 
     // Sets up state machine and wrap target. This function is automatically
     // generated in blink.pio.h.
-    pio_sm_config c = blink_program_get_default_config(offset);
+    pio_sm_config c = sn76489_program_get_default_config(offset);
 
     // Allow PIO to control GPIO pin (as output)
     pio_gpio_init(pio, pin);

@@ -28,7 +28,7 @@ target_compile_definitions(
 pico_generate_pio_header(
     picomigo_sound_sn76489_demo
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/blink.pio
+    ${CMAKE_CURRENT_LIST_DIR}/src/sn76489.pio
 )
 
 # Create map/bin/hex/uf2 files
