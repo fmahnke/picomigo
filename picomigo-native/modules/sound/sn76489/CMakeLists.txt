@@ -43,6 +43,31 @@ target_link_libraries(
     hardware_pio
 )
 
+add_executable(
+    test_pitch
+
+    src/test_pitch.cpp
+    src/pitch.cpp
+)
+
+target_compile_definitions(
+    test_pitch PRIVATE
+
+    PICO_ENTER_USB_BOOT_ON_EXIT=1
+)
+
+target_link_libraries(
+    test_pitch
+
+    pico_stdlib
+)
+
+pico_add_extra_outputs(test_pitch)
+
+# target_link_libraries(
+#     test_pitch
+# )
+    
 # target_link_libraries(
 #     picomigo_sound_sn76489_demo
 # 
@@ -73,4 +98,5 @@ target_link_libraries(
 # )
 # 
 pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
+pico_enable_stdio_usb(test_pitch 1)
 # pico_add_extra_outputs(picomigo_sound_sn76489_demo)
