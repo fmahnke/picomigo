@@ -40,6 +40,8 @@ void SN76489::init(const u8 *data, u8 clock, u8 not_write_en, u8 ready) {
 // frequency = CLOCK_HZ / 32 * n
 // n = CLOCK_HZ / (32 * frequency)
 
+// write time 32 cycles == 32 us at 1 MHz clock
+
 void SN76489::send_byte(uint8_t value) {
     gpio_put(pins_data[7], value & 1);
     gpio_put(pins_data[6], value & 2);

@@ -14,18 +14,9 @@ static const uint clock_pin = 8;
 static const uint not_write_en_pin = 9;
 static const uint ready_pin = 10;
 
-int main() {
-    // pico pins
-    // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+static SN76489 sn76489;
 
-    // write time 32 cycles == 32 us at 1 MHz clock
-
-    stdio_init_all();
-
-    // Wait for serial connection.
-
-    sleep_ms(2000);
-
+void pio_init() {
     printf("init PIO\n");
 
     // Choose PIO instance (0 or 1)
@@ -50,19 +41,35 @@ int main() {
 
     // Start running our PIO program in the state machine
     pio_sm_set_enabled(pio, sm, true);
+}
 
+void sn76489_init() {
     printf("init sn76489\n");
 
     const u8 data_pins[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-    SN76489 sn76489;
     sn76489.init(data_pins, 8, 9, 10);
+}
+
+void init() {
+    stdio_init_all();
+
+    // Wait for serial connection.
+
+    sleep_ms(2000);
+
+    pio_init();
+
+    sn76489_init();
+}
+
+int main() {
+    init();
 
     size_t step = 0;
 
     printf("loop\n");
 
-    // Do nothing
     while (true) {
         uint64_t time_ms = time_us_64() / 1000.0f;
 
@@ -93,15 +100,5 @@ int main() {
         sn76489.send_byte(0b10010001);
 
         sleep_ms(1);
-        /*
-        printf(
-            "Clock Hz: %.02f, pio freq: %.02f, div: %.02f\n",
-            clock_hz,
-            pio_freq,
-            div
-        );
-
-        sleep_ms(1000);
-        */
     }
 }
