@@ -71,5 +71,5 @@ target_link_libraries(
 #     hardware_pwm
 # )
 # 
-# pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
+pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
 # pico_add_extra_outputs(picomigo_sound_sn76489_demo)

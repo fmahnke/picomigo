@@ -1,19 +1,8 @@
 .program blink
 
-; Turn on LED for 100 cycles and off for 100 cycles.
-; At 2 kHz, this will toggle pin at 10 Hz (200 cycles / 2000 Hz = 0.1 sec)
-
 .wrap_target
-    set pins, 1 [19]    ; Turn LED on and wait another 19 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
-    set pins, 0 [19]    ; Turn LED off and wait another 19 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
-    nop         [19]    ; Wait 20 cycles
+    set pins, 1
+    set pins, 0
 .wrap
 
 % c-sdk {
