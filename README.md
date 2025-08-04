@@ -7,6 +7,13 @@ cd picomigo-py
 uv sync
 ```
 
+## prepare micropython
+
+```
+cd $UPYTHON_PATH/mpy-cross
+make
+```
+
 # build and install
 
 ## native modules
