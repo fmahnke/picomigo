@@ -16,6 +16,7 @@ add_executable(
     picomigo_sound_sn76489_demo
 
     src/demo.cpp
+    src/sn76489.cpp
 )
 
 target_compile_definitions(
