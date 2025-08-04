@@ -1,12 +1,10 @@
 #include "sn76489.hpp"
 
-#include "pico/stdlib.h"
+#include "pico/time.h"
 
 #include <hardware/gpio.h>
 
 #include <cstring>
-
-constexpr uint32_t CLOCK_HZ = 1000000;
 
 void SN76489::init(const u8 *data, u8 clock, u8 not_write_en, u8 ready) {
     memcpy(pins_data, data, sizeof(u8) * D_PINS_LENGTH);
@@ -20,16 +18,12 @@ void SN76489::init(const u8 *data, u8 clock, u8 not_write_en, u8 ready) {
         gpio_set_dir(pins_data[i], GPIO_OUT);
     }
 
-    // gpio_init(pin_clock);
-    // gpio_set_dir(pin_clock, GPIO_OUT);
-
-    gpio_init(pin_not_write_en);
     gpio_set_dir(pin_not_write_en, GPIO_OUT);
 
     gpio_init(pin_ready);
     gpio_set_dir(pin_ready, GPIO_IN);
 
-    // silence everything else
+    // silence everything
 
     send_byte(0b10011111);
     send_byte(0b10111111);
@@ -59,6 +53,18 @@ void SN76489::send_byte(uint8_t value) {
     gpio_put(pin_not_write_en, 1);
 }
 
-u16 data_from_frequency(float frequency) {
-    return CLOCK_HZ / (32 * frequency);
+void SN76489::frequency(u8 channel, u16 frequency) {
+    u8 first = (0b1 << 7) | (channel << 5) | (frequency & 0xF);
+    u8 second = frequency >> 4;
+
+    // printf("note: %u, %010b, %08b, %08b\n", note, note, first, second);
+
+    send_byte(first);
+    send_byte(second);
+}
+
+void SN76489::attenuator(u8 channel, u8 level) {
+    u8 data = (0b1001 << 4) | (channel << 5) | (level & 0xF);
+
+    send_byte(data);
 }

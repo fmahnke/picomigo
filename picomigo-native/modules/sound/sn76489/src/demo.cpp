@@ -1,12 +1,16 @@
 #include "sn76489.hpp"
 
+#include "sn76489.pio.h"
+
 #include "hardware/clocks.h"
 #include "hardware/pio.h"
 #include "pico/stdio.h"
 #include "pico/time.h"
-#include "sn76489.pio.h"
+
 #include <hardware/gpio.h>
 #include <stdio.h>
+
+constexpr uint32_t CLOCK_HZ = 1000000;
 
 const uint d_pins[D_PINS_LENGTH] = {0, 1, 2, 3, 4, 5, 6, 7};
 
@@ -66,8 +70,6 @@ void init() {
 int main() {
     init();
 
-    size_t step = 0;
-
     printf("loop\n");
 
     while (true) {
@@ -77,28 +79,19 @@ int main() {
             break;
         }
 
-        uint16_t note = data_from_frequency(440.0f);
+        sn76489.frequency(0, data_from_frequency(440.0f));
+        sn76489.frequency(1, data_from_frequency(523.25f));
+        sn76489.frequency(2, data_from_frequency(880.0f));
 
-        uint8_t first = (0b1000 << 4) | (note & 0xF);
-        uint8_t second = note >> 4;
-
-        if (step == 0) {
-            printf("note: %u, %010b, %08b, %08b\n", note, note, first, second);
-        }
-
-        step += 1;
-
-        if (step == 1000) {
-            step = 0;
-        }
-
-        sn76489.send_byte(first);
-        sn76489.send_byte(second);
-
-        // update ch 1 attenuator max
-
-        sn76489.send_byte(0b10010001);
+        sn76489.attenuator(0, 0);
+        sn76489.attenuator(1, 0);
+        sn76489.attenuator(2, 0);
+        sn76489.attenuator(3, 0xF);
 
         sleep_ms(1);
     }
+}
+
+u16 data_from_frequency(float frequency) {
+    return CLOCK_HZ / (32 * frequency);
 }
