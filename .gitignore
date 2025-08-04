@@ -12,3 +12,7 @@ _build
 # direnv
 
 .direnv
+
+# aider
+
+.aider*
