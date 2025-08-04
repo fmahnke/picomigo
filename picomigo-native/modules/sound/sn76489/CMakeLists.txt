@@ -15,7 +15,7 @@ pico_sdk_init()
 add_executable(
     picomigo_sound_sn76489_demo
 
-    src/demo.c
+    src/demo.cpp
 )
 
 target_compile_definitions(

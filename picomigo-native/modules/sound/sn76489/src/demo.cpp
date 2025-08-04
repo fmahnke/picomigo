@@ -6,8 +6,8 @@
 #include <hardware/gpio.h>
 #include <stdio.h>
 
-#define D_PINS_LENGTH 8
-#define CLOCK_HZ 1000000
+constexpr uint8_t D_PINS_LENGTH = 8;
+constexpr uint32_t CLOCK_HZ = 1000000;
 
 const uint d_pins[D_PINS_LENGTH] = {0, 1, 2, 3, 4, 5, 6, 7};
 
