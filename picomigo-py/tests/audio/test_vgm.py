@@ -1,3 +1,6 @@
+from io import StringIO
+
+import pytest
 from mktech import resources
 from mktech.log import log
 from picomigo.audio import vgm
@@ -7,12 +10,17 @@ p = resources.resource_path(
 ).unwrap()
 
 
+@pytest.fixture
+def parser():
+    data = p.read_bytes()
+
+    parser = vgm.Parser(data)
+
+    return parser
+
+
 class TestParser:
-    def test_parser(self) -> None:
-        data = p.read_bytes()
-
-        parser = vgm.Parser(data)
-
+    def test_parser(self, parser) -> None:
         log.debug(parser)
 
         parser.parse_metadata()
@@ -26,3 +34,12 @@ class TestParser:
         parser.parse_commands()
 
         log.debug(parser.command_list)
+
+    def test_format_command_list(self, parser) -> None:
+        parser.parse_commands()
+
+        output = StringIO()
+
+        parser.format_command_list(output)
+
+        log.debug(output.getvalue())

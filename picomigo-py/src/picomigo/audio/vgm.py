@@ -1,13 +1,22 @@
 import gzip
 import struct
 import sys
+from enum import Enum
+from typing import TextIO, TypedDict
 
+from mktech.error import Err, Error, Ok, Result
 from mktech.log import log
 
 if (sys.version_info > (3, 0)):
     from io import BytesIO as ByteBuffer
 else:
     from StringIO import StringIO as ByteBuffer
+
+
+class CommandListItem(TypedDict):
+    command: bytes
+    data: bytes | None
+
 
 _metadata_offsets = {}
 
@@ -45,6 +54,12 @@ _metadata_offsets[0x00000101] = {
 _metadata_offsets[0x00000150] = _metadata_offsets[0x00000101]
 
 
+class Command(Enum):
+    PSG_WRITE_VALUE = 0x50
+    WAIT_735_SAMPLES = 0x62
+    END_OF_DATA = 0x66
+
+
 class VersionError(Exception):
     pass
 
@@ -72,7 +87,7 @@ class Parser:
         self.validate_vgm_data()
 
         # Set up the variables that will be populated
-        self.command_list = []
+        self.command_list: list[CommandListItem] = []
         self.data_block = None
         self.gd3_data = {}
         self.metadata = {}
@@ -292,3 +307,51 @@ class Parser:
 
         if version not in self.supported_ver_list:
             raise VersionError('VGM version is not supported')
+
+    def format_command_list(self, output: TextIO) -> None:
+        not_found: list[int] = []
+
+        for it in self.command_list:
+            match self._format_command(it):
+                case Err(output_str):
+                    name_bytes = it['command']
+
+                    assert len(name_bytes) == 1
+
+                    not_found.append(name_bytes[0])
+                case Ok(output_str):
+                    pass
+
+            _ = output.write(output_str)
+
+        if len(not_found) != 0:
+            not_found_str = ', '.join([f'{it:#02X}' for it in not_found])
+
+            _ = output.write(f'not found: {not_found_str}')
+
+    @staticmethod
+    def _format_command(command: CommandListItem) -> Result[str, str]:
+        name_bytes = command['command']
+
+        assert len(name_bytes) == 1
+
+        try:
+            name = Command(name_bytes[0])
+
+            found = True
+        except ValueError:
+            name = f'unknown ({name_bytes[0]:#02X})'
+
+            found = False
+
+        if command['data'] is None:
+            data_str = None
+        else:
+            data_str = ' '.join([f'{it:02X}' for it in command['data']])
+
+        output = f"{name}, data: {data_str}\n"
+
+        if not found:
+            return Err(output)
+        else:
+            return Ok(output)
