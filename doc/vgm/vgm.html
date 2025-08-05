@@ -1,0 +1,2463 @@
+
+<div class="mw-content-container">
+			<main id="content" class="mw-body" role="main">
+				<header class="mw-body-header vector-page-titlebar">
+					<label id="vector-toc-collapsed-button" class="mw-ui-button mw-ui-quiet mw-ui-icon mw-ui-icon-flush-left mw-ui-icon-element mw-ui-icon-wikimedia-listBullet mw-checkbox-hack-button" for="vector-toc-collapsed-checkbox" role="button" aria-controls="toc-toggle-list" data-event-name="vector.toc-toggle-list" tabindex="0" title="Table of Contents">
+						Toggle the table of contents
+					</label>
+				
+					<nav role="navigation" aria-label="Contents" class="vector-toc-landmark">
+						
+<div id="vector-page-titlebar-toc" class="vector-menu vector-dropdown vector-menu-dropdown vector-page-titlebar-toc mw-ui-icon-flush-left">
+	<input type="checkbox" id="vector-page-titlebar-toc-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-vector-page-titlebar-toc" class="vector-menu-checkbox " aria-label="Toggle the table of contents">
+	<label id="vector-page-titlebar-toc-label" for="vector-page-titlebar-toc-checkbox" class="vector-menu-heading mw-checkbox-hack-button mw-ui-button mw-ui-icon-element" aria-hidden="true">
+		<span class="mw-ui-icon mw-ui-icon-listBullet mw-ui-icon-wikimedia-listBullet"></span>
+
+		<span class="vector-menu-heading-label">Toggle the table of contents</span>
+	</label>
+	<div class="vector-menu-content vector-dropdown-content">
+
+
+							<div id="vector-page-titlebar-toc-unpinned-container" class="vector-unpinned-container">
+			</div>
+		
+	</div>
+</div>
+					</nav>
+					<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">VGM Specification</span></h1>
+				
+				
+				</header>
+				<div class="vector-page-toolbar">
+					<div class="vector-page-toolbar-container">
+						<div id="left-navigation">
+							<nav aria-label="Namespaces">
+								
+<div id="p-associated-pages" class="vector-menu vector-menu-tabs mw-portlet mw-portlet-associated-pages">
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="ca-nstab-main" class="selected vector-tab-noicon mw-list-item"><a data-mw="interface" href="/wiki/VGM_Specification" title="View the content page [Alt+Shift+c]" accesskey="c" class=""><span>Page</span></a>
+</li>
+<li id="ca-talk" class="new vector-tab-noicon mw-list-item"><a data-mw="interface" href="/w/index.php?title=Talk:VGM_Specification&amp;action=edit&amp;redlink=1" rel="discussion" title="Discussion about the content page (page does not exist) [Alt+Shift+t]" accesskey="t" class=""><span>Discussion</span></a>
+</li>
+
+		</ul>
+		
+	</div>
+</div>
+
+								
+
+<div id="p-variants" class="vector-menu vector-dropdown vector-menu-dropdown mw-portlet mw-portlet-variants emptyPortlet">
+	<input type="checkbox" id="p-variants-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-variants" class="vector-menu-checkbox" aria-label="Change language variant">
+	<label id="p-variants-label" for="p-variants-checkbox" class="vector-menu-heading " aria-hidden="true">
+		
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content vector-dropdown-content">
+
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+
+	</div>
+</div>
+							</nav>
+						</div>
+						<div id="right-navigation" class="vector-collapsible">
+							<nav aria-label="Views">
+								
+<div id="p-views" class="vector-menu vector-menu-tabs mw-portlet mw-portlet-views">
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list">
+			<li id="ca-view" class="selected vector-tab-noicon mw-list-item"><a data-mw="interface" href="/wiki/VGM_Specification" class=""><span>Read</span></a>
+</li>
+<li id="ca-viewsource" class="vector-tab-noicon mw-list-item"><a data-mw="interface" href="/w/index.php?title=VGM_Specification&amp;action=edit" title="This page is protected.
+You can view its source [Alt+Shift+e]" accesskey="e" class=""><span>View source</span></a>
+</li>
+<li id="ca-history" class="vector-tab-noicon mw-list-item"><a data-mw="interface" href="/w/index.php?title=VGM_Specification&amp;action=history" title="Past revisions of this page [Alt+Shift+h]" accesskey="h" class=""><span>View history</span></a>
+</li>
+
+		</ul>
+		
+	</div>
+</div>
+
+							</nav>
+				
+							<nav class="vector-page-tools-landmark" aria-label="More options">
+								
+
+<div id="p-cactions" class="vector-menu vector-dropdown vector-menu-dropdown mw-portlet mw-portlet-cactions emptyPortlet vector-has-collapsible-items" title="More options">
+	<input type="checkbox" id="p-cactions-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-cactions" class="vector-menu-checkbox" aria-label="More">
+	<label id="p-cactions-label" for="p-cactions-checkbox" class="vector-menu-heading" aria-hidden="true">
+		
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content vector-dropdown-content">
+
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-more-view" class="selected vector-more-collapsible-item mw-list-item"><a href="/wiki/VGM_Specification"><span>Read</span></a></li><li id="ca-more-viewsource" class="vector-more-collapsible-item mw-list-item"><a href="/w/index.php?title=VGM_Specification&amp;action=edit"><span>View source</span></a></li><li id="ca-more-history" class="vector-more-collapsible-item mw-list-item"><a href="/w/index.php?title=VGM_Specification&amp;action=history"><span>View history</span></a></li></ul>
+		
+	</div>
+
+	</div>
+</div>
+							</nav>
+						</div>
+					</div>
+				</div>
+				
+				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container="">
+					<div class="vector-body-before-content">
+							<div class="mw-indicators">
+		</div>
+
+						<div id="siteSub" class="noprint">From vgmrips</div>
+					</div>
+					<div id="contentSub"><div id="mw-content-subtitle"></div></div>
+					
+					
+					<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p><a href="/wiki/VGM" title="VGM">VGM</a> (Video Game Music) is a sample-accurate sound logging format for the <a href="/wiki/Sega_Master_System" title="Sega Master System">Sega Master System</a>, the <a href="/wiki/Sega_Game_Gear" title="Sega Game Gear">Sega Game Gear</a> and possibly many other machines (e.g. <a href="/wiki/Sega_Genesis" class="mw-redirect" title="Sega Genesis">Sega Genesis</a>).
+</p><p>The normal file extension is <code>.vgm</code> but files can also be GZip compressed into <code>.vgz</code> files.
+However, a <a href="/w/index.php?title=Category:VGM_Players&amp;action=edit&amp;redlink=1" class="new" title="Category:VGM Players (page does not exist)">VGM player</a> should attempt to support compressed and uncompressed files with either extension (ZLib's GZIO library makes this trivial to implement).
+</p>
+<meta property="mw:PageProp/toc">
+<h2><span class="mw-headline" id="Header">Header</span></h2>
+<p>The format starts with a 256 byte header:
+</p>
+<table class="wikitable">
+
+<tbody><tr>
+<th width="4%">
+</th>
+<th width="6%">00
+</th>
+<th width="6%">01
+</th>
+<th width="6%">02
+</th>
+<th width="6%">03
+</th>
+<th width="6%">04
+</th>
+<th width="6%">05
+</th>
+<th width="6%">06
+</th>
+<th width="6%">07
+</th>
+<th width="6%">08
+</th>
+<th width="6%">09
+</th>
+<th width="6%">0A
+</th>
+<th width="6%">0B
+</th>
+<th width="6%">0C
+</th>
+<th width="6%">0D
+</th>
+<th width="6%">0E
+</th>
+<th width="6%">0F
+</th></tr>
+<tr>
+<th>0x00
+</th>
+<td colspan="4">"Vgm " ident
+</td>
+<td colspan="4">EoF offset
+</td>
+<td colspan="4">Version
+</td>
+<td colspan="4"><a href="/wiki/SN76489" class="mw-redirect" title="SN76489">SN76489</a> clock
+</td></tr>
+<tr>
+<th>0x10
+</th>
+<td colspan="4"><a href="/wiki/YM2413" class="mw-redirect" title="YM2413">YM2413</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=GD3&amp;action=edit&amp;redlink=1" class="new" title="GD3 (page does not exist)">GD3</a> offset
+</td>
+<td colspan="4">Total # samples
+</td>
+<td colspan="4">Loop offset
+</td></tr>
+<tr>
+<th>0x20
+</th>
+<td colspan="4">Loop # samples
+</td>
+<td colspan="4">Rate
+</td>
+<td colspan="2">SN FB
+</td>
+<td>SNW
+</td>
+<td>SF
+</td>
+<td colspan="4"><a href="/wiki/YM2612" class="mw-redirect" title="YM2612">YM2612</a> clock
+</td></tr>
+<tr>
+<th>0x30
+</th>
+<td colspan="4"><a href="/wiki/YM2151" class="mw-redirect" title="YM2151">YM2151</a> clock
+</td>
+<td colspan="4">VGM data offset
+</td>
+<td colspan="4"><a href="/w/index.php?title=Sega_PCM&amp;action=edit&amp;redlink=1" class="new" title="Sega PCM (page does not exist)">Sega PCM</a> clock
+</td>
+<td colspan="4">SPCM Interface
+</td></tr>
+<tr>
+<th>0x40
+</th>
+<td colspan="4"><a href="/wiki/RF5C68" class="mw-redirect" title="RF5C68">RF5C68</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YM2203" class="mw-redirect" title="YM2203">YM2203</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YM2608" class="mw-redirect" title="YM2608">YM2608</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YM2610" class="mw-redirect" title="YM2610">YM2610</a>/B clock
+</td></tr>
+<tr>
+<th>0x50
+</th>
+<td colspan="4"><a href="/wiki/YM3812" class="mw-redirect" title="YM3812">YM3812</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YM3526" class="mw-redirect" title="YM3526">YM3526</a> clock
+</td>
+<td colspan="4"><a href="/wiki/Y8950" class="mw-redirect" title="Y8950">Y8950</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YMF262" class="mw-redirect" title="YMF262">YMF262</a> clock
+</td></tr>
+<tr>
+<th>0x60
+</th>
+<td colspan="4"><a href="/wiki/YMF278B" class="mw-redirect" title="YMF278B">YMF278B</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YMF271" class="mw-redirect" title="YMF271">YMF271</a> clock
+</td>
+<td colspan="4"><a href="/wiki/YMZ280B" class="mw-redirect" title="YMZ280B">YMZ280B</a> clock
+</td>
+<td colspan="4"><a href="/wiki/RF5C164" class="mw-redirect" title="RF5C164">RF5C164</a> clock
+</td></tr>
+<tr>
+<th>0x70
+</th>
+<td colspan="4"><a href="/wiki/PWM" class="mw-redirect" title="PWM">PWM</a> clock
+</td>
+<td colspan="4"><a href="/wiki/AY8910" class="mw-redirect" title="AY8910">AY8910</a> clock</td>
+<td>AYT
+</td>
+<td colspan="3">AY Flags</td>
+<td>VM</td>
+<td>***</td>
+<td>LB</td>
+<td>LM
+</td></tr>
+<tr>
+<th>0x80
+</th>
+<td colspan="4"><a href="/w/index.php?title=GB_DMG&amp;action=edit&amp;redlink=1" class="new" title="GB DMG (page does not exist)">GB DMG</a> clock
+</td>
+<td colspan="4"><a href="/wiki/NES_APU" class="mw-redirect" title="NES APU">NES APU</a> clock
+</td>
+<td colspan="4"><a href="/wiki/MultiPCM" class="mw-redirect" title="MultiPCM">MultiPCM</a> clock
+</td>
+<td colspan="4"><a href="/wiki/UPD7759" class="mw-redirect" title="UPD7759">uPD7759</a> clock
+</td></tr>
+<tr>
+<th>0x90
+</th>
+<td colspan="4"><a href="/w/index.php?title=OKIM6258&amp;action=edit&amp;redlink=1" class="new" title="OKIM6258 (page does not exist)">OKIM6258</a> clock</td>
+<td>OF</td>
+<td>KF</td>
+<td>CF</td>
+<td>***
+</td>
+<td colspan="4"><a href="/wiki/OKIM6295" class="mw-redirect" title="OKIM6295">OKIM6295</a> clock
+</td>
+<td colspan="4"><a href="/wiki/K051649" class="mw-redirect" title="K051649">K051649</a> clock
+</td></tr>
+<tr>
+<th>0xA0
+</th>
+<td colspan="4"><a href="/wiki/K054539" class="mw-redirect" title="K054539">K054539</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=HuC6280&amp;action=edit&amp;redlink=1" class="new" title="HuC6280 (page does not exist)">HuC6280</a> clock
+</td>
+<td colspan="4"><a href="/wiki/C140" class="mw-redirect" title="C140">C140</a> clock
+</td>
+<td colspan="4"><a href="/wiki/K053260" class="mw-redirect" title="K053260">K053260</a> clock
+</td></tr>
+<tr>
+<th>0xB0
+</th>
+<td colspan="4"><a href="/wiki/Pokey" class="mw-redirect" title="Pokey">Pokey</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=QSound&amp;action=edit&amp;redlink=1" class="new" title="QSound (page does not exist)">QSound</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=SCSP&amp;action=edit&amp;redlink=1" class="new" title="SCSP (page does not exist)">SCSP</a> clock
+</td>
+<td colspan="4">Extra Hdr ofs
+</td></tr>
+<tr>
+<th>0xC0
+</th>
+<td colspan="4"><a href="/wiki/WonderSwan" title="WonderSwan">WonderSwan</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=VSU&amp;action=edit&amp;redlink=1" class="new" title="VSU (page does not exist)">VSU</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=SAA1099&amp;action=edit&amp;redlink=1" class="new" title="SAA1099 (page does not exist)">SAA1099</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=ES5503&amp;action=edit&amp;redlink=1" class="new" title="ES5503 (page does not exist)">ES5503</a> clock
+</td></tr>
+<tr>
+<th>0xD0
+</th>
+<td colspan="4"><a href="/w/index.php?title=ES5506&amp;action=edit&amp;redlink=1" class="new" title="ES5506 (page does not exist)">ES5506</a> clock
+</td>
+<td colspan="2">ES chns</td>
+<td>CD</td>
+<td>***
+</td>
+<td colspan="4"><a href="/w/index.php?title=X1-010&amp;action=edit&amp;redlink=1" class="new" title="X1-010 (page does not exist)">X1-010</a> clock
+</td>
+<td colspan="4"><a href="/wiki/C352" class="mw-redirect" title="C352">C352</a> clock
+</td></tr>
+<tr>
+<th>0xE0
+</th>
+<td colspan="4"><a href="/w/index.php?title=GA20&amp;action=edit&amp;redlink=1" class="new" title="GA20 (page does not exist)">GA20</a> clock
+</td>
+<td colspan="4"><a href="/w/index.php?title=Mikey&amp;action=edit&amp;redlink=1" class="new" title="Mikey (page does not exist)">Mikey</a> clock</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***
+</td></tr>
+<tr>
+<th>0xF0
+</th>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***</td>
+<td>***
+</td></tr></tbody></table>
+<p><br>
+</p>
+<ul><li>Unused space (marked with *) is reserved for future expansion, and must be zero.</li>
+<li>All integer values are <i>unsigned</i> and written in "Intel" byte order (Little Endian), so for example "0x12345678" is written as <code>0x78 0x56 0x34 0x12</code>.</li>
+<li>All pointer offsets are written as relative to the current position in the file, so for example the <a href="/wiki/GD3_Specification" title="GD3 Specification">GD3</a> offset at 0x14 in the header is the file position of the GD3 tag minus 0x14.</li>
+<li>All header sizes are valid for all versions from 1.50 on, as long as header has at least 64 bytes. If the VGM data starts at an offset that is lower than 0x100, all overlapping header bytes have to be handled as they were zero.</li>
+<li>VGMs run with a rate of 44100 samples per second. All sample values use this unit.</li></ul>
+<table class="wikitable topAlign">
+
+<tbody><tr>
+<th>Ofs
+</th>
+<th style="width: 50px">Size
+</th>
+<th>Field
+</th>
+<th>Description
+</th></tr>
+<tr>
+<th>0x00
+</th>
+<td>32 bits
+</td>
+<td><code>"Vgm "</code>
+</td>
+<td>file identification (<code>0x56 0x67 0x6d 0x20</code>)
+</td></tr>
+<tr>
+<th>0x04
+</th>
+<td>32 bits
+</td>
+<td>Eof offset
+</td>
+<td>
+<p>Relative offset to end of file (i.e. file length - 4).
+This is mainly used to find the next track when concatenating player stubs and multiple files.
+</p>
+</td></tr>
+<tr>
+<th>0x08
+</th>
+<td>32 bits
+</td>
+<td>Version number
+</td>
+<td>
+<p>Version number in BCD-Code. e.g. Version 1.71 is stored as <code>0x00000171</code>.
+This is used for backwards compatibility in players, and defines which header values are valid.
+</p>
+</td></tr>
+<tr>
+<th>0x0C
+</th>
+<td>32 bits
+</td>
+<td>SN76489 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the <a href="/wiki/SN76489" class="mw-redirect" title="SN76489">SN76489</a> PSG chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no PSG chip used.
+</p>
+<div class="note note-info"><b>Note:</b> Bit 31 (0x80000000) is used on combination with the dual-chip-bit to indicate that this is a <a href="/wiki/T6W28" class="mw-redirect" title="T6W28">T6W28</a>. (PSG variant used in <a href="/wiki/Neo_Geo_Pocket" title="Neo Geo Pocket">Neo Geo Pocket</a>)</div>
+</td></tr>
+<tr>
+<th>0x10
+</th>
+<td>32 bits
+</td>
+<td>YM2413 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the <a href="/wiki/YM2413" class="mw-redirect" title="YM2413">YM2413</a> chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no YM2413 chip used.
+</p><p>For version 1.01 and earlier files, this may in fact be the clock for the YM2151 or YM2612. If above 5000000 it must be the YM2612 clock.
+</p>
+</td></tr>
+<tr>
+<th>0x14
+</th>
+<td>32 bits
+</td>
+<td>GD3 offset
+</td>
+<td>
+<p>Relative offset to GD3 tag. 0 if no GD3 tag.
+GD3 tags are descriptive tags similar in use to ID3 tags in MP3 files.
+See the GD3 specification for more details. The GD3 tag is usually stored at the end of the file, immediately after the VGM data.
+</p>
+</td></tr>
+<tr>
+<th>0x18
+</th>
+<td>32 bits
+</td>
+<td>Total # samples
+</td>
+<td>
+<p>Total of all wait values in the file.
+</p>
+</td></tr>
+<tr>
+<th>0x1C
+</th>
+<td>32 bits
+</td>
+<td>Loop offset
+</td>
+<td>
+<p>Relative offset to loop point, or 0 if no loop.
+For example, if the data for the one-off intro to a song was in bytes <code>0x0040 - 0x3FFF</code> of the file, but the main looping section started at <code>0x4000</code>, this would contain the value <code>0x4000 - 0x1C = 0x00003FE4</code>.
+</p>
+<div class="note note-info"><b>Note:</b> A VGM file parser should be aware that some tools may write invalid loop offsets, resulting in out-of-range file offsets or 0-sample loops and treat those as "no loop". (and possibly throw a warning)</div>
+</td></tr>
+<tr>
+<th>0x20
+</th>
+<td>32 bits
+</td>
+<td>Loop # samples
+</td>
+<td>
+<p>Number of samples in one loop, or 0 if there is no loop.
+Total of all wait values between the loop point and the end of the file.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.01 additions:</b>
+</td></tr>
+<tr>
+<th>0x24
+</th>
+<td>32 bits
+</td>
+<td>Rate
+</td>
+<td>
+<p>"Rate" of recording in Hz, used for rate scaling on playback. It is typically 50 for PAL systems and 60 for NTSC systems. It should be set to zero if rate scaling is not appropriate - for example, if the game adjusts its music engine for the system's speed.
+VGM 1.00 files will have a value of 0.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.10 additions:</b>
+</td></tr>
+<tr>
+<th>0x28
+</th>
+<td>16 bits
+</td>
+<td>SN76489 feedback
+</td>
+<td>
+<p>The white noise feedback pattern for the SN76489 PSG. For anachronistic reasons this field is based directly on MAME's feedback taps which includes latency bits and differs from the physical value. Known values are:
+</p>
+<table>
+<tbody><tr>
+<td>0x0003</td>
+<td>SN76489, SN94624
+</td></tr>
+<tr>
+<td>0x0006</td>
+<td>Used incorrectly by some packs to refer to SN76489A, SN76494, SN76496, and Y204 in combination with the LFSR width value 16. Should be feedback pattern 0xC and LFSR width 17. The latter correctly reflects 1 additional bit of latency between shift register and output.
+</td></tr>
+<tr>
+<td>0x0009</td>
+<td>Sega Master System 2/Game Gear/Mega Drive (SN76489/SN76496 integrated into Sega VDP chip)
+</td></tr>
+<tr>
+<td>0x000C</td>
+<td>SN76489A, SN76494, SN76496, Y204
+</td></tr>
+<tr>
+<td>0x0022</td>
+<td>NCR8496, PSSJ3
+</td></tr></tbody></table>
+<p>For version 1.01 and earlier files, the feedback pattern should be assumed to be 0x0009. If the PSG is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x2A
+</th>
+<td>8 bits
+</td>
+<td>SN76489 shift register width
+</td>
+<td>
+<p>The noise feedback shift register width, in bits. For anachronistic reasons this field is based directly on MAME's feedback mask which includes latency bits and differs from the physical value. Known values are:
+</p>
+<table>
+<tbody><tr>
+<td>15</td>
+<td>SN76489, SN94624
+</td></tr>
+<tr>
+<td>16</td>
+<td>Sega Master System 2/Game Gear/Mega Drive (SN76489/SN76496 integrated into Sega VDP chip), NCR8496, PSSJ3
+</td></tr>
+<tr>
+<td>17</td>
+<td>SN76489A, SN76494, SN76496, Y204
+</td></tr></tbody></table>
+<p>For version 1.01 and earlier files, the shift register width should be
+assumed to be 16. If the PSG is not used then this may be omitted (left
+at zero).
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.51 additions:</b>
+</td></tr>
+<tr>
+<th>0x2B
+</th>
+<td>8 bits
+</td>
+<td>SN76489 Flags
+</td>
+<td>
+<p>Misc flags for the SN76489. Most of them don't make audible changes and
+can be ignored, if the SN76489 emulator lacks the features.
+</p>
+<table>
+<tbody><tr>
+<td>bit 0</td>
+<td>frequency 0 is 0x400 (should set for all chips but SEGA PSG)
+</td></tr>
+<tr>
+<td>bit 1</td>
+<td>output negate flag
+</td></tr>
+<tr>
+<td>bit 2</td>
+<td>GameGear stereo on/off (on when bit clear)
+</td></tr>
+<tr>
+<td>bit 3</td>
+<td>/8 Clock Divider on/off (on when bit clear)
+</td></tr>
+<tr>
+<td>bit 4</td>
+<td>XNOR noise mode (for NCR8496/PSSJ-3)
+</td></tr>
+<tr>
+<td>bit 5-7</td>
+<td>reserved (must be zero)
+</td></tr></tbody></table>
+<p>For version 1.51 and earlier files, all the flags should not be set.
+If the PSG is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.10 additions:</b>
+</td></tr>
+<tr>
+<th>0x2C
+</th>
+<td>32 bits
+</td>
+<td>YM2612 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM2612 chip. A typical value is 7670454 or 8053975.
+</p><p>It should be 0 if there us no YM2612 chip used.
+</p><p>For version 1.01 and earlier files, the YM2413 clock rate should be used for the clock rate of the YM2612 if it is greater than 5000000.
+</p><p>For version 1.51 and later, bit 31 is set to indicate the YM3438 variant.
+</p>
+</td></tr>
+<tr>
+<th>0x30
+</th>
+<td>32 bits
+</td>
+<td>YM2151 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM2151 chip. A typical value is 3579545 or 4000000.
+</p><p>It should be 0 if there us no YM2151 chip used.
+</p><p>For version 1.01 and earlier files, the YM2413 clock rate should be used for the clock rate of the YM2151 if it is less than 5000000.
+</p><p>For version 1.51 and later, bit 31 is set to indicate the YM2164 variant.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.50 additions:</b>
+</td></tr>
+<tr>
+<th>0x34
+</th>
+<td>32 bits
+</td>
+<td>VGM data offset
+</td>
+<td>
+<p>Relative offset to VGM data stream.
+</p><p>If the VGM data starts at absolute offset 0x40, this will contain value 0x0000000C. For versions prior to 1.50, it should be 0 and the VGM data must start at offset 0x40.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.51 additions:</b>
+</td></tr>
+<tr>
+<th>0x38
+</th>
+<td>32 bits
+</td>
+<td>Sega PCM clock
+</td>
+<td>
+<p>Input clock rate in Hz for the Sega PCM chip. A typical value is 4000000.
+</p><p>It should be 0 if there is no Sega PCM chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x3C
+</th>
+<td>32 bits
+</td>
+<td>Sega PCM interface register
+</td>
+<td>
+<p>The interface register for the Sega PCM chip.
+</p><p>It should be 0 if there is no Sega PCM chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x40
+</th>
+<td>32 bits
+</td>
+<td>RF5C68 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the RF5C68 PCM chip. A typical value is 10000000 or 12500000.
+</p><p>It should be 0 if there is no RF5C68 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x44
+</th>
+<td>32 bits
+</td>
+<td>YM2203 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM2203 chip. A typical value is 3000000 or 4000000.
+</p><p>It should be 0 if there is no YM2203 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x48
+</th>
+<td>32 bits
+</td>
+<td>YM2608 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM2608 chip. A typical value is 7987000 or 8000000.
+</p><p>It should be 0 if there is no YM2608 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x4C
+</th>
+<td>32 bits
+</td>
+<td>YM2610/YM2610B clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM2610/B chip. A typical value is 8000000.
+It should be 0 if there is no YM2610/B chip used.
+</p>
+<div class="note note-info"><b>Note:</b> Bit 31 is used to set whether it is an YM2610 or an YM2610B chip.
+If bit 31 is set it is an YM2610B, if bit 31 is clear it is an YM2610.</div>
+</td></tr>
+<tr>
+<th>0x50
+</th>
+<td>32 bits
+</td>
+<td>YM3812 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM3812 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no YM3812 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x54
+</th>
+<td>32 bits
+</td>
+<td>YM3526 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YM3526 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no YM3526 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x58
+</th>
+<td>32 bits
+</td>
+<td>Y8950 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the Y8950 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no Y8950 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x5C
+</th>
+<td>32 bits
+</td>
+<td>YMF262 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YMF262 chip. A typical value is 14318180.
+</p><p>It should be 0 if there is no YMF262 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x60
+</th>
+<td>32 bits
+</td>
+<td>YMF278B clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YMF278B chip. A typical value is 33868800.
+</p><p>It should be 0 if there is no YMF278B chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x64
+</th>
+<td>32 bits
+</td>
+<td>YMF271 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YMF271 chip. A typical value is 16934400.
+</p><p>It should be 0 if there is no YMF271 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x68
+</th>
+<td>32 bits
+</td>
+<td>YMZ280B clock
+</td>
+<td>
+<p>Input clock rate in Hz for the YMZ280B chip. A typical value is 16934400.
+</p><p>It should be 0 if there is no YMZ280B chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x6C
+</th>
+<td>32 bits
+</td>
+<td>RF5C164 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the RF5C164 PCM chip. A typical value is 12500000.
+</p><p>It should be 0 if there is no RF5C164 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x70
+</th>
+<td>32 bits
+</td>
+<td>PWM clock
+</td>
+<td>
+<p>Input clock rate in Hz for the PWM chip. A typical value is 23011361.
+</p><p>It should be 0 if there is no PWM chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x74
+</th>
+<td>32 bits
+</td>
+<td>AY8910 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the AY8910 chip. A typical value is 1789772.
+</p><p>It should be 0 if there is no AY8910 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x78
+</th>
+<td>8 bits
+</td>
+<td>AY8910 Chip Type
+</td>
+<td>
+<p>Defines the exact type of AY8910. The values are:
+</p>
+<table>
+<tbody><tr>
+<th>0x00
+</th>
+<td>AY8910
+</td></tr>
+<tr>
+<th>0x01
+</th>
+<td>AY8912
+</td></tr>
+<tr>
+<th>0x02
+</th>
+<td>AY8913
+</td></tr>
+<tr>
+<th>0x03
+</th>
+<td>AY8930
+</td></tr>
+<tr>
+<th>0x04
+</th>
+<td>AY8914
+</td></tr>
+<tr>
+<th>0x10
+</th>
+<td>YM2149
+</td></tr>
+<tr>
+<th>0x11
+</th>
+<td>YM3439
+</td></tr>
+<tr>
+<th>0x12
+</th>
+<td>YMZ284
+</td></tr>
+<tr>
+<th>0x13
+</th>
+<td>YMZ294
+</td></tr></tbody></table>
+<p>If the AY8910 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x79
+</th>
+<td>8 bits
+</td>
+<td>AY8910 Flags
+</td>
+<td>
+<p>Misc flags for the AY8910. Default is 0x01.
+For additional description see ay8910.h in MAME source code.
+</p>
+<table>
+<tbody><tr>
+<td>bit 0</td>
+<td>Legacy Output
+</td></tr>
+<tr>
+<td>bit 1</td>
+<td>Single Output
+</td></tr>
+<tr>
+<td>bit 2</td>
+<td>Discrete Output
+</td></tr>
+<tr>
+<td>bit 3</td>
+<td>RAW Output
+</td></tr>
+<tr>
+<td>bit 4</td>
+<td>YMxxxx pin 26 (clock divider) low
+</td></tr>
+<tr>
+<td>bit 5-7</td>
+<td>reserved (must be zero)
+</td></tr></tbody></table>
+<p>If the AY8910 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x7A
+</th>
+<td>8 bits
+</td>
+<td>YM2203/AY8910 Flags
+</td>
+<td>
+<p>Misc flags for the AY8910. This one is specific for the AY8910 that's connected with/part of the YM2203.
+</p>
+</td></tr>
+<tr>
+<th>0x7B
+</th>
+<td>8 bits
+</td>
+<td>YM2608/AY8910 Flags
+</td>
+<td>
+<p>Misc flags for the AY8910. This one is specific for the AY8910 that's connected with/part of the YM2608.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.60 additions:</b>
+</td></tr>
+<tr>
+<th>0x7C
+</th>
+<td>8 bits
+</td>
+<td>Volume Modifier
+</td>
+<td>
+<p><code>Volume = 2 ^ (VolumeModifier / 0x20)</code> where VolumeModifier is a number
+from -63 to 192 (-63 = 0xC1, 0 = 0x00, 192 = 0xC0). Also the value -63
+gets replaced with -64 in order to make factor of 0.25 possible.
+Therefore the volume can reach levels between 0.25 and 64.
+Default is 0, which is equal to a factor of 1 or 100%.
+</p>
+<div class="note note-info"><b>Note:</b> Players should support the Volume Modifier in v1.50 files and higher. This way Mega Drive VGMs can use the Volume Modifier without breaking compatibility with old players.</div>
+</td></tr>
+<tr>
+<th>0x7D
+</th>
+<td>8 bits
+</td>
+<td>reserved
+</td>
+<td>Reserved byte for future use. It must be 0.
+</td></tr>
+<tr>
+<th>0x7E
+</th>
+<td>8 bits
+</td>
+<td>Loop Base
+</td>
+<td>
+<p>Modifies the number of loops that are played before the playback ends.
+Set this value to eg. 1 to reduce the number of played loops by one.
+This is useful, if the song is looped twice in the vgm, because there
+are minor differences between the first and second loop and the song
+repeats just the second loop.
+The resulting number of loops that are played is calculated as
+following: NumLoops = NumLoopsModified - LoopBase
+Default is 0. Negative numbers are possible (80h...FFh = -128...-1)
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.51 additions:</b>
+</td></tr>
+<tr>
+<th>0x7F
+</th>
+<td>8 bits
+</td>
+<td>Loop Modifier
+</td>
+<td>
+<p>Modifies the number of loops that are played before the playback ends.
+You may want to use this, e.g. if a tune has a very short, but non-
+repetitive loop (then set it to 0x20 double the loop number).
+The resulting number of loops that are played is calculated as
+following:
+</p>
+<pre> NumLoops = ProgramNumLoops * LoopModifier / 0x10
+</pre>
+<p>Default is 0, which is equal to 0x10.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.61 additions:</b>
+</td></tr>
+<tr>
+<th>0x80
+</th>
+<td>32 bits
+</td>
+<td>GameBoy DMG clock
+</td>
+<td>
+<p>Input clock rate in Hz for the GameBoy DMG chip, LR35902. A typical value is 4194304.
+</p><p>It should be 0 if there is no GB DMG chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x84
+</th>
+<td>32 bits
+</td>
+<td>NES APU clock
+</td>
+<td>
+<p>Input clock rate in Hz for the NES APU chip, N2A03. A typical value is 1789772.
+</p><p>It should be 0 if there is no NES APU chip used.
+</p>
+<div class="note note-info"><b>Note:</b> Bit 31 (0x80000000) is used to enable the FDS sound addon. Set to enable, clear to disable.</div>
+</td></tr>
+<tr>
+<th>0x88
+</th>
+<td>32 bits
+</td>
+<td>MultiPCM clock
+</td>
+<td>
+<p>Input clock rate in Hz for the MultiPCM chip. A typical value is 8053975.
+</p><p>It should be 0 if there is no MultiPCM chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x8C
+</th>
+<td>32 bits
+</td>
+<td>uPD7759 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the uPD7759 chip. A typical value is 640000.
+</p><p>It should be 0 if there is no uPD7759 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x90
+</th>
+<td>32 bits
+</td>
+<td>OKIM6258 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the OKIM6258 chip. A typical value is 4000000.
+</p><p>It should be 0 if there is no OKIM6258 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x94
+</th>
+<td>8 bits
+</td>
+<td>OKIM6258 Flags
+</td>
+<td>
+<p>Misc flags for the OKIM6258. Default is 0x00.
+</p>
+<table>
+<tbody><tr>
+<td>bit 0-1</td>
+<td>Clock Divider (clock dividers are 1024, 768, 512, 512)
+</td></tr>
+<tr>
+<td>bit 2</td>
+<td>3/4-bit ADPCM select (default is 4-bit, doesn't work currently)
+</td></tr>
+<tr>
+<td>bit 3</td>
+<td>10/12-bit Output (default is 10-bit)
+</td></tr>
+<tr>
+<td>bit 4-7</td>
+<td>reserved (must be zero)
+</td></tr></tbody></table>
+<p>If the OKIM6258 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x95
+</th>
+<td>8 bits
+</td>
+<td>K054539 Flags
+</td>
+<td>
+<p>Misc flags for the K054539. Default is 0x01.
+See also k054539.h in MAME source code.
+</p>
+<table>
+<tbody><tr>
+<td>bit 0</td>
+<td>Reverse Stereo
+</td></tr>
+<tr>
+<td>bit 1</td>
+<td>Disable Reverb
+</td></tr>
+<tr>
+<td>bit 2</td>
+<td>Update at KeyOn
+</td></tr>
+<tr>
+<td>bit 3-7</td>
+<td>reserved (must be zero)
+</td></tr></tbody></table>
+<p>If the K054539 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x96
+</th>
+<td>8 bits
+</td>
+<td>C140 Chip Type
+</td>
+<td>
+<p>Defines the exact type of C140 and its banking method. The values are:
+</p>
+<table>
+<tbody><tr>
+<th>0x00
+</th>
+<td>C140, <a href="/w/index.php?title=Namco_System_2&amp;action=edit&amp;redlink=1" class="new" title="Namco System 2 (page does not exist)">Namco System 2</a>
+</td></tr>
+<tr>
+<th>0x01
+</th>
+<td>C140, <a href="/wiki/Namco_System_21" title="Namco System 21">Namco System 21</a>
+</td></tr>
+<tr>
+<th>0x02
+</th>
+<td>219 ASIC, Namco NA-1/2
+</td></tr></tbody></table>
+<p>If the C140 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0x97
+</th>
+<td>8 bits
+</td>
+<td>reserved
+</td>
+<td>Reserved byte for future use. It must be 0.
+</td></tr>
+<tr>
+<th>0x98
+</th>
+<td>32 bits
+</td>
+<td>OKIM6295 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the OKIM6295 chip. A typical value is 8000000 or 8448000.
+</p><p>It should be 0 if there is no OKIM6295 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0x9C
+</th>
+<td>32 bits
+</td>
+<td>K051649/K052539 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the K051649 chip. A typical value is 1789773.
+</p><p>It should be 0 if there is no K051649 chip used.
+</p><p>If bit 31 is set it is a K052539.
+</p>
+</td></tr>
+<tr>
+<th>0xA0
+</th>
+<td>32 bits
+</td>
+<td>K054539 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the K054539 chip. A typical value is 18432000.
+</p><p>It should be 0 if there is no K054539 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xA4
+</th>
+<td>32 bits
+</td>
+<td>HuC6280 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the HuC6280 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no HuC6280 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xA8
+</th>
+<td>32 bits
+</td>
+<td>C140 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the C140 chip. A typical value is 21390.
+</p><p>It should be 0 if there is no C140 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xAC
+</th>
+<td>32 bits
+</td>
+<td>K053260 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the K053260 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no K053260 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xB0
+</th>
+<td>32 bits
+</td>
+<td>Pokey clock
+</td>
+<td>
+<p>Input clock rate in Hz for the Pokey chip. A typical value is 1789772.
+</p><p>It should be 0 if there is no Pokey chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xB4
+</th>
+<td>32 bits
+</td>
+<td>QSound clock
+</td>
+<td>
+<p>Input clock rate in Hz for the QSound chip. A typical value is 4000000.
+</p><p>It should be 0 if there is no QSound chip used.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.71 additions:</b>
+</td></tr>
+<tr>
+<th>0xB8
+</th>
+<td>32 bits
+</td>
+<td>SCSP clock
+</td>
+<td>
+<p>Input clock rate in Hz for the SCSP chip. A typical value is 22579200.
+</p><p>It should be 0 if there is no SCSP chip used.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.70 additions:</b>
+</td></tr>
+<tr>
+<th>0xBC
+</th>
+<td>32 bits
+</td>
+<td>Extra Header Offset
+</td>
+<td>Relative offset to the extra header or 0 if no extra header is present.
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.71 additions:</b>
+</td></tr>
+<tr>
+<th>0xC0
+</th>
+<td>32 bits
+</td>
+<td>WonderSwan clock
+</td>
+<td>
+<p>Input clock rate in Hz for the WonderSwan chip. A typical value is 3072000.
+</p><p>It should be 0 if there is no WonderSwan chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xC4
+</th>
+<td>32 bits
+</td>
+<td>VSU clock
+</td>
+<td>
+<p>Input clock rate in Hz for the VSU chip. A typical value is 5000000.
+</p><p>It should be 0 if there is no VSU chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xC8
+</th>
+<td>32 bits
+</td>
+<td>SAA1099 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the SAA1099 chip. A typical value is 8000000 (or 7159000/7159090).
+</p><p>It should be 0 if there is no SAA1099 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xCC
+</th>
+<td>32 bits
+</td>
+<td>ES5503 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the ES5503 chip. A typical value is 7159090.
+</p><p>It should be 0 if there is no ES5503 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xD0
+</th>
+<td>32 bits
+</td>
+<td>ES5505/ES5506 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the ES5505/ES5506 chip. A typical value is 16000000.
+</p><p>It should be 0 if there is no ES5505/ES5506 chip used.
+</p>
+<div class="note note-info"><b>Note:</b> Bit 31 is used to set whether it is an ES5505 or an ES5506 chip.
+If bit 31 is set it is an ES5506, if bit 31 is clear it is an ES5505.</div>
+</td></tr>
+<tr>
+<th>0xD4
+</th>
+<td>8 bits
+</td>
+<td>ES5503 amount of output channels
+</td>
+<td>
+<p>Defines the internal number of output channels for the ES5503.
+</p><p>Possible values are 1 to 8. A typical value is 2.
+</p><p>If the ES5503 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0xD5
+</th>
+<td>8 bits
+</td>
+<td>ES5505/ES5506 amount of output channels
+</td>
+<td>
+<p>Defines the internal number of output channels for the ES5506.
+</p><p>Possible values are 1 to 4 for the ES5505 and 1 to 8 for the ES5506. A typical value is 1.
+</p><p>If the ES5505/ES5506 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0xD6
+</th>
+<td>8 bits
+</td>
+<td>C352 clock divider
+</td>
+<td>
+<p>Defines the clock divider for the C352 chip, divided by 4 in order to achieve a divider range of 0 to 1020. A typical value is 288.
+</p><p>If the C352 is not used then this may be omitted (left at zero).
+</p>
+</td></tr>
+<tr>
+<th>0xD8
+</th>
+<td>32 bits
+</td>
+<td>X1-010 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the X1-010 chip. A typical value is 16000000.
+</p><p>It should be 0 if there is no X1-010 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xDC
+</th>
+<td>32 bits
+</td>
+<td>C352 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the C352 chip. A typical value is 24192000.
+</p><p>It should be 0 if there is no C352 chip used.
+</p>
+</td></tr>
+<tr>
+<th>0xE0
+</th>
+<td>32 bits
+</td>
+<td>GA20 clock
+</td>
+<td>
+<p>Input clock rate in Hz for the GA20 chip. A typical value is 3579545.
+</p><p>It should be 0 if there is no GA20 chip used.
+</p>
+</td></tr>
+<tr>
+<td colspan="4"><b>VGM 1.72 additions:</b>
+</td></tr>
+<tr>
+<th>0xE4
+</th>
+<td>32 bits
+</td>
+<td>Mikey clock
+</td>
+<td>
+<p>Input clock rate in Hz for the Mikey (Atari Lynx) chip. A typical value is 16000000.
+</p><p>It should be 0 if there is no Mikey chip used.
+</p>
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Commands">Commands</span></h2>
+<p>Starting at the location specified by the VGM data offset (or, offset 0x40 for
+file versions below 1.50) is found a sequence of commands containing data
+written to the chips or timing information. A command is one of:
+</p>
+<table class="wikitable">
+<tbody><tr>
+<td>0x31</td>
+<td>dd</td>
+<td>AY8910 stereo mask, dd is a bit mask of <code>i y r3 l3 r2 l2 r1 l1</code> (bit 7 ... 0)
+<table>
+<tbody><tr>
+<td><code>i</code></td>
+<td>chip instance (0 or 1)
+</td></tr>
+<tr>
+<td><code>y</code></td>
+<td>set stereo mask for YM2203 SSG (1) or AY8910 (0)
+</td></tr>
+<tr>
+<td><code>l1/l2/l3</code></td>
+<td>enable channel 1/2/3 on left speaker
+</td></tr>
+<tr>
+<td><code>r1/r2/r3</code></td>
+<td>enable channel 1/2/3 on right speaker
+</td></tr></tbody></table>
+</td></tr>
+<tr>
+<td>0x40</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=Mikey&amp;action=edit&amp;redlink=1" class="new" title="Mikey (page does not exist)">Mikey</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x4F</td>
+<td>dd</td>
+<td>Game Gear PSG stereo, write <code>dd</code> to port <code>0x06</code>
+</td></tr>
+<tr>
+<td>0x50</td>
+<td>dd</td>
+<td><a href="/wiki/PSG" class="mw-redirect" title="PSG">PSG</a> (SN76489/SN76496) write value <code>dd</code>
+</td></tr>
+<tr>
+<td>0x51</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2413" class="mw-redirect" title="YM2413">YM2413</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x52</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2612" class="mw-redirect" title="YM2612">YM2612</a> port 0, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x53</td>
+<td>aa dd</td>
+<td>YM2612 port 1, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x54</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2151" class="mw-redirect" title="YM2151">YM2151</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x55</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2203" class="mw-redirect" title="YM2203">YM2203</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x56</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2608" class="mw-redirect" title="YM2608">YM2608</a> port 0, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x57</td>
+<td>aa dd</td>
+<td>YM2608 port 1, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x58</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM2610" class="mw-redirect" title="YM2610">YM2610</a> port 0, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x59</td>
+<td>aa dd</td>
+<td>YM2610 port 1, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5A</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM3812" class="mw-redirect" title="YM3812">YM3812</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5B</td>
+<td>aa dd</td>
+<td><a href="/wiki/YM3526" class="mw-redirect" title="YM3526">YM3526</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5C</td>
+<td>aa dd</td>
+<td><a href="/wiki/Y8950" class="mw-redirect" title="Y8950">Y8950</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5D</td>
+<td>aa dd</td>
+<td><a href="/wiki/YMZ280B" class="mw-redirect" title="YMZ280B">YMZ280B</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5E</td>
+<td>aa dd</td>
+<td><a href="/wiki/YMF262" class="mw-redirect" title="YMF262">YMF262</a> port 0, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x5F</td>
+<td>aa dd</td>
+<td>YMF262 port 1, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0x61</td>
+<td>nn nn</td>
+<td>Wait <code>n</code> samples, <code>n</code> can range from 0 to 65535 (approx 1.49 seconds). Longer pauses than this are represented by multiple wait commands.
+</td></tr>
+<tr>
+<td>0x62</td>
+<td></td>
+<td>wait 735 samples (60th of a second), a shortcut for <code>0x61 0xdf 0x02</code>
+</td></tr>
+<tr>
+<td>0x63</td>
+<td></td>
+<td>wait 882 samples (50th of a second), a shortcut for <code>0x61 0x72 0x03</code>
+</td></tr>
+<tr>
+<td>0x66</td>
+<td></td>
+<td>end of sound data
+</td></tr>
+<tr>
+<td>0x67</td>
+<td>...</td>
+<td>data block: see below
+</td></tr>
+<tr>
+<td>0x68</td>
+<td>...</td>
+<td>PCM RAM write: see below
+</td></tr>
+<tr>
+<td>0x7n</td>
+<td></td>
+<td>wait <code>n+1</code> samples, n can range from 0 to 15.
+</td></tr>
+<tr>
+<td>0x8n</td>
+<td></td>
+<td>YM2612 port 0 address 2A write from the data bank, then wait n samples; n can range from 0 to 15. Note that the wait is n, NOT n+1. See also command <code>0xE0</code>.
+<div class="note note-info"><b>Note:</b> Written to first chip instance only.</div>
+</td></tr>
+<tr>
+<td colspan="2">0x90 - 0x95
+</td>
+<td>DAC Stream Control Write: see below
+</td></tr>
+<tr>
+<td>0xA0</td>
+<td>aa dd</td>
+<td><a href="/wiki/AY8910" class="mw-redirect" title="AY8910">AY8910</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB0</td>
+<td>aa dd</td>
+<td><a href="/wiki/RF5C68" class="mw-redirect" title="RF5C68">RF5C68</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB1</td>
+<td>aa dd</td>
+<td><a href="/wiki/RF5C164" class="mw-redirect" title="RF5C164">RF5C164</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB2</td>
+<td>ad dd</td>
+<td><a href="/wiki/PWM" class="mw-redirect" title="PWM">PWM</a>, write value <code>ddd</code> to register <code>a</code> (<code>d</code> is MSB, <code>dd</code> is LSB)
+</td></tr>
+<tr>
+<td>0xB3</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=GameBoy_DMG&amp;action=edit&amp;redlink=1" class="new" title="GameBoy DMG (page does not exist)">GameBoy DMG</a>, write value <code>dd</code> to register <code>aa</code>
+<div class="note note-info"><b>Note:</b> Register 00 equals GameBoy address FF10.</div>
+</td></tr>
+<tr>
+<td>0xB4</td>
+<td>aa dd</td>
+<td><a href="/wiki/NES_APU" class="mw-redirect" title="NES APU">NES APU</a>, write value <code>dd</code> to register <code>aa</code>
+<div class="note note-info"><b>Note:</b> Registers 00-1F equal NES address 4000-401F,
+<p>registers 20-3E equal NES address 4080-409E,
+register 3F equals NES address 4023,
+</p>
+registers 40-7F equal NES address 4040-407F.</div>
+</td></tr>
+<tr>
+<td>0xB5</td>
+<td>aa dd</td>
+<td><a href="/wiki/MultiPCM" class="mw-redirect" title="MultiPCM">MultiPCM</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB6</td>
+<td>aa dd</td>
+<td><a href="/wiki/UPD7759" class="mw-redirect" title="UPD7759">uPD7759</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB7</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=OKIM6258&amp;action=edit&amp;redlink=1" class="new" title="OKIM6258 (page does not exist)">OKIM6258</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xB8</td>
+<td>aa dd</td>
+<td><a href="/wiki/OKIM6295" class="mw-redirect" title="OKIM6295">OKIM6295</a>, write value <code>dd</code> to register aa
+</td></tr>
+<tr>
+<td>0xB9</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=HuC6280&amp;action=edit&amp;redlink=1" class="new" title="HuC6280 (page does not exist)">HuC6280</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xBA</td>
+<td>aa dd</td>
+<td><a href="/wiki/K053260" class="mw-redirect" title="K053260">K053260</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xBB</td>
+<td>aa dd</td>
+<td><a href="/wiki/Pokey" class="mw-redirect" title="Pokey">Pokey</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xBC</td>
+<td>aa dd</td>
+<td><a href="/wiki/WonderSwan" title="WonderSwan">WonderSwan</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xBD</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=SAA1099&amp;action=edit&amp;redlink=1" class="new" title="SAA1099 (page does not exist)">SAA1099</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xBE</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=ES5506&amp;action=edit&amp;redlink=1" class="new" title="ES5506 (page does not exist)">ES5506</a>, write value <code>dd</code> to register <code>aa</code>
+<div class="note note-info"><b>Note:</b> This command writes 8-bit data. For 16-bit data, use command 0xD6</div>
+</td></tr>
+<tr>
+<td>0xBF</td>
+<td>aa dd</td>
+<td><a href="/w/index.php?title=GA20&amp;action=edit&amp;redlink=1" class="new" title="GA20 (page does not exist)">GA20</a>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xC0</td>
+<td>bbaa dd</td>
+<td><a href="/w/index.php?title=Sega_PCM&amp;action=edit&amp;redlink=1" class="new" title="Sega PCM (page does not exist)">Sega PCM</a>, write value <code>dd</code> to memory offset <code>aabb</code>
+</td></tr>
+<tr>
+<td>0xC1</td>
+<td>bbaa dd</td>
+<td><a href="/wiki/RF5C68" class="mw-redirect" title="RF5C68">RF5C68</a>, write value <code>dd</code> to memory offset <code>aabb</code>
+</td></tr>
+<tr>
+<td>0xC2</td>
+<td>bbaa dd</td>
+<td><a href="/wiki/RF5C164" class="mw-redirect" title="RF5C164">RF5C164</a>, write value <code>dd</code> to memory offset <code>aabb</code>
+</td></tr>
+<tr>
+<td>0xC3</td>
+<td>cc bbaa</td>
+<td><a href="/wiki/MultiPCM" class="mw-redirect" title="MultiPCM">MultiPCM</a>, write set bank offset <code>aabb</code> to channel <code>cc</code>
+</td></tr>
+<tr>
+<td>0xC4</td>
+<td>mmll rr</td>
+<td><a href="/w/index.php?title=QSound&amp;action=edit&amp;redlink=1" class="new" title="QSound (page does not exist)">QSound</a>, write value <code>mmll</code> to register <code>rr</code> (<code>mm</code> - data MSB, <code>ll</code> - data LSB)
+</td></tr>
+<tr>
+<td>0xC5</td>
+<td>mmll dd</td>
+<td><a href="/w/index.php?title=SCSP&amp;action=edit&amp;redlink=1" class="new" title="SCSP (page does not exist)">SCSP</a>, write value <code>dd</code> to memory offset <code>mmll</code> (<code>mm</code> - offset MSB, <code>ll</code> - offset LSB)
+</td></tr>
+<tr>
+<td>0xC6</td>
+<td>mmll dd</td>
+<td><a href="/wiki/WonderSwan" title="WonderSwan">WonderSwan</a>, write value <code>dd</code> to memory offset <code>mmll</code> (<code>mm</code> - offset MSB, <code>ll</code> - offset LSB)
+</td></tr>
+<tr>
+<td>0xC7</td>
+<td>mmll dd</td>
+<td><a href="/w/index.php?title=VSU&amp;action=edit&amp;redlink=1" class="new" title="VSU (page does not exist)">VSU</a>, write value <code>dd</code> to memory offset <code>mmll</code> (<code>mm</code> - offset MSB, <code>ll</code> - offset LSB)
+</td></tr>
+<tr>
+<td>0xC8</td>
+<td>mmll dd</td>
+<td><a href="/w/index.php?title=X1-010&amp;action=edit&amp;redlink=1" class="new" title="X1-010 (page does not exist)">X1-010</a>, write value <code>dd</code> to memory offset <code>mmll</code> (<code>mm</code> - offset MSB, <code>ll</code> - offset LSB)
+</td></tr>
+<tr>
+<td>0xD0</td>
+<td>pp aa dd</td>
+<td><a href="/wiki/YMF278B" class="mw-redirect" title="YMF278B">YMF278B</a>, port <code>pp</code>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xD1</td>
+<td>pp aa dd</td>
+<td><a href="/wiki/YMF271" class="mw-redirect" title="YMF271">YMF271</a>, port <code>pp</code>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xD2</td>
+<td>pp aa dd</td>
+<td><a href="/wiki/SCC1" class="mw-redirect" title="SCC1">SCC1</a>, port <code>pp</code>, write value <code>dd</code> to register <code>aa</code>
+</td></tr>
+<tr>
+<td>0xD3</td>
+<td>pp aa dd</td>
+<td><a href="/wiki/K054539" class="mw-redirect" title="K054539">K054539</a>, write value <code>dd</code> to register <code>ppaa</code>
+</td></tr>
+<tr>
+<td>0xD4</td>
+<td>pp aa dd</td>
+<td><a href="/wiki/C140" class="mw-redirect" title="C140">C140</a>, write value <code>dd</code> to register <code>ppaa</code>
+</td></tr>
+<tr>
+<td>0xD5</td>
+<td>pp aa dd</td>
+<td><a href="/w/index.php?title=ES5503&amp;action=edit&amp;redlink=1" class="new" title="ES5503 (page does not exist)">ES5503</a>, write value <code>dd</code> to register <code>ppaa</code>
+</td></tr>
+<tr>
+<td>0xD6</td>
+<td>pp aa dd</td>
+<td><a href="/w/index.php?title=ES5506&amp;action=edit&amp;redlink=1" class="new" title="ES5506 (page does not exist)">ES5506</a>, write value <code>aadd</code> to register <code>pp</code>
+<div class="note note-info"><b>Note:</b> This command writes 16-bit data. For 8-bit data, use command 0xBE</div>
+</td></tr>
+<tr>
+<td>0xE0</td>
+<td>dddddddd</td>
+<td>Seek to offset <code>dddddddd</code> (Intel byte order) in PCM data bank of data block type 0 (YM2612).
+<div class="note note-info"><b>Note:</b> This command is used with <code>8x</code> commands. The usual order is:
+<ol><li>Data block <code>00</code> (<code>0x67</code> <code>0x66</code> <code>0x00</code> ...)</li>
+<li>Use <code>E0</code> to set the read pointer</li>
+<li>Use <code>8x</code> to play a sample and advance the pointer by 1</li></ol>
+</div>
+</td></tr>
+<tr>
+<td>0xE1</td>
+<td>mmll aadd</td>
+<td><a href="/wiki/C352" class="mw-redirect" title="C352">C352</a>, write value <code>aadd</code> to register <code>mmll</code>
+</td></tr>
+</tbody></table>
+<p>Some ranges are reserved for future use, with different numbers of operands:
+</p>
+<table class="wikitable topAlign">
+<tbody><tr>
+<td><code>0x30..0x3F</code></td>
+<td>dd</td>
+<td>one operand, reserved for future use
+<div class="note note-info"><b>Note:</b> used for dual-chip support (see below)</div>
+</td></tr>
+<tr>
+<td><code>0x41..0x4E</code></td>
+<td>dd dd</td>
+<td>two operands, reserved for future use
+<div class="note note-info"><b>Note:</b> was one operand only til v1.60</div>
+</td></tr>
+<tr>
+<td><code>0xC9..0xCF</code></td>
+<td>dd dd dd</td>
+<td>three operands, reserved for future use
+</td></tr>
+<tr>
+<td><code>0xD7..0xDF</code></td>
+<td>dd dd dd</td>
+<td>three operands, reserved for future use
+</td></tr>
+<tr>
+<td><code>0xE2..0xFF</code></td>
+<td>dd dd dd dd</td>
+<td>four operands, reserved for future use
+</td></tr></tbody></table>
+<p>On encountering these, the correct number of bytes should be skipped.
+</p>
+<h2><span class="mw-headline" id="Data_blocks">Data blocks</span></h2>
+<p>VGM command 0x67 specifies a data block. These are used to store large amounts
+of data, which can be used in parallel with the normal VGM data stream. The
+data block format is:
+</p>
+<pre> 0x67 0x66 tt ss ss ss ss (data)
+</pre>
+<p>where:
+</p>
+<table class="wikitable">
+<tbody><tr>
+<td><code>0x67</code>
+</td>
+<td>
+</td>
+<td>VGM command
+</td></tr>
+<tr>
+<td><code>0x66</code>
+</td>
+<td>
+</td>
+<td>compatibility command to make older players stop parsing the stream
+</td></tr>
+<tr>
+<td><code>tt</code>
+</td>
+<td>8 bits
+</td>
+<td>data type (see below)
+</td></tr>
+<tr>
+<td><code>ss ss ss ss</code>
+</td>
+<td>32 bits
+</td>
+<td>size of data, in bytes
+</td></tr>
+<tr>
+<td><code>data</code>
+</td>
+<td>
+</td>
+<td>data, of size previously specified
+</td></tr></tbody></table>
+<p>Data blocks of recorded streams, if present, should be at the very start of the VGM data.
+Multiple data blocks expand the data bank. (The start offset and length of the block in the data bank should be saved for command 0x95.)
+Because data blocks can happen anywhere in the stream, players must be able to parse data blocks anywhere in the stream.
+</p><p>The data block type specifies what type of data it contains. Currently defined types are:
+</p><p>00..3F&nbsp;: data of recorded streams (uncompressed)
+</p><p>40..7E&nbsp;: data of recorded streams (compressed)
+</p>
+<pre> data block format for compressed streams:
+   tt (8 bits) = compression type
+                   00 - bit packing compression
+                   01 - DPCM compression
+   ss ss ss ss (32 bits) = size of uncompressed data (for memory allocation)
+                           It is assumed that each decompressed value uses
+                           ceil(bd/8) bytes.
+   (attr) = attribute bytes used by the decompression-algorithm
+   bit packing compression:
+       bd (8 bits) = Bits decompressed
+       bc (8 bits) = Bits compressed
+       st (8 bits) = compression sub-type
+                       00 - copy (high bits aren't used)
+                       01 - shift left (low bits aren't used)
+                       02 - use table (data = index into decompression table,
+                                       see data block 7F)
+       aa aa (16 bits) = value that is added (ignored if table is used)
+       The data block is treated as a bitstream with bc bits per value. The
+       top bits in each byte are read first. The extracted bits of each value
+       are transformed into a value with at least bd bits using method st.
+       Finally, aaaa is added to get the resulting value.
+   DPCM-Compression: (uses a decompression table)
+       bd (8 bits) = Bits decompressed
+       bc (8 bits) = Bits compressed
+       st (8 bits) = [reserved for future use, must be 00]
+       aa aa (16 bits) = start value
+       The data is read as a bitstream (see bit packing). The read value is used as
+       index into a delta-table (defined by data block 7F). The delta value
+       is added to the "state" value, which is also the result value.
+       The "state" value is initialized with aaaa at the beginning.
+   (data) = compressed data, of size (block size - 0x0A - attr size)
+</pre>
+<p>7F    &nbsp;: Decompression Table
+</p>
+<pre>   tt (8 bits) = compression type (see data block 40..7E)
+   st (8 bits) = compression sub-type (see data block 40..7E)
+   bd (8 bits) = Bits decompressed
+   bc (8 bits) = Bits compressed (only used for verifying against
+                 block 40..7E)
+   cc cc (16 bits) = number of following values (with each of size
+                     ceil(bd / 8))
+   (data) = table data, cccc values with a total size of (block size - 0x06)
+   Note: Multiple decompression tables are valid. The player should keep a
+         list of one table per tt and st combination. If there are multiple
+         tables of the same tt/st type, the new one overrides the old one and
+         all following compressed data blocks will use the new table.
+</pre>
+<p>80..BF&nbsp;: ROM/RAM Image dumps (contain usually samples)
+</p>
+<pre> data block format for ROM dumps:
+   rr rr rr rr (32 bits) = size of the entire ROM
+   ss ss ss ss (32 bits) = start address of data
+   (data) = ROM data, of size (block size - 0x08)
+ The size of the VGM can be decreased a lot by saving only the used parts
+ of the ROM. This is done by saving multiple small ROM data blocks.
+ The start address is the ROM offset where the data will be written, the
+ ROM size is used to allocate space for the ROM (and some chips rely on it).
+</pre>
+<p>C0..DF&nbsp;: RAM writes (for RAM with up to 64 KB)
+</p>
+<pre> data block format for direct RAM writes:
+   ss ss (16 bits) = start address of data (affected by a chip's banking
+                     registers)
+   (data) = RAM data, of size (block size - 0x02)
+</pre>
+<p>E0..FF&nbsp;: RAM writes (for RAM with more than 64 KB)
+</p>
+<pre> data block format for direct RAM writes:
+   ss ss ss ss (32 bits) = start address of data (affected by a chip's banking
+                           registers)
+   (data) = RAM data, of size (block size - 0x04)
+</pre>
+<p><br>
+</p>
+<table class="wikitable">
+<tbody><tr>
+<td>00</td>
+<td>YM2612 PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>01</td>
+<td>RF5C68 PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>02</td>
+<td>RF5C164 PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>03</td>
+<td>PWM PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>04</td>
+<td>OKIM6258 ADPCM data for use with associated commands
+</td></tr>
+<tr>
+<td>05</td>
+<td>HuC6280 PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>06</td>
+<td>SCSP PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>07</td>
+<td>NES APU DPCM data for use with associated commands
+</td></tr>
+<tr>
+<td>08</td>
+<td>Mikey PCM data for use with associated commands
+</td></tr>
+<tr>
+<td>40..7E</td>
+<td>same as 00..3E, just compressed
+</td></tr>
+<tr>
+<td>80</td>
+<td>Sega PCM ROM data
+</td></tr>
+<tr>
+<td>81</td>
+<td>YM2608 DELTA-T ROM data
+</td></tr>
+<tr>
+<td>82</td>
+<td>YM2610 ADPCM ROM data
+</td></tr>
+<tr>
+<td>83</td>
+<td>YM2610 DELTA-T ROM data
+</td></tr>
+<tr>
+<td>84</td>
+<td>YMF278B ROM data
+</td></tr>
+<tr>
+<td>85</td>
+<td>YMF271 ROM data
+</td></tr>
+<tr>
+<td>86</td>
+<td>YMZ280B ROM data
+</td></tr>
+<tr>
+<td>87</td>
+<td>YMF278B RAM data
+</td></tr>
+<tr>
+<td>88</td>
+<td>Y8950 DELTA-T ROM data
+</td></tr>
+<tr>
+<td>89</td>
+<td>MultiPCM ROM data
+</td></tr>
+<tr>
+<td>8A</td>
+<td>uPD7759 ROM data
+</td></tr>
+<tr>
+<td>8B</td>
+<td>OKIM6295 ROM data
+</td></tr>
+<tr>
+<td>8C</td>
+<td>K054539 ROM data
+</td></tr>
+<tr>
+<td>8D</td>
+<td>C140 ROM data
+</td></tr>
+<tr>
+<td>8E</td>
+<td>K053260 ROM data
+</td></tr>
+<tr>
+<td>8F</td>
+<td>Q-Sound ROM data
+</td></tr>
+<tr>
+<td>90</td>
+<td>ES5505/ES5506 ROM data
+</td></tr>
+<tr>
+<td>91</td>
+<td>X1-010 ROM data
+</td></tr>
+<tr>
+<td>92</td>
+<td>C352 ROM data
+</td></tr>
+<tr>
+<td>93</td>
+<td>GA20 ROM data
+</td></tr>
+<tr>
+<td>C0</td>
+<td>RF5C68 RAM write
+</td></tr>
+<tr>
+<td>C1</td>
+<td>RF5C164 RAM write
+</td></tr>
+<tr>
+<td>C2</td>
+<td>NES APU RAM write
+</td></tr>
+<tr>
+<td>E0</td>
+<td>SCSP RAM write
+</td></tr>
+<tr>
+<td>E1</td>
+<td>ES5503 RAM write
+</td></tr></tbody></table>
+<p>Unknown ROM/RAM blocks must be skipped by the player.
+Data for blocks 0x00..0x7F must be stored by the player in any case.
+</p>
+<div class="note note-info"><b>Note:</b> The "Stream Control" system is able to use any of the 64 block types with any of the sound chips. The data block types may be used arbitrarily in these cases.<br>
+The data block type list must be followed if VGM commands 0x68 and 0x80..0x8F are used.</div>
+<div class="note note-info"><b>Note:</b> It is valid to have multiple data blocks of the same type. The player must consolidate those into a single block of memory and keep track of the start/end offsets of the data block instances for use with VGM command 0x95.</div>
+<h1><span class="mw-headline" id="PCM_RAM_writes">PCM RAM writes</span></h1>
+<p>VGM command 0x68 specifies a PCM RAM write. These are used to write data from
+data blocks to the RAM of a PCM chip. The data block format is:
+</p>
+<pre> 0x68 0x66 cc oo oo oo dd dd dd ss ss ss
+</pre>
+<p>where:
+</p>
+<pre> 0x68 = VGM command
+ 0x66 = compatibility command to make older players stop parsing the stream
+ cc   = chip type (see data block types 00..3F)
+ oo oo oo (24 bits) = read offset in data block
+ dd dd dd (24 bits) = write offset in chip's ram (affected by chip's
+                       registers)
+ ss ss ss (24 bits) = size of data, in bytes
+   Since size can't be zero, a size of 0 bytes means 0x0100 0000 bytes.
+</pre>
+<p>Unknown chip types must be skipped by the player.
+</p>
+<h2><span class="mw-headline" id="DAC_Stream_Control_Write">DAC Stream Control Write</span></h2>
+<p>VGM commands 0x90 to 0x95 specify writes to the DAC Stream Control Driver.
+These are used to stream data from data blocks to the chips via chip writes.
+To use it you must:
+</p>
+<ol><li>Setup the Stream (set chip type and command) - this activates the stream</li>
+<li>Set the Stream Data Bank</li>
+<li>Set the Stream Frequency</li>
+<li>Now you can start the stream, change its frequency, start it again, stop it, etc ...</li></ol>
+<p>There are the following commands:
+</p>
+<div class="note note-info"><b>Note:</b> Stream ID 0xFF is reserved and ignored unless noted otherwise.</div>
+<p>Setup Stream Control:
+</p>
+<pre> 0x90 ss tt pp cc
+     ss = Stream ID
+     tt = Chip Type (see clock-order in header, e.g. YM2612 = 0x02)
+           bit 7 is used to select the 2nd chip
+     pp cc = write command/register cc at port pp
+     Note: For chips that use Channel Select Registers (like the RF5C-family
+           and the HuC6280), the format is pp cd where pp is the channel
+           number, c is the channel register and d is the data register.
+           If you set pp to FF, the channel select write is skipped.
+</pre>
+<p>Set Stream Data:
+</p>
+<pre> 0x91 ss dd ll bb
+     ss = Stream ID
+     dd = Data Bank ID (see data block types 0x00..0x3f)
+     ll = Step Size (how many data is skipped after every write, usually 1)
+           Set to 2, if you're using an interleaved stream (e.g. for
+            left/right channel).
+     bb = Step Base (data offset added to the Start Offset when starting
+           stream playback, usually 0)
+           If you're using an interleaved stream, set it to 0 in one stream
+           and to 1 in the other one.
+     Note: Step Size/Step Step are given in command-data-size
+            (i.e. 1 for YM2612, 2 for PWM), not bytes
+</pre>
+<p>Set Stream Frequency:
+</p>
+<pre> 0x92 ss ff ff ff ff
+     ss = Stream ID
+     ff = Frequency (or Sample Rate, in Hz) at which the writes are done
+</pre>
+<p>Start Stream:
+</p>
+<pre> 0x93 ss aa aa aa aa mm ll ll ll ll
+     ss = Stream ID
+     aa = Data Start offset in data bank (byte offset in data bank)
+           Note: if set to -1, the Data Start offset is ignored
+     mm = Length Mode (how the Data Length is calculated)
+           00 - ignore (just change current data position)
+           01 - length = number of commands
+           02 - length in msec
+           03 - play until end of data
+           1? - (bit 4) Reverse Mode
+           8? - (bit 7) Loop (automatically restarts when finished)
+     ll = Data Length
+</pre>
+<p>Stop Stream:
+</p>
+<pre> 0x94 ss
+     ss = Stream ID
+           Note: 0xFF stops all streams
+</pre>
+<p>Start Stream (fast call):
+</p>
+<pre> 0x95 ss bb bb ff
+     ss = Stream ID
+     bb = Block ID (number of the data block that is part of the data bank set
+           with command 0x91)
+     ff = Flags
+           bit 0 - Loop (see command 0x93, mm bit 7)
+           bit 4 - Reverse Mode (see command 0x93)
+</pre>
+<p>General Note to the DAC Stream Control:<br>
+Although it may be quite hard to press already streamed data into these
+commands, it makes it very easy to write vgm-creation tools that need to stream
+something. (like YM2612 DAC drums/voices/etc.)
+The DAC Stream Control can use with almost all chips and is NOT limited to
+chips such as YM2612 and PWM.
+</p>
+<h2><span class="mw-headline" id="Dual_Chip_Support">Dual Chip Support</span></h2>
+<p>These chips support two instances of a chip in one vgm:
+<a href="/wiki/PSG" class="mw-redirect" title="PSG">PSG</a>, <a href="/wiki/YM2413" class="mw-redirect" title="YM2413">YM2413</a>, <a href="/wiki/YM2612" class="mw-redirect" title="YM2612">YM2612</a>, <a href="/wiki/YM2151" class="mw-redirect" title="YM2151">YM2151</a>, <a href="/wiki/YM2203" class="mw-redirect" title="YM2203">YM2203</a>, <a href="/wiki/YM2608" class="mw-redirect" title="YM2608">YM2608</a>, <a href="/wiki/YM2610" class="mw-redirect" title="YM2610">YM2610</a>, <a href="/wiki/YM3812" class="mw-redirect" title="YM3812">YM3812</a>, <a href="/wiki/YM3526" class="mw-redirect" title="YM3526">YM3526</a>, <a href="/wiki/Y8950" class="mw-redirect" title="Y8950">Y8950</a>,
+<a href="/wiki/YMZ280B" class="mw-redirect" title="YMZ280B">YMZ280B</a>, <a href="/wiki/YMF262" class="mw-redirect" title="YMF262">YMF262</a>, <a href="/wiki/YMF278B" class="mw-redirect" title="YMF278B">YMF278B</a>, <a href="/wiki/YMF271" class="mw-redirect" title="YMF271">YMF271</a>, <a href="/wiki/AY8910" class="mw-redirect" title="AY8910">AY8910</a>, <a href="/w/index.php?title=GameBoy_DMG&amp;action=edit&amp;redlink=1" class="new" title="GameBoy DMG (page does not exist)">GameBoy DMG</a>, <a href="/wiki/NES_APU" class="mw-redirect" title="NES APU">NES APU</a>, <a href="/wiki/MultiPCM" class="mw-redirect" title="MultiPCM">MultiPCM</a>,
+<a href="/wiki/UPD7759" class="mw-redirect" title="UPD7759">uPD7759</a>, <a href="/w/index.php?title=OKIM6258&amp;action=edit&amp;redlink=1" class="new" title="OKIM6258 (page does not exist)">OKIM6258</a>, <a href="/wiki/OKIM6295" class="mw-redirect" title="OKIM6295">OKIM6295</a>, <a href="/wiki/K051649" class="mw-redirect" title="K051649">K051649</a>, <a href="/wiki/K054539" class="mw-redirect" title="K054539">K054539</a>, <a href="/w/index.php?title=HuC6280&amp;action=edit&amp;redlink=1" class="new" title="HuC6280 (page does not exist)">HuC6280</a>, <a href="/wiki/C140" class="mw-redirect" title="C140">C140</a>, <a href="/wiki/K053260" class="mw-redirect" title="K053260">K053260</a>, <a href="/wiki/Pokey" class="mw-redirect" title="Pokey">Pokey</a>,
+<a href="/w/index.php?title=SCSP&amp;action=edit&amp;redlink=1" class="new" title="SCSP (page does not exist)">SCSP</a>, <a href="/wiki/WonderSwan" title="WonderSwan">WonderSwan</a>, <a href="/w/index.php?title=VSU&amp;action=edit&amp;redlink=1" class="new" title="VSU (page does not exist)">VSU</a>, <a href="/w/index.php?title=SAA1099&amp;action=edit&amp;redlink=1" class="new" title="SAA1099 (page does not exist)">SAA1099</a>, <a href="/w/index.php?title=ES5503&amp;action=edit&amp;redlink=1" class="new" title="ES5503 (page does not exist)">ES5503</a>, <a href="/w/index.php?title=ES5506&amp;action=edit&amp;redlink=1" class="new" title="ES5506 (page does not exist)">ES5506</a>, <a href="/w/index.php?title=X1-010&amp;action=edit&amp;redlink=1" class="new" title="X1-010 (page does not exist)">X1-010</a>, <a href="/wiki/C352" class="mw-redirect" title="C352">C352</a>, <a href="/w/index.php?title=GA20&amp;action=edit&amp;redlink=1" class="new" title="GA20 (page does not exist)">GA20</a>.   
+</p><p>Dual chip support is activated by setting bit 30 (0x40000000) in the chip's
+clock value. (Note: The PSG needs this bit set for T6W28 mode.)
+</p><p><b>Dual Chip Support #1</b><br>
+The second chip instance is controlled via separate commands.
+</p><p>The second SN76489 PSG uses <code>0x30</code> (<code>0x3F</code> for GG Stereo).
+All chips of the YM-family that use command <code>0x5n</code> use <code>0xAn</code> for the second chip. n is the last digit of the main command.
+e.g. <code>0x52</code> (1st chip) -&gt; <code>0xA2</code> (2nd chip)
+</p><p><b>Dual Chip Support #2</b><br>
+All other chips use bit 7 (0x80) of the first parameter byte to distinguish
+between the 1st and 2nd chip. (<code>0x00-7F</code> = chip 1, <code>0x80-0xFF</code> = chip 2)
+</p><p>Note: The SegaPCM chip has the 2nd-chip-bit in the high byte of the address
+parameter. This is the second parameter byte.
+</p>
+<h2><span class="mw-headline" id="Extra_Header">Extra Header</span></h2>
+<p>With VGM v1.70, there was an extra header added. This one has to be placed
+between the usual header and the actual VGM data.
+</p><p>This is the format of the extra header:
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th></th>
+<th>00</th>
+<th>01</th>
+<th>02</th>
+<th>03</th>
+<th>04</th>
+<th>05</th>
+<th>06</th>
+<th>07</th>
+<th>08</th>
+<th>09</th>
+<th>0A</th>
+<th>0B</th>
+<th>0C</th>
+<th>0D</th>
+<th>0E</th>
+<th>0F
+</th></tr>
+<tr>
+<th>0x00
+</th>
+<td colspan="4">Header Size
+</td>
+<td colspan="4">ChpClock Offset
+</td>
+<td colspan="4">ChpVol Offset
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>
+</td></tr></tbody></table>
+<p><b>Header Size</b> is the size of the extra header, including the length value itself. It has to be 4 or larger,
+depending in the needed offsets.
+</p><p>Then there are two offsets that point to extra header data for:
+</p>
+<ul><li>additional Chip Clocks for second chips</li>
+<li>user-defined chip volumes</li></ul>
+<p><b>Chip Clock Header</b>
+</p>
+<pre> 1 byte   - Entry Count (chips with extra clocks)
+ [5 bytes - List Entry 1]
+ [5 bytes - List Entry 2]
+ ...
+</pre>
+<p>Each list entry has the format:
+</p>
+<pre> 1 byte  - Chip ID (chip order follows the header)
+ 4 bytes - clock for second chip of the type above
+</pre>
+<p><br>
+<b>Chip Volume Header</b>
+</p>
+<div class="note note-info"><b>Note:</b> This controls the balance between sound chips. A global normalization is applied after adding all sound chip volumes together.</div>
+<pre> 1 byte   - Entry Count (chips with user-defined volumes)
+ [4 bytes - List Entry 1]
+ [4 bytes - List Entry 2]
+ ...
+</pre>
+<p>Each list entry has the format:
+</p><p>1 byte  - Chip ID (chip order follows the header)
+</p>
+<div class="note note-info"><b>Note:</b> If bit 7 is set, it's the volume for a paired chip.
+(e.g. the AY-part of the YM2203)</div>
+<p>1 byte  - Flags
+</p>
+<div class="note note-info"><b>Note:</b> If bit 0 is set, it's the volume for the second chip.</div>
+<p>2 bytes - volume for the chip
+</p>
+<div class="note note-info"><b>Note:</b> If Bit 15 is 0, this is an absolute volume setting.
+If Bit 15 is 1, it's relative and the chip volume gets multiplied by <code>((Value &amp; 0x7FFF) / 0x0100)</code>.</div>
+<h2><span class="mw-headline" id="History">History</span></h2>
+<table class="wikitable">
+
+<tbody><tr>
+<th>1.00
+</th>
+<td>Initial public release by Dave
+</td></tr>
+<tr>
+<th>1.01
+</th>
+<td>Rate value added by Maxim; 1.00 files are fully compatible
+</td></tr>
+<tr>
+<th>1.10
+</th>
+<td>PSG white noise feedback and shift register width parameters added by Maxim, with note on how to handle earlier version files.
+<p>Additional wait command added by Maxim with thanks to Steve Snake for the suggestion.
+1.01 files are fully compatible but 1.01 players might have problems with 1.10 files, hence the 0.1 version change.
+</p>
+</td></tr>
+<tr>
+<th>1.50
+</th>
+<td>VGM data offset added to header by Maxim.
+<p>Data block support added by blargg, to allow for better handling of YM2612 PCM data.
+Both of these changes have the potential to cause problems, but are really good changes, so the version number has been increased all the way to 1.50.
+</p>
+</td></tr>
+<tr>
+<th>1.51
+</th>
+<td>Sega PCM, RF5C68, YM2203, YM2608, YM2610/B, YM3812, YM3526, Y8950, YMF262, YMF278B, YMF271, YMZ280B, RF5C164, PWM and AY8910 chips and commands added.
+<p>Additional data block types RF5C68 RAM write, RF5C164 RAM write, Sega PCM ROM, YM2608 DELTA-T ROM, YM2610 ADPCM ROM, YM2610 DELTA-T ROM, YMF278B ROM, YMF271 ROM, YMF271 RAM, YMZ280B ROM and Y8950 DELTA-T ROM Data added.
+Data Block Types splitted into 4 categories. (PCM Stream, compressed PCM Stream, ROM/RAM Dump, RAM write) SN76489 Flags and Loop Modifier added.
+It is the first time the header size exceeds 0x40 bytes.
+1.51 files are fully compatible to 1.50 players, but there may be problems with the new commands.<br>
+Note: Dual chip support was added too, but as a "cheat"-feature. The dual-chip-bits in the clock values are not compatible to 1.50, but the rest is.
+All changes done by Valley Bell.
+</p>
+</td></tr>
+<tr>
+<th>1.60
+</th>
+<td>RF5C68, RF5C164 and PWM PCM blocks and compressed data blocks added.
+<p>A whole bunch of new commands (PCM RAM write and DAC Stream Control) added.
+Volume Modifier and Loop Base added.
+The new commands (especially 0x9?) may cause problems with older players.
+All changes done by Valley Bell.
+</p>
+</td></tr>
+<tr>
+<th>1.61
+</th>
+<td>GameBoy DMG, NES APU, MultiPCM, uPD7759, OKIM6258, OKIM6295, K051649, K051649, HuC6280, C140, K053260, Pokey and Q-Sound chips added. (including necessary data blocks)
+<p>Changed number of operands from 1 to 2 for reserved commands 0x40-0x4E.
+Although they're still unused, old players might handle future vgm versions wrongly.
+All changes done by Valley Bell.
+</p>
+</td></tr>
+<tr>
+<th>1.70
+</th>
+<td>Added extra header with separate chip clocks for the second one of dual chips and chip volume adjustments.
+<p>All changes done by Valley Bell.
+</p>
+</td></tr>
+<tr>
+<th>1.71
+</th>
+<td>SCSP, WonderSwan, Virtual Boy VSU, SAA1099, ES5503, ES5506, Seta X1-010, Namco C352, Irem GA20 added. (including necessary ROM data blocks)
+<p>Data blocks (type 0x) for OKIM6258, HuC6280, SCSP and NES added.
+VGM v1.61 players should support the data block of their respective chips despite their late addition.
+Documented command 0x31 added by NewRisingSun.
+All changes done by Valley Bell.
+</p>
+</td></tr>
+<tr>
+<th>1.72 (beta)
+</th>
+<td>Mikey chip clock and command 0x40 added.
+</td></tr></tbody></table>
+<!-- 
+NewPP limit report
+Cached time: 20250804214803
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc, no‐toc‐conversion]
+CPU time usage: 0.075 seconds
+Real time usage: 0.078 seconds
+Preprocessor visited node count: 327/1000000
+Post‐expand include size: 3520/2097152 bytes
+Template argument size: 2554/2097152 bytes
+Highest expansion depth: 3/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    6.091      1 -total
+ 76.46%    4.657     21 Template:Note
+-->
+
+<!-- Saved in parser cache with key vgmrips_vgmrips-wiki_:pcache:idhash:1333-0!canonical and timestamp 20250804214803 and revision id 5875. Rendering was triggered because: page-view
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://vgmrips.net/w/index.php?title=VGM_Specification&amp;oldid=5875">https://vgmrips.net/w/index.php?title=VGM_Specification&amp;oldid=5875</a>"</div></div>
+					<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="/wiki/Category:Logged_Music_Formats" title="Category:Logged Music Formats">Logged Music Formats</a></li><li><a href="/w/index.php?title=Category:Informational_Documents&amp;action=edit&amp;redlink=1" class="new" title="Category:Informational Documents (page does not exist)">Informational Documents</a></li></ul></div></div>
+					
+				</div>
+				
+			</main>
+			
+		</div>
