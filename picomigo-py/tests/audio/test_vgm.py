@@ -43,3 +43,12 @@ class TestParser:
         parser.format_command_list(output)
 
         log.debug(output.getvalue())
+
+    def test_format_command_list_c_array(self, parser) -> None:
+        parser.parse_commands()
+
+        output = StringIO()
+
+        parser.format_command_list(output, vgm.CommandFormat.C_ARRAY)
+
+        log.debug(output.getvalue())

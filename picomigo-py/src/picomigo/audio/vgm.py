@@ -1,7 +1,8 @@
 import gzip
 import struct
 import sys
-from enum import Enum
+from enum import Enum, auto
+from token import STRING
 from typing import TextIO, TypedDict
 
 from mktech.error import Err, Error, Ok, Result
@@ -11,6 +12,11 @@ if (sys.version_info > (3, 0)):
     from io import BytesIO as ByteBuffer
 else:
     from StringIO import StringIO as ByteBuffer
+
+
+class CommandFormat(Enum):
+    STRING = auto()
+    C_ARRAY = auto()
 
 
 class CommandListItem(TypedDict):
@@ -308,11 +314,15 @@ class Parser:
         if version not in self.supported_ver_list:
             raise VersionError('VGM version is not supported')
 
-    def format_command_list(self, output: TextIO) -> None:
+    def format_command_list(
+        self,
+        output: TextIO,
+        format: CommandFormat = CommandFormat.STRING
+    ) -> None:
         not_found: list[int] = []
 
         for it in self.command_list:
-            match self._format_command(it):
+            match self._format_command(it, format):
                 case Err(output_str):
                     name_bytes = it['command']
 
@@ -330,7 +340,10 @@ class Parser:
             _ = output.write(f'not found: {not_found_str}')
 
     @staticmethod
-    def _format_command(command: CommandListItem) -> Result[str, str]:
+    def _format_command(
+        command: CommandListItem,
+        format: CommandFormat = CommandFormat.STRING
+    ) -> Result[str, str]:
         name_bytes = command['command']
 
         assert len(name_bytes) == 1
@@ -344,12 +357,28 @@ class Parser:
 
             found = False
 
-        if command['data'] is None:
-            data_str = None
-        else:
-            data_str = ' '.join([f'{it:02X}' for it in command['data']])
+        data = command['data']
 
-        output = f"{name}, data: {data_str}\n"
+        match format:
+            case CommandFormat.STRING:
+                if data is None:
+                    data_str = None
+                else:
+                    data_str = ' '.join([f'{it:02X}' for it in data])
+
+                output = f"{name}, data: {data_str}\n"
+            case CommandFormat.C_ARRAY:
+                match name:
+                    case Command.PSG_WRITE_VALUE:
+                        assert data is not None
+
+                        output = f'0x00, {data[0]:#02X},  // PSG_WRITE_VALUE\n'
+                    case Command.WAIT_735_SAMPLES:
+                        output = '0x01,  // WAIT_735_SAMPLES\n'
+                    case Command.END_OF_DATA:
+                        output = '// END_OF_DATA\n'
+                    case _:
+                        raise NotImplementedError
 
         if not found:
             return Err(output)
