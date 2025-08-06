@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 4.0)
 
-include(defaults.cmake)
+list(APPEND CMAKE_MODULE_PATH "$ENV{MK_CMAKE_MODULE_PATH}")
+
+include(defaults)
 # include(pico_sdk_import.cmake)
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 include($ENV{PICO_SDK_PATH}/tools/CMakeLists.txt)
@@ -11,6 +13,8 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
+
+# picomigo_sound_sn76489_demo
 
 add_executable(
     picomigo_sound_sn76489_demo
@@ -34,6 +38,7 @@ pico_generate_pio_header(
 
 # Create map/bin/hex/uf2 files
 pico_add_extra_outputs(picomigo_sound_sn76489_demo)
+pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
 
 # Link to pico_stdlib (gpio, time, etc. functions)
 target_link_libraries(
@@ -42,6 +47,8 @@ target_link_libraries(
     pico_stdlib
     hardware_pio
 )
+
+# test_pitch
 
 add_executable(
     test_pitch
@@ -63,6 +70,7 @@ target_link_libraries(
 )
 
 pico_add_extra_outputs(test_pitch)
+pico_enable_stdio_usb(test_pitch 1)
 
 # target_link_libraries(
 #     test_pitch
@@ -97,6 +105,4 @@ pico_add_extra_outputs(test_pitch)
 #     hardware_pwm
 # )
 # 
-pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
-pico_enable_stdio_usb(test_pitch 1)
 # pico_add_extra_outputs(picomigo_sound_sn76489_demo)
