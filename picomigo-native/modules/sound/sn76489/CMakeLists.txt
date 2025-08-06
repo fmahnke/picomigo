@@ -12,7 +12,43 @@ project(picomigo_sound_sn76489 C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+add_subdirectory(pico-interfaces)
+add_subdirectory(pico-mcp23017)
+
 pico_sdk_init()
+
+# picomigo_sound_track_editor_demo
+
+add_executable(
+    picomigo_sound_track_editor_demo
+
+    src/demo_track_editor.cpp
+    # src/sn76489.cpp
+)
+
+target_compile_definitions(
+    picomigo_sound_track_editor_demo PRIVATE
+
+    PICO_ENTER_USB_BOOT_ON_EXIT=1
+)
+
+# pico_generate_pio_header(
+#     picomigo_sound_track_editor_demo
+
+#     ${CMAKE_CURRENT_LIST_DIR}/src/sn76489.pio
+# )
+
+pico_add_extra_outputs(picomigo_sound_track_editor_demo)
+pico_enable_stdio_usb(picomigo_sound_track_editor_demo 1)
+
+target_link_libraries(
+    picomigo_sound_track_editor_demo
+
+    pico_mcp23017
+    pico_stdlib
+    hardware_i2c
+    # hardware_pio
+)
 
 # picomigo_sound_sn76489_demo
 
