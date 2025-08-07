@@ -80,6 +80,7 @@ pico_enable_stdio_usb(picomigo_sound_sn76489_demo 1)
 target_link_libraries(
     picomigo_sound_sn76489_demo
 
+    pico_mcp23017
     pico_stdlib
     hardware_pio
 )
