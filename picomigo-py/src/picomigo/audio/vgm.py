@@ -3,7 +3,8 @@ from __future__ import annotations
 import gzip
 import struct
 from enum import Enum, auto
-from io import BytesIO
+from io import BytesIO, StringIO
+from textwrap import indent
 from typing import TextIO, TypeAlias, TypedDict
 
 from mktech.error import Err, Ok, Result
@@ -72,10 +73,12 @@ _metadata_offsets[0x00000101] = {
     },
 }
 
+_metadata_offsets[0x00000110] = _metadata_offsets[0x00000101]
 _metadata_offsets[0x00000150] = _metadata_offsets[0x00000101]
 
 
 class Command(Enum):
+    GAME_GEAR_STEREO = 0x4F
     PSG_WRITE_VALUE = 0x50
     WAIT_735_SAMPLES = 0x62
     END_OF_DATA = 0x66
@@ -96,6 +99,7 @@ class VgmParser:
     # Supported VGM versions
     supported_ver_list: list[int] = [
         0x00000101,
+        0x00000110,
         0x00000150,
     ]
 
@@ -117,6 +121,9 @@ class VgmParser:
 
         # Parse the VGM metadata and validate the VGM version
         self.parse_metadata()
+
+        log.debug(f'metadata={self.metadata}')
+
         self.validate_vgm_version()
 
         # Parse GD3 data and the VGM commands
@@ -350,6 +357,27 @@ class VgmParser:
         if version not in self.supported_ver_list:
             raise VersionError('VGM version is not supported')
 
+    def format(
+        self,
+        output: TextIO,
+        format: VgmOutputFormat = VgmOutputFormat.STRING
+    ) -> None:
+        match format:
+            case VgmOutputFormat.STRING:
+                self.format_command_list(output, format)
+            case VgmOutputFormat.C_ARRAY:
+                command_list_output = StringIO()
+
+                self.format_command_list(command_list_output, format)
+
+                _ = output.write(
+                    '#include "types.h"\n\n'
+                    + 'const u8 vgm_data[] = {\n'
+                    + indent(command_list_output.getvalue(), '    ')
+                    + '};\n\n'
+                    + 'constexpr usize vgm_data_len = sizeof(vgm_data) / sizeof(u8);'  # noqa: E501
+                )  # yapf: disable
+
     def format_command_list(
         self,
         output: TextIO,
@@ -364,7 +392,8 @@ class VgmParser:
 
                     assert len(name_bytes) == 1
 
-                    not_found.append(name_bytes[0])
+                    if name_bytes[0] not in not_found:
+                        not_found.append(name_bytes[0])
                 case Ok(output_str):
                     pass
 
@@ -373,7 +402,7 @@ class VgmParser:
         if len(not_found) != 0:
             not_found_str = ', '.join([f'{it:#02X}' for it in not_found])
 
-            _ = output.write(f'not found: {not_found_str}')
+            _ = output.write(f'// not found: {not_found_str}\n')
 
     @staticmethod
     def _format_command(
@@ -405,6 +434,8 @@ class VgmParser:
                 output = f"{name}, data: {data_str}\n"
             case VgmOutputFormat.C_ARRAY:
                 match name:
+                    case Command.GAME_GEAR_STEREO:
+                        output = '0x4F,  // GAME_GEAR_STEREO\n'
                     case Command.PSG_WRITE_VALUE:
                         assert data is not None
 
@@ -414,7 +445,7 @@ class VgmParser:
                     case Command.END_OF_DATA:
                         output = '// END_OF_DATA\n'
                     case _:
-                        raise NotImplementedError
+                        output = f'0x{name_bytes[0]:02X},  // UNKNOWN\n'
 
         if not found:
             return Err(output)

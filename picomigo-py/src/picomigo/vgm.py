@@ -19,10 +19,10 @@ def main(path: Path, format: str | None) -> Result[None, Error]:
 
     output = StringIO()
 
-    parser.format_command_list(output, format_)
+    parser.format(output, format_)
 
     print(output.getvalue())
 
-    print(parser.metadata)
+    # print(parser.metadata)
 
     return Ok(None)
