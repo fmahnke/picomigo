@@ -11,7 +11,7 @@ from mktech.log import log
 from mktech.path import Path
 
 from . import board as board_module
-from . import build, load, native_check, run, serial
+from . import build, load, native_check, run, serial, vgm
 from .config import BuildConfig
 
 
@@ -81,6 +81,17 @@ def run_command() -> None:
 @cli.command()
 def serial_command() -> None:
     serial.main()
+
+
+@cli.command()
+@click.argument('path', type=click.Path(path_type=Path))
+@click.option('--format', '-f')
+def vgm_command(path: Path, format: str | None) -> None:
+    match vgm.main(path, format):
+        case Err(e):
+            print(e)
+        case Ok(_):
+            pass
 
 
 def main() -> None:
