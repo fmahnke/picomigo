@@ -1,14 +1,18 @@
 #include "sn76489.hpp"
-#include "vgm_data.hpp"
+#include "vgm_lunar_last_boss.hpp"
 
 #include "sn76489.pio.h"
 
 #include "hardware/clocks.h"
 #include "hardware/pio.h"
+#include "pico/assert.h"
 #include "pico/stdio.h"
 #include "pico/time.h"
 
+#include <cfenv>
 #include <hardware/gpio.h>
+
+#include <cmath>
 #include <stdio.h>
 
 #define I2C_GPIO_PIN_SDA 14
@@ -16,6 +20,9 @@
 
 // constexpr uint32_t CLOCK_HZ = 1000000;
 constexpr uint32_t CLOCK_HZ = 3579540;
+
+constexpr uint32_t SAMPLE_RATE = 44100;
+constexpr float SPEED = 1.10f;
 
 const uint d_pins[D_PINS_LENGTH] = {0, 1, 2, 3, 4, 5, 6, 7};
 
@@ -93,6 +100,14 @@ void init() {
     // sn76489_init();
 }
 
+u32 milliseconds_from_samples(u32 sample_count) {
+    return std::lround((double) sample_count / (SAMPLE_RATE * SPEED) * 1000);
+}
+
+u32 microseconds_from_samples(u32 sample_count) {
+    return std::lround((double) sample_count / (SAMPLE_RATE * SPEED) * 1000000);
+}
+
 int main() {
     init();
 
@@ -101,12 +116,14 @@ int main() {
     bool play = false;
     bool play2 = true;
 
-    usize vgm_index = 10500;
+    usize vgm_index = 0;
+
+    std::fesetround(FE_TONEAREST);
 
     while (true) {
         uint64_t time_ms = time_us_64() / 1000.0f;
 
-        if (time_ms > 12000) {
+        if (time_ms > 15000) {
             // break;
         }
 
@@ -126,16 +143,51 @@ int main() {
             // printf("vgm index %d/%d\n", vgm_index, vgm_data_len);
 
             u8 command = vgm_data[vgm_index];
+            u8 command_size = 0;
+            u8 data[2] = {vgm_data[vgm_index + 1], vgm_data[vgm_index + 2]};
+
+            // printf(
+            //     "%u command: %02x  %02x %02x\n",
+            //     vgm_index,
+            //     command,
+            //     data[0],
+            //     data[1]
+            // );
 
             if (command == 0x00) {
+                command_size = 2;
+
                 u8 data = vgm_data[vgm_index + 1];
 
                 audio_module.send_byte(data);
             } else if (command == 0x01) {
-                sleep_ms(17);
+                command_size = 1;
+
+                sleep_us(microseconds_from_samples(735));
+            } else if (command == 0x4F) {
+                command_size = 1;
+
+                // no op
+            } else if (command == 0x61) {
+                command_size = 3;
+
+                u16 data =
+                    (vgm_data[vgm_index + 2] << 8) | vgm_data[vgm_index + 1];
+
+                sleep_us(microseconds_from_samples(data));
+            } else {
+                printf(
+                    "unsupported command: 0x%02x (%u)\n",
+                    command,
+                    vgm_index
+                );
+
+                hard_assertion_failure();
             }
 
-            ++vgm_index;
+            hard_assert(command_size != 0);
+
+            vgm_index += command_size;
         }
 
         // sleep_ms(1);
