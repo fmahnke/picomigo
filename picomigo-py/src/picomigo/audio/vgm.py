@@ -80,6 +80,7 @@ _metadata_offsets[0x00000150] = _metadata_offsets[0x00000101]
 class Command(Enum):
     GAME_GEAR_STEREO = 0x4F
     PSG_WRITE_VALUE = 0x50
+    WAIT_N_SAMPLES = 0X61
     WAIT_735_SAMPLES = 0x62
     END_OF_DATA = 0x66
 
@@ -442,6 +443,8 @@ class VgmParser:
                         output = f'0x00, {data[0]:#02X},  // PSG_WRITE_VALUE\n'
                     case Command.WAIT_735_SAMPLES:
                         output = '0x01,  // WAIT_735_SAMPLES\n'
+                    case Command.WAIT_N_SAMPLES:
+                        output = f'0x61, {data[0]:#02X}, {data[1]:#02X},  // WAIT_N_SAMPLES\n'
                     case Command.END_OF_DATA:
                         output = '// END_OF_DATA\n'
                     case _:
