@@ -1,17 +1,11 @@
 import gzip
 import struct
-import sys
 from enum import Enum, auto
-from token import STRING
-from typing import TextIO, TypedDict
+from io import BytesIO as ByteBuffer
+from typing import TextIO, TypeAlias, TypedDict
 
-from mktech.error import Err, Error, Ok, Result
+from mktech.error import Err, Ok, Result
 from mktech.log import log
-
-if (sys.version_info > (3, 0)):
-    from io import BytesIO as ByteBuffer
-else:
-    from StringIO import StringIO as ByteBuffer
 
 
 class CommandFormat(Enum):
@@ -24,7 +18,23 @@ class CommandListItem(TypedDict):
     data: bytes | None
 
 
-_metadata_offsets = {}
+class MetadataOffsetsItem(TypedDict):
+    offset: int
+    size: int
+    type_format: str | None
+
+
+class Metadata(TypedDict, total=True):
+    version: int
+    gd3_offset: int
+    vgm_data_offset: int
+
+
+GD3: TypeAlias = dict[str, bytes]
+
+MetadataOffsets: TypeAlias = dict[int, dict[str, MetadataOffsetsItem]]
+
+_metadata_offsets: MetadataOffsets = {}
 
 _metadata_offsets[0x00000101] = {
     'vgm_ident': {'offset': 0x00, 'size': 4, 'type_format': None},
@@ -76,27 +86,29 @@ class Parser:
     """
 
     # VGM file identifier
-    vgm_magic_number = b'Vgm '
+    vgm_magic_number: bytes = b'Vgm '
 
     # Supported VGM versions
-    supported_ver_list = [
+    supported_ver_list: list[int] = [
         0x00000101,
         0x00000150,
     ]
 
     # VGM metadata offsets
-    metadata_offsets = _metadata_offsets
+    metadata_offsets: MetadataOffsets = _metadata_offsets
 
-    def __init__(self, vgm_data):
+    def __init__(self, vgm_data: bytes):
         # Store the VGM data and validate it
-        self.data = ByteBuffer(vgm_data)
+        self.data: ByteBuffer | gzip.GzipFile = ByteBuffer(vgm_data)
         self.validate_vgm_data()
 
         # Set up the variables that will be populated
         self.command_list: list[CommandListItem] = []
-        self.data_block = None
-        self.gd3_data = {}
-        self.metadata = {}
+        self.data_block: ByteBuffer | None = None
+        self.gd3_data: GD3 = {}
+        self.metadata: Metadata = {
+            'version': 0, 'gd3_offset': 0, 'vgm_data_offset': 0
+        }
 
         # Parse the VGM metadata and validate the VGM version
         self.parse_metadata()
@@ -110,10 +122,17 @@ class Parser:
         # Save the current position of the VGM data
         original_pos = self.data.tell()
 
+        version = self.metadata['version']
+
+        assert version is not None
+
+        # _ = self.metadata_offsets[version]  # ['vgm_data_offset']['offset']
+        # _ = self.metadata_offsets[version]['vgm_data_offset']['offset']
+
         # Seek to the start of the VGM data
-        self.data.seek(
-            self.metadata['vgm_data_offset'] + self.metadata_offsets[
-                self.metadata['version']]['vgm_data_offset']['offset']
+        _ = self.data.seek(
+            self.metadata['vgm_data_offset']
+            + self.metadata_offsets[version]['vgm_data_offset']['offset']
         )
 
         while True:
@@ -122,7 +141,7 @@ class Parser:
             command = self.data.read(1)
 
             # Break if we are at the end of the file
-            if command == '':
+            if command == b'':
                 break
 
             # 0x4f dd - Game Gear PSG stereo, write dd to port 0x06
@@ -170,7 +189,7 @@ class Parser:
             # 0x67 0x66 tt ss ss ss ss - Data block
             elif command == b'\x67':
                 # Skip the compatibility and type bytes (0x66 tt)
-                self.data.seek(2, 1)
+                _ = self.data.seek(2, 1)
 
                 # Read the size of the data block
                 data_block_size = struct.unpack('<I', self.data.read(4))[0]
@@ -195,27 +214,27 @@ class Parser:
                 )
 
         # Seek back to the original position in the VGM data
-        self.data.seek(original_pos)
+        _ = self.data.seek(original_pos)
 
     def parse_gd3(self):
         # Save the current position of the VGM data
         original_pos = self.data.tell()
 
         # Seek to the start of the GD3 data
-        self.data.seek(
+        _ = self.data.seek(
             self.metadata['gd3_offset'] + self.metadata_offsets[
                 self.metadata['version']]['gd3_offset']['offset']
         )
 
         # Skip 8 bytes ('Gd3 ' string and 4 byte version identifier)
-        self.data.seek(8, 1)
+        _ = self.data.seek(8, 1)
 
         # Get the length of the GD3 data, then read it
         gd3_length = struct.unpack('<I', self.data.read(4))[0]
         gd3_data = ByteBuffer(self.data.read(gd3_length))
 
         # Parse the GD3 data
-        gd3_fields = []
+        gd3_fields: list[bytes] = []
         current_field = b''
         while True:
             # Read two bytes. All characters (English and Japanese) in the GD3
@@ -250,21 +269,21 @@ class Parser:
         }
 
         # Seek back to the original position in the VGM data
-        self.data.seek(original_pos)
+        _ = self.data.seek(original_pos)
 
     def parse_metadata(self):
         # Save the current position of the VGM data
         original_pos = self.data.tell()
 
         # Create the list to store the VGM metadata
-        self.metadata = {}
+        self.metadata = {'version': 0, 'gd3_offset': 0, 'vgm_data_offset': 0}
 
         # Iterate over the offsets and parse the metadata
-        for version, offsets in self.metadata_offsets.items():
+        for _version, offsets in self.metadata_offsets.items():
             for value, offset_data in offsets.items():
 
                 # Seek to the data location and read the data
-                self.data.seek(offset_data['offset'])
+                _ = self.data.seek(offset_data['offset'])
                 data = self.data.read(offset_data['size'])
 
                 # Unpack the data if required
@@ -277,21 +296,21 @@ class Parser:
                     self.metadata[value] = data
 
         # Seek back to the original position in the VGM data
-        self.data.seek(original_pos)
+        _ = self.data.seek(original_pos)
 
     def validate_vgm_data(self):
         # Save the current position of the VGM data
         original_pos = self.data.tell()
 
         # Seek to the start of the file
-        self.data.seek(0)
+        _ = self.data.seek(0)
 
         # Perform basic validation on the given file by checking for the VGM
         # magic number ('Vgm ')
         if self.data.read(4) != self.vgm_magic_number:
             # Could not find the magic number. The file could be gzipped (e.g.
             # a vgz file). Try un-gzipping the file and trying again.
-            self.data.seek(0)
+            _ = self.data.seek(0)
             self.data = gzip.GzipFile(fileobj=self.data, mode='rb')
 
             try:
@@ -304,7 +323,7 @@ class Parser:
                 raise ValueError('Data does not appear to be a valid VGM file')
 
         # Seek back to the original position in the VGM data
-        self.data.seek(original_pos)
+        _ = self.data.seek(original_pos)
 
     def validate_vgm_version(self):
         version = self.metadata['version']
