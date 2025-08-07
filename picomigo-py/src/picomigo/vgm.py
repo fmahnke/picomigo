@@ -3,21 +3,19 @@ from io import StringIO
 from mktech.error import Err, Error, Ok, Result
 from mktech.path import Path
 
-from .audio.vgm import CommandFormat, Parser
+from .audio.vgm import VgmOutputFormat, VgmParser
 
 
 def main(path: Path, format: str | None) -> Result[None, Error]:
     match format:
         case 'c':
-            format_ = CommandFormat.C_ARRAY
+            format_ = VgmOutputFormat.C_ARRAY
         case None:
-            format_ = CommandFormat.STRING
+            format_ = VgmOutputFormat.STRING
         case _:
             return Err(Error(f'unsupported format: {format}'))
 
-    data = path.read_bytes()
-
-    parser = Parser(data)
+    parser = VgmParser.create(path)
 
     output = StringIO()
 

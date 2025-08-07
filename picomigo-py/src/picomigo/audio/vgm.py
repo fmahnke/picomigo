@@ -1,14 +1,19 @@
+from __future__ import annotations
+
 import gzip
 import struct
 from enum import Enum, auto
-from io import BytesIO as ByteBuffer
+from io import BytesIO
 from typing import TextIO, TypeAlias, TypedDict
 
 from mktech.error import Err, Ok, Result
 from mktech.log import log
+from mktech.path import Path
+
+__all__ = ['VgmParser', 'VgmOutputFormat']
 
 
-class CommandFormat(Enum):
+class VgmOutputFormat(Enum):
     STRING = auto()
     C_ARRAY = auto()
 
@@ -80,7 +85,7 @@ class VersionError(Exception):
     pass
 
 
-class Parser:
+class VgmParser:
     """
     Parser for the VGM format.
     """
@@ -99,12 +104,12 @@ class Parser:
 
     def __init__(self, vgm_data: bytes):
         # Store the VGM data and validate it
-        self.data: ByteBuffer | gzip.GzipFile = ByteBuffer(vgm_data)
+        self.data: BytesIO | gzip.GzipFile = BytesIO(vgm_data)
         self.validate_vgm_data()
 
         # Set up the variables that will be populated
         self.command_list: list[CommandListItem] = []
-        self.data_block: ByteBuffer | None = None
+        self.data_block: BytesIO | None = None
         self.gd3_data: GD3 = {}
         self.metadata: Metadata = {
             'version': 0, 'gd3_offset': 0, 'vgm_data_offset': 0
@@ -117,6 +122,18 @@ class Parser:
         # Parse GD3 data and the VGM commands
         self.parse_gd3()
         self.parse_commands()
+
+    @classmethod
+    def create(cls, vgm: Path | BytesIO | bytes) -> VgmParser:
+        match vgm:
+            case Path():
+                data = vgm.read_bytes()
+            case BytesIO():
+                data = vgm.read()
+            case bytes():
+                data = vgm
+
+        return cls(data)
 
     def parse_commands(self):
         # Save the current position of the VGM data
@@ -195,7 +212,7 @@ class Parser:
                 data_block_size = struct.unpack('<I', self.data.read(4))[0]
 
                 # Store the data block for later use
-                self.data_block = ByteBuffer(self.data.read(data_block_size))
+                self.data_block = BytesIO(self.data.read(data_block_size))
 
             # 0x7n - Wait n+1 samples, n can range from 0 to 15
             # 0x8n - YM2612 port 0 address 2A write from the data bank, then
@@ -231,7 +248,7 @@ class Parser:
 
         # Get the length of the GD3 data, then read it
         gd3_length = struct.unpack('<I', self.data.read(4))[0]
-        gd3_data = ByteBuffer(self.data.read(gd3_length))
+        gd3_data = BytesIO(self.data.read(gd3_length))
 
         # Parse the GD3 data
         gd3_fields: list[bytes] = []
@@ -336,7 +353,7 @@ class Parser:
     def format_command_list(
         self,
         output: TextIO,
-        format: CommandFormat = CommandFormat.STRING
+        format: VgmOutputFormat = VgmOutputFormat.STRING
     ) -> None:
         not_found: list[int] = []
 
@@ -361,7 +378,7 @@ class Parser:
     @staticmethod
     def _format_command(
         command: CommandListItem,
-        format: CommandFormat = CommandFormat.STRING
+        format: VgmOutputFormat = VgmOutputFormat.STRING
     ) -> Result[str, str]:
         name_bytes = command['command']
 
@@ -379,14 +396,14 @@ class Parser:
         data = command['data']
 
         match format:
-            case CommandFormat.STRING:
+            case VgmOutputFormat.STRING:
                 if data is None:
                     data_str = None
                 else:
                     data_str = ' '.join([f'{it:02X}' for it in data])
 
                 output = f"{name}, data: {data_str}\n"
-            case CommandFormat.C_ARRAY:
+            case VgmOutputFormat.C_ARRAY:
                 match name:
                     case Command.PSG_WRITE_VALUE:
                         assert data is not None
