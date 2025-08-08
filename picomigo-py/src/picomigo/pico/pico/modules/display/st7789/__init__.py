@@ -1,7 +1,10 @@
 import st7789
 from machine import Pin
 from pico import spi
+from pico.config import config
 from pico.logger import log
+
+_config = config.st7789_display
 
 
 def display():
@@ -21,9 +24,9 @@ def init() -> None:
         display_spi,
         240,
         320,
-        reset=Pin(9, Pin.OUT),
-        dc=Pin(8, Pin.OUT),
-        cs=Pin(0, Pin.OUT),
+        reset=Pin(_config.reset, Pin.OUT),
+        dc=Pin(_config.dc, Pin.OUT),
+        cs=Pin(_config.cs, Pin.OUT),
         rotation=0
     )
 

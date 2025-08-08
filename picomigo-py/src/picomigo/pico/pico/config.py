@@ -24,6 +24,11 @@ class Config:
     class LED:
         data: int = 20
 
+    class ST7789Display:
+        reset: int = 9
+        dc: int = 8
+        cs: int = 0
+
     class SPI:
         id: int
         baudrate: int
@@ -64,6 +69,8 @@ class Config:
 
     led: 'Config.LED'
 
+    st7789_display: 'Config.ST7789Display'
+
     spi: dict[int, 'Config.SPI']
 
     def __init__(self) -> None:
@@ -72,6 +79,8 @@ class Config:
         self.switches = Config.Switches()
 
         self.led = Config.LED()
+
+        self.st7789_display = Config.ST7789Display()
 
         self.spi = {
             0: Config.SPI(id=0, sck=None, mosi=None, miso=None),
