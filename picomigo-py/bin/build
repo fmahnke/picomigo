@@ -51,6 +51,10 @@ do_build_rsync logging \
     -avzr \
     lib/micropython_logging/micropython_logging.py _build/lib
 
+do_build_rsync mcp23017 \
+    -avzr \
+    lib/micropython-mcp23017/mcp23017.py _build/lib
+
 do_build_rsync unittest \
     -avzr \
     lib/unittest/unittest/__init__.py \
