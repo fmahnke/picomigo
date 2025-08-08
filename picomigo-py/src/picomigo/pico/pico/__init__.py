@@ -13,6 +13,8 @@ from pico.logger import log
 from pico.modules import display as display_module
 from pico.modules import input
 
+from . import i2c
+
 __all__ = ['config']
 
 _config = config.config
@@ -58,6 +60,8 @@ async def _async_run(
 
 def _init() -> None:
     log.add(level=_config.log.level)
+
+    i2c.init()
 
     input.init()
     display_module.init()
