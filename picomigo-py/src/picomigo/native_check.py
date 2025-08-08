@@ -1,8 +1,6 @@
 import re
-from subprocess import PIPE
 from typing import cast
 
-from mktech import subprocess
 from mktech.error import Err, Ok
 from mktech.log import log
 from mktech.os import ensure_dir, environ, working_directory
@@ -53,10 +51,10 @@ def _clangd_check(path: Path) -> None:
 
     args = (
         '--enable-config'
-        """ --query-driver='/usr/bin/arm-none-eabi-*,/usr/bin/gcc*,/usr/bin/g++*'"""
+        """ --query-driver='/usr/bin/arm-none-eabi-*,/usr/bin/gcc*,/usr/bin/g++*'"""  # noqa: E501
     )
 
-    result = run(f'clangd {args} --check={path}', stderr=stderr)
+    _ = run(f'clangd {args} --check={path}', stderr=stderr)
 
     output = cast(str, stderr.text)
 

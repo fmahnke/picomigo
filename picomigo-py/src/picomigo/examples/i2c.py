@@ -1,5 +1,4 @@
 import asyncio
-from typing import Any
 
 import pico
 from machine import I2C, Pin
@@ -32,7 +31,11 @@ async def main():
     log.warning('A -> output')
 
     # i2c.writeto_mem(0x20, io_dir_a, b'\x00')
-    i2c.writeto_mem(0x20, io_dir_a, bytes([0x00]))
+    i2c.writeto_mem(  # pyright: ignore[reportUnknownMemberType]
+        0x20,
+        io_dir_a,
+        bytes([0x00]),
+    )
     # i2c.writeto_mem(0x20, 0x12, b'\x00')
     '''
     i2c.writeto(42, b'123')
@@ -67,7 +70,11 @@ async def main():
             if output == 0x100:
                 output = 1
 
-        i2c.writeto_mem(0x20, gpio_a, bytes([output]))
+        i2c.writeto_mem(  # pyright: ignore[reportUnknownMemberType]
+            0x20,
+            gpio_a,
+            bytes([output]),
+        )
 
         await asyncio.sleep(0.5)
 

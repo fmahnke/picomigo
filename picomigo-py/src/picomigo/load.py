@@ -3,7 +3,6 @@ from os.path import isfile
 from mktech.error import Err, Error, Ok, Result
 from mktech.log import log
 
-from . import pico_sdk
 from .board import Board
 from .config import BuildConfig
 from .runner import picotool
@@ -11,11 +10,9 @@ from .runner import picotool
 
 def execute(target: str, board: Board,
             build_config: BuildConfig) -> Result[None, Error]:
-    pico_sdk_board = pico_sdk.board(board)
-
     match target:
         case 'micropython' | 'upython':
-            top_build_path = f'{build_config.micropython_source_dir}/ports/rp2/build'
+            top_build_path = f'{build_config.micropython_source_dir}/ports/rp2/build'  # noqa: E501
 
             match board:
                 case Board.PICO2:

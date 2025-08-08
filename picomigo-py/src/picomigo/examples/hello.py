@@ -1,17 +1,14 @@
 import asyncio
-from typing import Any
 
 import pico
 import vga2_16x32 as font
 from neopixel2 import Neopixel, slice_maker
-from pico.logger import log
 from pico.modules import display as display_module
 
 _display = display_module.display()
 _line_height: int = 34
 
 
-# from pico.config import led as config
 async def main():
     _display.init()
 

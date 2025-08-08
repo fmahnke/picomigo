@@ -1,4 +1,4 @@
-import asyncio
+# import asyncio
 import time
 
 import pico
@@ -13,11 +13,11 @@ _tone_range = _moisture_threshold_max - _moisture_threshold_min
 
 class MoistureExample:
     _input: ADC = ADC(26)
-    _buzzer = PWM(Pin(22))
-    _duty = int(5000)
-    _tone = True
-    _step = 0
-    _next_update = 0
+    _buzzer: PWM = PWM(Pin(22))
+    _duty: int = int(5000)
+    _tone: bool = True
+    _step: int = 0
+    _next_update: int = 0
 
     async def run(self):
         while True:

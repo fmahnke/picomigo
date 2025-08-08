@@ -1,10 +1,7 @@
-import logging
 import sys
 from dataclasses import dataclass
-from typing import Required
 
 import click
-import sarge
 from mktech.cli import from_config
 from mktech.error import Err, Ok
 from mktech.log import log
@@ -40,8 +37,8 @@ def cli(ctx: click.Context, build_config: BuildConfig) -> None:
             'activation': [
                 ('sarge', False),
                 ('sarge.parse', False),
-            ]
-        }
+            ]  # noqa: E122
+        }  # pyright: ignore[reportArgumentType]
     )
 
     ctx.obj = CliContext(build_config)
