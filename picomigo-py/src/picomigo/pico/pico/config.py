@@ -31,6 +31,24 @@ class Config:
         dc: int = 8
         cs: int = 0
 
+    class I2C:
+        id: int
+        scl: int
+        sda: int
+        freq: int
+
+        def __init__(
+            self, id: int, *, scl: int, sda: int, freq: int = 400_000
+        ) -> None:
+            self.id = id
+            self.scl = scl
+            self.sda = sda
+            self.freq = freq
+
+    class I2CExpander:
+        id: int = 1
+        address: int = 0x20
+
     class SPI:
         id: int
         baudrate: int
@@ -73,6 +91,10 @@ class Config:
 
     st7789_display: 'Config.ST7789Display'
 
+    i2c: dict[int, 'Config.I2C']
+
+    i2c_expander: 'Config.I2CExpander'
+
     spi: dict[int, 'Config.SPI']
 
     def __init__(self) -> None:
@@ -83,6 +105,12 @@ class Config:
         self.led = Config.LED()
 
         self.st7789_display = Config.ST7789Display()
+
+        self.i2c = {
+            1: Config.I2C(id=1, scl=19, sda=18),
+        }
+
+        self.i2c_expander = Config.I2CExpander()
 
         self.spi = {
             0: Config.SPI(id=0, sck=None, mosi=None, miso=None),
