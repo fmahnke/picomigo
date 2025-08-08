@@ -4,7 +4,7 @@
 import asyncio
 
 from machine import ADC, Pin
-from pico.config import switches as config
+from pico.config import config
 from pico.modules.events import signal
 
 from .rotary_encoder import RotaryEncoderEvent, encoder
@@ -18,6 +18,8 @@ __all__ = [
     'switches',
     'tick'
 ]
+
+_config = config.switches
 
 
 class SwitchState:
@@ -43,14 +45,14 @@ _button_1_off = signal('button_1_off')
 # def push_button_on(name: str, callback) -> None:
 #     pass
 
-pot_0 = ADC(config['potentiometer_0'])
+pot_0 = ADC(_config.potentiometer_0)
 
 switches: dict[str, Switch] = {}
 
 
 def init() -> None:
-    switches['button_0'] = Switch(Pin(config['button_0'], Pin.IN))
-    switches['button_1'] = Switch(Pin(config['button_1'], Pin.IN))
+    switches['button_0'] = Switch(Pin(_config.button_0, Pin.IN))
+    switches['button_1'] = Switch(Pin(_config.button_1, Pin.IN))
 
 
 async def tick() -> None:

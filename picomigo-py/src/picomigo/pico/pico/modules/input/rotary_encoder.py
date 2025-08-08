@@ -3,7 +3,7 @@
 from typing import Any
 
 from machine import Pin
-from pico.config import switches as config
+from pico.config import config
 from pico.modules.events import signal
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
@@ -11,6 +11,8 @@ __all__ = [
     'RotaryEncoderEvent',
     'encoder',
 ]
+
+_config = config.switches.rotary_encoder
 
 
 def _click_event_listener() -> None:
@@ -67,9 +69,9 @@ class RotaryEncoder(RotaryEncoderRP2):
         )
 
 
-_encoder_pin_clk = Pin(config['rotary_encoder']['clk'], Pin.IN, Pin.PULL_UP)
-_encoder_pin_dt = Pin(config['rotary_encoder']['dt'], Pin.IN, Pin.PULL_UP)
-_encoder_pin_sw = Pin(config['rotary_encoder']['sw'], Pin.IN, Pin.PULL_UP)
+_encoder_pin_clk = Pin(_config.clk, Pin.IN, Pin.PULL_UP)
+_encoder_pin_dt = Pin(_config.dt, Pin.IN, Pin.PULL_UP)
+_encoder_pin_sw = Pin(_config.sw, Pin.IN, Pin.PULL_UP)
 
 encoder = RotaryEncoder(_encoder_pin_clk, _encoder_pin_dt, _encoder_pin_sw)
 

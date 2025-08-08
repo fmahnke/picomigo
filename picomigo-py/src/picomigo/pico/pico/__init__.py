@@ -13,6 +13,10 @@ from pico.logger import log
 from pico.modules import display as display_module
 from pico.modules import input
 
+__all__ = ['config']
+
+_config = config.config
+
 _temp_sensor = ADC(4)
 
 
@@ -53,7 +57,7 @@ async def _async_run(
 
 
 def _init() -> None:
-    log.add(level=config.log['level'])
+    log.add(level=_config.log.level)
 
     input.init()
     display_module.init()
