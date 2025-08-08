@@ -1,92 +1,82 @@
-import time
+import asyncio
 
-import neopixel
-from machine import Pin
+import pico
+from neopixel2 import Neopixel, slice_maker
 
-ws_pin = 0
-led_num = 16
-BRIGHTNESS = 0.2  # Adjust the brightness (0.0 - 1.0)
-
-_bpp = 3
-
-if _bpp == 3:
-    red = (255, 0, 0)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
-    black = (0, 0, 0)
-elif _bpp == 4:
-    red = (255, 0, 0, 0)
-    green = (0, 255, 0, 0)
-    blue = (0, 0, 255, 0)
-    black = (0, 0, 0, 0)
-else:
-    raise NotImplementedError
-
-neoRing = neopixel.NeoPixel(Pin(ws_pin), led_num, bpp=_bpp, timing=1)
+_config = pico.config.config.led
 
 
-def set_brightness(color: tuple[int, ...]):
-    r, g, b = color
-    r = int(r * BRIGHTNESS)
-    g = int(g * BRIGHTNESS)
-    b = int(b * BRIGHTNESS)
-    return (r, g, b)
+async def main():
+    pixels = Neopixel(
+        _config.led_count, _config.pio_state_machine_id, _config.data, "GRB"
+    )
 
+    print('start pixels')
 
-def off():
-    # color = (255, 0, 0)  # Red color
-    # color = set_brightness(color)
-    # neoRing.fill((0, 0, 0))
-    # neoRing.write()
-    neoRing[0] = (255, 0, 0, 0)
-    neoRing.write()
-
-
-colors = [red, green, blue]
-
-
-def set_color(_color: tuple[int, ...]) -> None:
-    # color = set_brightness(color)
-
-    # for it in range(0, 3):
-    #     neoRing[it] = red
-
-    neoRing[0] = red
-    neoRing[1] = green
-    neoRing[2] = blue
-
-    for it in range(3, len(neoRing)):
-        neoRing[it] = black
-
-    # neoRing.fill(color)
-
-    neoRing.write()
-
-
-def loop():
-    index = 0
+    end = 8
 
     while True:
-        if index == len(colors):
-            index = 0
+        pixels.fill((0, 0, 0))
+        pixels.show()
 
-        color = colors[index]
+        await asyncio.sleep(1.0)
 
-        index += 1
+        for index in range(0, end):
+            start = (0, 2, 0)
+            stop = (0, 50, 0)
 
-        print(f'set color: {color}')
+            pixels.set_pixel_line_gradient(0, end - 1, start, stop)
 
-        set_color(color)
+            print(f'index {index}')
+            if index < end - 1:
+                pixels.set_pixel(
+                    slice_maker[
+                        index
+                        + 1:end],  # pyright: ignore[reportUnknownArgumentType]
+                    (0, 0, 0)
+                )
 
-        time.sleep(1)
+            pixels.show()
+
+            await asyncio.sleep(0.5)
 
 
-'''
-print('turn off')
-
-while True:
-    off()
-    time.sleep(1)
-'''
-
-loop()
+pico.run(main)
+# while True:
+#     pixels.set_pixel(0, (20, 0, 0))
+#     pixels.show()
+#
+#     sleep(1.0)
+#
+#     pixels.set_pixel(1, (0, 20, 0))
+#     pixels.show()
+#
+#     sleep(1.0)
+#
+#     pixels.set_pixel(2, (0, 0, 20))
+#     pixels.show()
+#
+#     sleep(1.0)
+#
+#     pixels.set_pixel_line(0, 3, (0, 0, 0))
+#     pixels.show()
+#
+#     sleep(1.0)
+#
+# pixels.set_pixel_line(5, 7, (0, 255, 0))
+# pixels.show()
+#
+# sleep(1.0)
+#
+# pixels.fill((20, 5, 0))
+# pixels.show()
+#
+# sleep(1.0)
+#
+# # rgbw1 = (0, 0, 50, 0)
+# # rgbw2 = (50, 0, 0, 250)
+# # pixels.set_pixel(42, (0, 50, 0, 0))
+# # pixels.set_pixel_line(5, 7, rgbw1)
+# # pixels.set_pixel_line_gradient(0, 13, rgbw1, rgbw2)
+#
+# print('done')

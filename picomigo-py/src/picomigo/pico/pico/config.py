@@ -23,6 +23,8 @@ class Config:
 
     class LED:
         data: int = 20
+        pio_state_machine_id: int = 0
+        led_count: int = 8
 
     class ST7789Display:
         reset: int = 9
