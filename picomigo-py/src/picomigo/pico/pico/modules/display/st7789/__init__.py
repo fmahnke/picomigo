@@ -1,5 +1,6 @@
 import st7789
-from machine import SPI, Pin
+from machine import Pin
+from pico import spi
 from pico.logger import log
 
 
@@ -12,12 +13,12 @@ def display():
 def init() -> None:
     global _display
 
-    spi = SPI(1, sck=Pin(10), mosi=Pin(11), miso=None)
+    display_spi = spi.init(1)
 
-    log.debug(spi)
+    log.debug(display_spi)
 
     _display = st7789.ST7789(
-        spi,
+        display_spi,
         240,
         320,
         reset=Pin(9, Pin.OUT),
