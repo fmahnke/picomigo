@@ -2,7 +2,7 @@
 
 | #  |     GP |  i2c |  SPI | UART |  ADC | Description    | Use |
 | -- | ------ | ---- | ---- | ---- | ---- | -------------- | --- |
-|  1 |    GP0 | SDA0 |  RX0 |  TX0 | ---- |                |     |
+|  1 |    GP0 | SDA0 |  RX0 |  TX0 | ---- | Display CS     | SPI |
 |  2 |    GP1 | SCL0 | CSn0 |  RX0 | ---- |                |     |
 |  3 |    GND | ---- | ---- | ---- | ---- |                |     |
 |  4 |    GP2 | SDA1 | SCK0 | ---- | ---- |                |     |
@@ -12,22 +12,22 @@
 |  8 |    GND | ---- | ---- | ---- | ---- |                |     |
 |  9 |    GP6 | SDA1 | SCK0 | ---- | ---- |                |     |
 | 10 |    GP7 | SCL1 |  TX0 | ---- | ---- |                |     |
-| 11 |    GP8 | SDA0 |  RX1 |  TX1 | ---- |                |     |
-| 12 |    GP9 | SCL0 | CSn1 |  RX1 | ---- |                |     |
+| 11 |    GP8 | SDA0 |  RX1 |  TX1 | ---- | Display D/C    |  GP |
+| 12 |    GP9 | SCL0 | CSn1 |  RX1 | ---- | Display reset  |  GP |
 | 13 |    GND | ---- | ---- | ---- | ---- |                |     |
-| 14 |   GP10 | SDA1 | SCK1 | ---- | ---- |                |     |
-| 15 |   GP11 | SCL1 |  TX1 | ---- | ---- |                |     |
+| 14 |   GP10 | SDA1 | SCK1 | ---- | ---- | SPI 1          | SPI |
+| 15 |   GP11 | SCL1 |  TX1 | ---- | ---- | SPI 1          | SPI |
 | 16 |   GP12 | SDA0 |  RX1 |  TX0 | ---- |                |     |
 | 17 |   GP13 | SCL0 | CSn1 |  RX0 | ---- |                |     |
 | 18 |    GND | ---- | ---- | ---- | ---- |                |     |
-| 19 |   GP14 | SDA1 | SCK1 | ---- | ---- | Push button 1  |  GP |
-| 20 |   GP15 | SCL1 |  TX1 | ---- | ---- | Push button 0  |  GP |
+| 19 |   GP14 | SDA1 | SCK1 | ---- | ---- | *Push button 1  |  GP |
+| 20 |   GP15 | SCL1 |  TX1 | ---- | ---- | *Push button 0  |  GP |
 | 21 |   GP16 | SDA0 |  RX0 |  TX0 | ---- |                |     |
-| 22 |   GP17 | SCL0 | CSn0 |  RX0 | ---- | Encoder out 1  |  GP |
+| 22 |   GP17 | SCL0 | CSn0 |  RX0 | ---- | *Encoder out 1  |  GP |
 | 23 |    GND | ---- | ---- | ---- | ---- |                |     |
-| 24 |   GP18 | SDA1 | SCK0 | ---- | ---- | Encoder out 0  |  GP |
-| 25 |   GP19 | SCL1 |  TX0 | ---- | ---- | Encoder button |  GP |
-| 26 |   GP20 | SDA0 | ---- | ---- | ---- |                |     |
+| 24 |   GP18 | SDA1 | SCK0 | ---- | ---- | I2C 1          | I2C |
+| 25 |   GP19 | SCL1 |  TX0 | ---- | ---- | I2C 1          | I2C |
+| 26 |   GP20 | SDA0 | ---- | ---- | ---- | WS2812 LED     |  GP |
 | 27 |   GP21 | SCL0 | ---- | ---- | ---- |                |     |
 | 28 |    GND | ---- | ---- | ---- | ---- |                |     |
 | 29 |   GP22 | ---- | ---- | ---- | ---- |                |     |
