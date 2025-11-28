@@ -66,6 +66,10 @@ do_build_rsync blinker \
     -avzr \
     lib/blinker/blinker _build/lib
 
+do_build_rsync umsgpack \
+    -avzr \
+    lib/umsgpack/umsgpack _build/lib
+
 # do_build_rsync ssd1306 \
 #     -avzr \
 #     lib/ssd1306/ssd1306.py _build/lib
