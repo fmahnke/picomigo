@@ -15,7 +15,7 @@ from pico.modules import input
 
 from . import i2c
 
-__all__ = ['config']
+__all__ = ['config', 'init', 'input']
 
 _temp_sensor = ADC(4)
 
@@ -26,7 +26,7 @@ def run(
     callback: Callable[..., Coroutine[None, None, None]],
     config: Config | None = None
 ) -> None:
-    _init(config)
+    init(config)
 
     asyncio.run(_async_run(callback))
 
@@ -63,7 +63,7 @@ async def _async_run(
     )
 
 
-def _init(config: Config | None = None) -> None:
+def init(config: Config | None = None) -> None:
     if config is None:
         config = _config
 

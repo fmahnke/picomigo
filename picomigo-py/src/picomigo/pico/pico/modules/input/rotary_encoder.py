@@ -4,7 +4,7 @@ from typing import Any
 
 from machine import Pin
 from pico.config import Config
-from pico.config import config as default_config
+from pico.config import config as default_config, get_pin
 from pico.modules.events import signal
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
@@ -87,9 +87,9 @@ def init(config: Config | None = None) -> None:
 
     encoder_config = config.switches.rotary_encoder
 
-    encoder_pin_clk = Pin(encoder_config.clk, Pin.IN, Pin.PULL_UP)
-    encoder_pin_dt = Pin(encoder_config.dt, Pin.IN, Pin.PULL_UP)
-    encoder_pin_sw = Pin(encoder_config.sw, Pin.IN, Pin.PULL_UP)
+    encoder_pin_clk = get_pin(encoder_config.clk, Pin.IN, Pin.PULL_UP)
+    encoder_pin_dt = get_pin(encoder_config.dt, Pin.IN, Pin.PULL_UP)
+    encoder_pin_sw = get_pin(encoder_config.sw, Pin.IN, Pin.PULL_UP)
 
     encoder = RotaryEncoder(encoder_pin_clk, encoder_pin_dt, encoder_pin_sw)
 

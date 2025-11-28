@@ -1,6 +1,9 @@
 # pyright: reportImplicitOverride=false
 
+from typing import Any
+
 import machine
+from machine import Pin
 
 __all__ = ['config']
 
@@ -124,6 +127,15 @@ class Config:
             0: Config.SPI(id=0, sck=None, mosi=None, miso=None),
             1: Config.SPI(id=1, sck=10, mosi=11, miso=None)
         }
+
+
+def get_pin(pin: int | Pin, *args: Any, **kwargs: Any) -> Pin:
+    if isinstance(pin, int):
+        result = Pin(pin, *args, **kwargs)
+    else:
+        result = pin
+
+    return result
 
 
 config = Config()
