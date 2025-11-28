@@ -52,19 +52,19 @@ def parse_args() -> argparse.Namespace:
         description='Talk to a Pico server over USB CDC.'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '--port',
         default='/dev/ttyACM0',
         help='serial device path (e.g. /dev/ttyACM0)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '--message',
         default='hello from host',
         help='payload to send after ping'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '--timeout',
         type=float,
         default=2.0,

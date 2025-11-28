@@ -1,3 +1,6 @@
+# pyright: reportDeprecated=false
+# pyright: reportMissingParameterType=false
+# pyright: reportUnknownParameterType=false
 """
 Minimal MicroPython server for Pico 2 using USB CDC stdin/stdout.
 
