@@ -45,6 +45,7 @@ picomigo = "picomigo.cli:main"
 
 [project.optional-dependencies]
 serial = [
+    "msgpack>=1.1.2",
     "pyserial>=3.5",
 ]
 
@@ -52,6 +53,7 @@ serial = [
 dev = [
     "micropython-rp2-rpi-pico2-w-stubs>=1.25.0.post4",
     "mktech-dev-tools[check,debug,doc,lsp-pyright,lsp-python-lsp-server] @ git+http://git.mahnke.tech/lib/python/mktech/dev-tools.git@0.1.0",
+    "msgpack-types>=0.5.0",
 ]
 
 [tool.coverage.run]
