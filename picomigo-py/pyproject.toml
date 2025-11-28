@@ -43,6 +43,11 @@ Discussions = "https://github.com/fmahnke/picomigo/discussions"
 [project.scripts]
 picomigo = "picomigo.cli:main"
 
+[project.optional-dependencies]
+serial = [
+    "pyserial>=3.5",
+]
+
 [dependency-groups]
 dev = [
     "micropython-rp2-rpi-pico2-w-stubs>=1.25.0.post4",

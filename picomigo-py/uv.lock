@@ -661,6 +661,11 @@ dependencies = [
     { name = "rshell" },
 ]
 
+[package.optional-dependencies]
+serial = [
+    { name = "pyserial" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "micropython-rp2-rpi-pico2-w-stubs" },
@@ -674,8 +679,10 @@ requires-dist = [
     { name = "mktech", git = "http://git.mahnke.tech/lib/python/mktech/mktech.git?rev=0.22.0-dev" },
     { name = "mpremote", specifier = ">=1.25.0" },
     { name = "pyelftools", specifier = ">=0.32" },
+    { name = "pyserial", marker = "extra == 'serial'", specifier = ">=3.5" },
     { name = "rshell", specifier = ">=0.0.36" },
 ]
+provides-extras = ["serial"]
 
 [package.metadata.requires-dev]
 dev = [
