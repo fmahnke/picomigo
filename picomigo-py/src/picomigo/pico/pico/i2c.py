@@ -34,3 +34,18 @@ def _init(id: int) -> I2C:
     i2c[i2c_config.id] = result
 
     return result
+
+
+def MCP23017___str__(self: MCP23017) -> str:
+    i2c = self._i2c  # pyright: ignore[reportPrivateUsage]
+    address = self._address  # pyright: ignore[reportPrivateUsage]
+    config = self._config  # pyright: ignore[reportPrivateUsage,reportUnknownMemberType,reportUnknownVariableType]  # noqa: E501
+    virtual_pins = self._virtual_pins  # pyright: ignore[reportPrivateUsage,reportUnknownMemberType]  # noqa: E501
+
+    return (
+        f'<MCP23017 _i2c={i2c}, _address={address}'
+        + f', _config={config}, _virtual_pins={virtual_pins}'
+    )
+
+
+setattr(MCP23017, '__str__', MCP23017___str__)

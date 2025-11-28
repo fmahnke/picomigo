@@ -1,3 +1,5 @@
+# pyright: reportImplicitOverride=false
+
 import machine
 
 __all__ = ['config']
@@ -44,6 +46,12 @@ class Config:
             self.scl = scl
             self.sda = sda
             self.freq = freq
+
+        def __str__(self) -> str:
+            return (
+                f'<I2C id={self.id}, scl={self.scl}, sda={self.sda}'
+                + f', freq={self.freq}>'
+            )
 
     class I2CExpander:
         id: int = 1
