@@ -3,7 +3,8 @@
 from typing import Any
 
 from machine import Pin
-from pico.config import config
+from pico.config import Config
+from pico.config import config as default_config
 from pico.modules.events import signal
 from rotary_encoder import RotaryEncoderEvent, RotaryEncoderRP2
 
@@ -11,8 +12,6 @@ __all__ = [
     'RotaryEncoderEvent',
     'encoder',
 ]
-
-_config = config.switches.rotary_encoder
 
 
 def _click_event_listener() -> None:
@@ -69,11 +68,7 @@ class RotaryEncoder(RotaryEncoderRP2):
         )
 
 
-_encoder_pin_clk = Pin(_config.clk, Pin.IN, Pin.PULL_UP)
-_encoder_pin_dt = Pin(_config.dt, Pin.IN, Pin.PULL_UP)
-_encoder_pin_sw = Pin(_config.sw, Pin.IN, Pin.PULL_UP)
-
-encoder = RotaryEncoder(_encoder_pin_clk, _encoder_pin_dt, _encoder_pin_sw)
+encoder: RotaryEncoder | None = None
 
 _click = signal('encoder_click')
 _multiple_click = signal('encoder_multiple_click')
@@ -82,3 +77,26 @@ _turn_left = signal('encoder_turn_left')
 _turn_left_fast = signal('encoder_turn_left_fast')
 _turn_right = signal('encoder_turn_right')
 _turn_right_fast = signal('encoder_turn_right_fast')
+
+
+def init(config: Config | None = None) -> None:
+    global encoder
+
+    if config is None:
+        config = default_config
+
+    encoder_config = config.switches.rotary_encoder
+
+    encoder_pin_clk = Pin(encoder_config.clk, Pin.IN, Pin.PULL_UP)
+    encoder_pin_dt = Pin(encoder_config.dt, Pin.IN, Pin.PULL_UP)
+    encoder_pin_sw = Pin(encoder_config.sw, Pin.IN, Pin.PULL_UP)
+
+    encoder = RotaryEncoder(encoder_pin_clk, encoder_pin_dt, encoder_pin_sw)
+
+
+async def async_tick(timeout: int = 1):
+    global encoder
+
+    assert encoder is not None
+
+    await encoder.async_tick(timeout)

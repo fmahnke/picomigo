@@ -4,22 +4,11 @@
 import asyncio
 
 from machine import ADC, Pin
-from pico.config import config
+from pico.config import Config
+from pico.config import config as default_config
 from pico.modules.events import signal
 
-from .rotary_encoder import RotaryEncoderEvent, encoder
-
-__all__ = [
-    'RotaryEncoderEvent',
-    'encoder',
-    'init',
-    'is_on',
-    'pot_0',
-    'switches',
-    'tick'
-]
-
-_config = config.switches
+__all__ = ['init', 'is_on', 'pot_0', 'switches', 'tick']
 
 
 class SwitchState:
@@ -45,28 +34,28 @@ _button_1_off = signal('button_1_off')
 # def push_button_on(name: str, callback) -> None:
 #     pass
 
-pot_0 = ADC(_config.potentiometer_0)
+pot_0 = None
 
 switches: dict[str, Switch] = {}
 
 
-def init() -> None:
-    switches['button_0'] = Switch(Pin(_config.button_0, Pin.IN))
-    switches['button_1'] = Switch(Pin(_config.button_1, Pin.IN))
+def init(config: Config | None = None) -> None:
+    if config is None:
+        config = default_config
 
+    global pot_0
 
-async def tick() -> None:
-    _ = await asyncio.gather(
-        encoder.async_tick(1),
-        _switches_tick(),
-    )
+    pot_0 = ADC(config.switches.potentiometer_0)
+
+    switches['button_0'] = Switch(Pin(config.switches.button_0, Pin.IN))
+    switches['button_1'] = Switch(Pin(config.switches.button_1, Pin.IN))
 
 
 def is_on(switch: str) -> bool:
     return switches[switch].pin.value() == 1
 
 
-async def _switches_tick() -> None:
+async def tick() -> None:
     while True:
         for k, v in switches.items():
             state = v.pin.value()
