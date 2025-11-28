@@ -8,7 +8,7 @@ from typing import Callable, Coroutine
 
 import vga2_16x32 as font
 from machine import ADC
-from pico import config
+from pico.config import Config, config
 from pico.logger import log
 from pico.modules import display as display_module
 from pico.modules import input
@@ -17,12 +17,17 @@ from . import i2c
 
 __all__ = ['config']
 
-_config = config.config
-
 _temp_sensor = ADC(4)
 
+_config = config
 
-def run(callback: Callable[..., Coroutine[None, None, None]]) -> None:
+
+def run(
+    callback: Callable[..., Coroutine[None, None, None]],
+    config: Config | None = None
+) -> None:
+    _init(config)
+
     asyncio.run(_async_run(callback))
 
 
@@ -58,13 +63,13 @@ async def _async_run(
     )
 
 
-def _init() -> None:
-    log.add(level=_config.log.level)
+def _init(config: Config | None = None) -> None:
+    if config is None:
+        config = _config
+
+    log.add(level=config.log.level)
 
     i2c.init()
 
-    input.init()
+    input.init(config)
     display_module.init()
-
-
-_init()
