@@ -25,6 +25,11 @@
       "reportMissingTypeStubs": false,
     },
     {
+      "root": "src/picomigo/pico_sensors",
+      "reportMissingModuleSource": false,
+      "reportMissingTypeStubs": false,
+    },
+    {
       "root": "src/picomigo/examples",
       "reportMissingModuleSource": false,
       "reportMissingTypeStubs": false,
