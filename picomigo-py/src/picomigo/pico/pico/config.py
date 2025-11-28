@@ -10,9 +10,9 @@ class Config:
         level: str = 'WARNING'
 
     class RotaryEncoder:
-        clk: int = 18
+        clk: int = 16
         dt: int = 17
-        sw: int = 19
+        sw: int = 13
 
     class Switches:
         button_0: int = 15

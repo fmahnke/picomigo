@@ -18,12 +18,12 @@
 | 14 |   GP10 | SDA1 | SCK1 | ---- | ---- | SPI 1          | SPI |
 | 15 |   GP11 | SCL1 |  TX1 | ---- | ---- | SPI 1          | SPI |
 | 16 |   GP12 | SDA0 |  RX1 |  TX0 | ---- |                |     |
-| 17 |   GP13 | SCL0 | CSn1 |  RX0 | ---- |                |     |
+| 17 |   GP13 | SCL0 | CSn1 |  RX0 | ---- | Encoder button |     |
 | 18 |    GND | ---- | ---- | ---- | ---- |                |     |
-| 19 |   GP14 | SDA1 | SCK1 | ---- | ---- | *Push button 1  |  GP |
-| 20 |   GP15 | SCL1 |  TX1 | ---- | ---- | *Push button 0  |  GP |
-| 21 |   GP16 | SDA0 |  RX0 |  TX0 | ---- |                |     |
-| 22 |   GP17 | SCL0 | CSn0 |  RX0 | ---- | *Encoder out 1  |  GP |
+| 19 |   GP14 | SDA1 | SCK1 | ---- | ---- | *Push button 1 |  GP |
+| 20 |   GP15 | SCL1 |  TX1 | ---- | ---- | *Push button 0 |  GP |
+| 21 |   GP16 | SDA0 |  RX0 |  TX0 | ---- | Encoder out 1  |     |
+| 22 |   GP17 | SCL0 | CSn0 |  RX0 | ---- | Encoder out 2  |  GP |
 | 23 |    GND | ---- | ---- | ---- | ---- |                |     |
 | 24 |   GP18 | SDA1 | SCK0 | ---- | ---- | I2C 1          | I2C |
 | 25 |   GP19 | SCL1 |  TX0 | ---- | ---- | I2C 1          | I2C |
