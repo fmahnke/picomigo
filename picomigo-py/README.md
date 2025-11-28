@@ -31,8 +31,8 @@ src/picomigo/pico/pico/modules/display/ssd1306/examples/hello.py
 
 ## Development
 
-Install with `pdm`:
+Install with `uv`:
 
 ```bash
-pdm install
+uv sync
 ```

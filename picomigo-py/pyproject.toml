@@ -1,10 +1,6 @@
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
 [project]
 name = "picomigo"
-dynamic = ["version"]
+version = "0.1.0"
 description = ""
 authors = [{name = "Fritz Mahnke", email = "fritz@mahnke.tech"}]
 license = {text = "GPL-3.0"}
@@ -47,13 +43,6 @@ Discussions = "https://github.com/fmahnke/picomigo/discussions"
 [project.scripts]
 picomigo = "picomigo.cli:main"
 
-[tool.pdm]
-distribution = true
-
-[tool.pdm.version]
-source = "scm"
-fallback_version = "0.0.0"
-
 [dependency-groups]
 dev = [
     "micropython-rp2-rpi-pico2-w-stubs>=1.25.0.post4",
@@ -74,3 +63,7 @@ testpaths = [ "tests" ]
 
 [tool.uv.sources]
 mktech = { git = "http://git.mahnke.tech/lib/python/mktech/mktech.git", rev = "0.22.0-dev" }
+
+[build-system]
+requires = ["uv_build>=0.9.13,<0.10.0"]
+build-backend = "uv_build"
