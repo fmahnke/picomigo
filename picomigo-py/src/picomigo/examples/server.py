@@ -28,118 +28,110 @@ FrameHandler = Callable[[str, bytes], None]
 Frame = Tuple[int, str, bytes]
 
 
-def build_frame(frame_type: str, payload: bytes) -> bytes:
-    header = f'{len(payload)}|{frame_type}|'.encode()
+class Server:
+    def __init__(self) -> None:
+        self._poller: uselect.poll = uselect.poll()
 
-    frame = header + payload + b'\n'
+        self._poller.register(sys.stdin.buffer, uselect.POLLIN)
 
-    return frame
+    async def read_frames(self) -> None:
+        handler = self._handle_frame
 
+        buffer: bytes = b''
 
-def send_frame(frame_type: str, payload: bytes) -> None:
-    frame = build_frame(frame_type, payload)
+        while True:
+            events = self._poller.poll(0)
 
-    _ = sys.stdout.buffer.write(frame + b'\n')
+            if events:
+                # print('got event')
 
-    try:
-        sys.stdout.buffer.flush()
-    except AttributeError:
-        pass
+                chunk = sys.stdin.buffer.read(1)
 
-    try:
-        sys.stdout.flush()
-    except AttributeError:
-        pass
+                if not chunk:
+                    # print('waiting...')
 
-
-def parse_frame(line: bytes) -> Frame | None:
-    try:
-        length_text, frame_type, payload_text = line.decode().split('|', 2)
-    except ValueError:
-        return None
-
-    try:
-        length = int(length_text)
-    except ValueError:
-        return None
-
-    payload = payload_text.encode()
-
-    if len(payload) != length:
-        return None
-
-    return length, frame_type, payload
-
-
-async def read_frames(handler: FrameHandler) -> None:
-    poller = uselect.poll()
-
-    poller.register(sys.stdin.buffer, uselect.POLLIN)
-
-    buffer: bytes = b''
-
-    while True:
-        events = poller.poll(0)
-
-        if events:
-            # print('got event')
-
-            chunk = sys.stdin.buffer.read(1)
-
-            if not chunk:
-                # print('waiting...')
-
-                await asyncio.sleep_ms(1000)
-
-                continue
-
-            # print(f'got chunk: {chunk}')
-
-            buffer += chunk
-
-            while True:
-                # print('parse frame')
-
-                newline_index = buffer.find(b'\n')
-
-                if newline_index == -1:
-                    break
-
-                line = buffer[:newline_index]
-
-                buffer = buffer[newline_index + 1:]
-
-                print(f'parsing frame line: "{line}"')
-
-                frame = parse_frame(line)
-
-                if frame is None:
-                    send_frame('err', b'bad frame')
+                    await asyncio.sleep_ms(1000)
 
                     continue
 
-                _, frame_type, payload = frame
+                # print(f'got chunk: {chunk}')
 
-                handler(frame_type, payload)
+                buffer += chunk
 
-        await asyncio.sleep_ms(5)
+                while True:
+                    # print('parse frame')
 
+                    newline_index = buffer.find(b'\n')
 
-def handle_frame(frame_type: str, payload: bytes) -> None:
-    print(f'got frame type: {frame_type}')
+                    if newline_index == -1:
+                        break
 
-    if frame_type == 'ping':
-        send_frame('pong', b'')
-    elif frame_type == 'msg':
-        send_frame('ok', payload)
-    else:
-        send_frame('err', b'unknown type')
+                    line = buffer[:newline_index]
+
+                    buffer = buffer[newline_index + 1:]
+
+                    print(f'parsing frame line: "{line}"')
+
+                    frame = self._parse_frame(line)
+
+                    if frame is None:
+                        self._send_frame('err', b'bad frame')
+
+                        continue
+
+                    _, frame_type, payload = frame
+
+                    handler(frame_type, payload)
+
+            await asyncio.sleep_ms(5)
+
+    def _build_frame(self, frame_type: str, payload: bytes) -> bytes:
+        header = f'{len(payload)}|{frame_type}|'.encode()
+
+        frame = header + payload + b'\n'
+
+        return frame
+
+    def _send_frame(self, frame_type: str, payload: bytes) -> None:
+        frame = self._build_frame(frame_type, payload)
+
+        _ = sys.stdout.buffer.write(frame + b'\n')
+
+    def _parse_frame(self, line: bytes) -> Frame | None:
+        try:
+            length_text, frame_type, payload_text = line.decode().split('|', 2)
+        except ValueError:
+            return None
+
+        try:
+            length = int(length_text)
+        except ValueError:
+            return None
+
+        payload = payload_text.encode()
+
+        if len(payload) != length:
+            return None
+
+        return length, frame_type, payload
+
+    def _handle_frame(self, frame_type: str, payload: bytes) -> None:
+        print(f'got frame type: {frame_type}')
+
+        if frame_type == 'ping':
+            self._send_frame('pong', b'')
+        elif frame_type == 'msg':
+            self._send_frame('ok', payload)
+        else:
+            self._send_frame('err', b'unknown type')
 
 
 async def main() -> None:
     print('pico server ready')
 
-    await read_frames(handle_frame)
+    server = Server()
+
+    await server.read_frames()
 
 
 try:
