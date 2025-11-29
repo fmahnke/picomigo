@@ -8,7 +8,8 @@ from mktech.log import log
 from mktech.path import Path
 
 from . import board as board_module
-from . import build, load, native_check, run, serial, vgm
+from . import build, load, native_check, run, vgm
+# from . import serial
 from .config import BuildConfig
 
 
@@ -75,9 +76,9 @@ def run_command() -> None:
     run.run()
 
 
-@cli.command()
-def serial_command() -> None:
-    serial.main()
+# @cli.command()
+# def serial_command() -> None:
+#     serial.main()
 
 
 @cli.command()
