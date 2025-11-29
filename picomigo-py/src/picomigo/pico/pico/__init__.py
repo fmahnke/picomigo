@@ -1,4 +1,5 @@
 # pyright: reportDeprecated=false
+# pyright: reportImportCycles=false
 
 import asyncio
 from math import ceil
