@@ -3,7 +3,7 @@ import asyncio
 import pico
 from neopixel2 import Neopixel, slice_maker
 
-_config = pico.config.config.led
+_config = pico.config.led
 
 
 async def main():
