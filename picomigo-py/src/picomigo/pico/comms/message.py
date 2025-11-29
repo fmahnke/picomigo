@@ -11,7 +11,7 @@ class Frame:
         self.type = type
         self.message = message
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pyright: ignore[reportImplicitOverride]
         return (
             f'<Frame length={self.length}, type={self.type}'
             + f', message="{self.message}">'

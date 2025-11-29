@@ -8,26 +8,12 @@ Protocol: LEN|TYPE|PAYLOAD\\n (binary safe, line delimited).
 Handles `ping` (responds `pong`), `msg` (echoes with `ok`), otherwise `err`.
 """
 
-try:
-    from typing import Callable, Tuple
-except ImportError:
-
-    class _Subscriptable:
-        def __getitem__(self, item):
-            return object
-
-    Callable = _Subscriptable()  # type: ignore
-    Tuple = _Subscriptable()  # type: ignore
-
 import sys
 
 import uasyncio as asyncio
 import umsgpack
-import uselect
 
-from .message import Frame, decode_message
-
-FrameHandler = Callable[[str, bytes], None]
+from .message import Frame
 
 
 class InvalidMessageError(Exception):
@@ -35,132 +21,40 @@ class InvalidMessageError(Exception):
 
 
 class Comms:
-    _buffer: bytes
-
     def __init__(self) -> None:
-        self._streaming: bool = True
-        self._sending: bool = False
-
-        self._buffer = b''
-
-        self._poller: uselect.poll = uselect.poll()
-
-        self._poller.register(sys.stdin.buffer, uselect.POLLIN)
+        pass
 
     async def read_frames(self) -> None:
-        if self._streaming:
-            while True:
-                frame = self._receive()
+        while True:
+            frame = self._receive()
 
-                if frame is None:
-                    # self._send_log('incomplete frame')
+            if frame is None:
+                # self._send_log('incomplete frame')
 
-                    continue
+                continue
 
-                self._send_log(f'frame data: {frame}')
+            self._send_log(f'frame data: {frame}')
 
-                self._buffer = b''
+            self._handle_frame(frame)
 
-                self._handle_frame(frame)
-
-                await asyncio.sleep_ms(1000)
-        else:
-            if self._sending:
-                count = 0
-
-                count_max = 10
-
-                while count < count_max:
-                    self._send_log(f'count: {count}')
-
-                    count += 1
-
-                    await asyncio.sleep_ms(1000)
-            else:
-                while True:
-                    events = self._poller.poll(0)
-
-                    if events:
-                        # self._send_log('got event')
-
-                        chunk = sys.stdin.buffer.read(1)
-
-                        if not chunk:
-                            # self._send_log('waiting...')
-
-                            await asyncio.sleep_ms(1000)
-
-                            continue
-
-                        # self._send_log(f'got chunk: {chunk}')
-
-                        self._buffer += chunk
-
-                        # self._send_log(
-                        #     f'read frame from buffer: {self._buffer}'
-                        # )
-
-                        frame = self._receive()
-
-                        if frame is None:
-                            # self._send_log('incomplete frame')
-
-                            continue
-
-                        # self._send_log(f'frame data: {frame}')
-
-                        self._buffer = b''
-
-                        self._handle_frame(frame)
-
-                    await asyncio.sleep_ms(1000)
+            await asyncio.sleep_ms(1000)
 
     def _send(self, payload: bytes) -> None:
         _ = sys.stdout.buffer.write(payload)
 
-    # def _read_frame(self, type: str = 'msg') -> Frame | None:
-    #     self._send_log(f'read frame from buffer: {self._buffer}')
-
-    #     result = umsgpack.loads(self._buffer)
-
-    #     self._send_log(f'frame data: {result}')
-
-    #     return None, 'msg', result
-
     def _receive(self) -> Frame | None:
-        if self._streaming:
-            payload = umsgpack.load(sys.stdin.buffer)
+        payload = umsgpack.load(sys.stdin.buffer)
 
-            if payload is None:
-                result = None
-            else:
-                if not (isinstance(payload, dict) and 'length' in payload
-                        and 'type' in payload and 'message' in payload):
-                    result = None
-                else:
-                    result = Frame(
-                        length=payload['length'],
-                        type=payload['type'],
-                        message=payload['message']
-                    )
+        if payload is None:
+            result = None
         else:
-            try:
-                payload = umsgpack.loads(self._buffer)
-            except umsgpack.InsufficientDataException:
-                payload = None
-
-            if payload is None:
+            if not (isinstance(payload, dict) and 'length' in payload
+                    and 'type' in payload and 'message' in payload):
                 result = None
             else:
-                if not (isinstance(payload, dict) and 'length' in payload
-                        and 'type' in payload and 'message' in payload):
-                    result = None
-                else:
-                    result = Frame(
-                        length=payload['length'],
-                        type=payload['type'],
-                        message=payload['message']
-                    )
+                result = Frame(
+                    **payload  # pyright: ignore[reportUnknownArgumentType]
+                )
 
         return result
 

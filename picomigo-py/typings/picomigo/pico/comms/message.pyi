@@ -1,6 +1,5 @@
 from typing import Any, override
 
-
 class Frame:
     length: int
     type: str
