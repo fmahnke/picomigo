@@ -20,7 +20,7 @@ class InvalidMessageError(Exception):
     pass
 
 
-class Comms:
+class LocalPeer:
     def __init__(self) -> None:
         pass
 
@@ -94,7 +94,7 @@ class Comms:
 
 
 async def main() -> None:
-    server = Comms()
+    server = LocalPeer()
 
     await server.read_frames()
 

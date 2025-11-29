@@ -3,14 +3,14 @@ import time
 
 from mktech.log import log
 
-from picomigo.pico.comms.client import Client
+from picomigo.pico.comms.remote_peer import RemotePeer
 
 
 class BasicHost:
-    _client: Client
+    _client: RemotePeer
 
     def __init__(self) -> None:
-        self._client = Client()
+        self._client = RemotePeer()
 
     def run(self):
         count = 0

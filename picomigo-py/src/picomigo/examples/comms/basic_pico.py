@@ -1,9 +1,9 @@
 import pico
-from pico.comms import Comms
+from pico.comms import LocalPeer
 
 
 async def main():
-    comms = Comms()
+    comms = LocalPeer()
 
     await comms.read_frames()
 

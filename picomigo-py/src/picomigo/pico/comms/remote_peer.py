@@ -7,7 +7,7 @@ from mktech.log import log
 from picomigo.pico.comms.message import Frame, decode_message
 
 
-class Client:
+class RemotePeer:
     _connection: serial.Serial
     _unpacker: msgpack.Unpacker
 
