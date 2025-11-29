@@ -15,7 +15,7 @@ async def main():
 
         mcp.porta.gpio = 0
 
-        mcp[output].output(1)
+        mcp[output].output(1)  # pyright: ignore[reportUnknownMemberType]
 
         output += 1
 
