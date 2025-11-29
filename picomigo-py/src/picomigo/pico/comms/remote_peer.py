@@ -3,7 +3,6 @@ import time
 import msgpack
 import serial
 from mktech.log import log
-
 from picomigo.pico.comms.message import Frame, decode_message
 
 
@@ -39,12 +38,12 @@ class RemotePeer:
                     log.debug(f'message={message}')
 
                     assert isinstance(message, Frame)
+
+                    results.append(message)
                 except ValueError as e:
                     log.error(f'error: {e}')
 
                 log.info(f'message: {message}')
-
-            time.sleep(0.5)
 
         return results
 
