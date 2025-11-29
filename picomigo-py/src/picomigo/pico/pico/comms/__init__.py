@@ -39,6 +39,9 @@ class LocalPeer:
 
             await asyncio.sleep_ms(1000)
 
+    def send(self, message: str) -> None:
+        self._send_frame('msg', message.encode())
+
     def _send(self, payload: bytes) -> None:
         _ = sys.stdout.buffer.write(payload)
 
@@ -91,15 +94,3 @@ class LocalPeer:
             self._send_frame('ok', frame.message.encode())
         else:
             self._send_frame('err', b'unknown type')
-
-
-async def main() -> None:
-    server = LocalPeer()
-
-    await server.read_frames()
-
-
-try:
-    asyncio.run(main())
-except KeyboardInterrupt:
-    pass
