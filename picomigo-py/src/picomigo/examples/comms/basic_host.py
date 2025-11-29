@@ -1,47 +1,112 @@
+import sys
 import time
 
+import msgpack
 import serial
 from mktech.log import log
 
-
-def build_frame(frame_type: str, payload: bytes) -> bytes:
-    header = f'{len(payload)}|{frame_type}|'.encode()
-
-    frame = header + payload + b'\n'
-
-    return frame
+from picomigo.pico.comms.message import Frame, decode_message
 
 
-def main():
-    with serial.Serial('/dev/ttyACM0', baudrate=115200, timeout=0.1) as port:
-        buffer: bytes = b''
+class BasicHost:
+    _type: str
 
-        while True:
-            log.info('read')
+    def __init__(self) -> None:
+        self._type = 'msgpack'
+        self._streaming: bool = True
 
-            data = port.read(port.in_waiting or 1)
+    def run(self):
+        with serial.Serial('/dev/ttyACM0', baudrate=115200,
+                           timeout=0.1) as port:
+            buffer: bytes = b''
 
-            log.info(f'process data: {data}')
+            if self._streaming:
+                # message_accum = b''
 
-            if data:
-                buffer += data
+                unpacker = msgpack.Unpacker(
+                    port, max_buffer_size=128, object_hook=decode_message
+                )
 
                 while True:
-                    newline_index = buffer.find(b'\n')
+                    message = None
 
-                    if newline_index == -1:
-                        break
+                    log.debug(f'waiting: {port.in_waiting}')
 
-                    line = buffer[:newline_index]
+                    # if port.in_waiting == 0:
+                    #     data = port.read(1)
 
-                    buffer = buffer[newline_index + 1:]
+                    #     assert len(data) == 0
 
-                    print(f'rx: {line.decode()}')
+                    if port.in_waiting == 0:
+                        _ = port.write(self._build_frame(b'hello'))
+                    else:
 
-            _ = port.write(build_frame('ping', b''))
+                        try:
+                            message = next(unpacker)
 
-            time.sleep(1)
+                            assert isinstance(message, Frame)
+                            # message = msgpack.unpack(port, max_buffer_size=128)
+
+                            # message_accum += message
+                        except ValueError as e:
+                            log.error(f'error: {e}')
+
+                        log.info(f'message: {message}')
+                        # log.info(
+                        #     f'message_a ({len(message_accum)}): {message_accum}'
+                        # )
+
+                    time.sleep(0.5)
+            else:
+                count = 0
+
+                count_max = 1
+
+                while count < count_max:
+                    log.debug('read')
+
+                    data = port.read(port.in_waiting or 1)
+
+                    log.debug(f'process data: {data}')
+
+                    if data:
+                        buffer += data
+
+                        message: str | None = None
+
+                        try:
+                            message = msgpack.unpackb(buffer)
+                        except msgpack.exceptions.ExtraData:
+                            message = 'error: extra data'
+
+                            buffer = b''
+
+                        if message:
+                            print(f'rx: {message}')
+
+                    time.sleep(1)
+
+                count_max += 1
+
+    def _build_frame(self, payload: bytes) -> bytes:
+        length = len(payload)
+
+        frame_ = Frame(length, 'msg', payload.decode('utf-8'))
+
+        frame = msgpack.packb(frame_, default=encode_frame)
+
+        return frame
+
+
+def encode_frame(frame: Frame):
+    return {
+        'length': frame.length, 'type': frame.type, 'message': frame.message
+    }
 
 
 if __name__ == '__main__':
-    main()
+    log.remove()
+
+    _ = log.add(sys.stderr, level='DEBUG')
+
+    BasicHost().run()
