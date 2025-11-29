@@ -444,7 +444,9 @@ class VgmParser:
                     case Command.WAIT_735_SAMPLES:
                         output = '0x01,  // WAIT_735_SAMPLES\n'
                     case Command.WAIT_N_SAMPLES:
-                        output = f'0x61, {data[0]:#02X}, {data[1]:#02X},  // WAIT_N_SAMPLES\n'
+                        assert data is not None
+
+                        output = f'0x61, {data[0]:#02X}, {data[1]:#02X},  // WAIT_N_SAMPLES\n'  # noqa: E501
                     case Command.END_OF_DATA:
                         output = '// END_OF_DATA\n'
                     case _:
