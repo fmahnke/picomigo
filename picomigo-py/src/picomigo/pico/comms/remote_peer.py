@@ -37,13 +37,15 @@ class RemotePeer:
 
                     log.debug(f'message={message}')
 
-                    assert isinstance(message, Frame)
-
-                    results.append(message)
                 except ValueError as e:
                     log.error(f'error: {e}')
 
                 log.info(f'message: {message}')
+
+                if not isinstance(message, Frame):
+                    log.error(f'message type {type(message)} not expected')
+                else:
+                    results.append(message)
 
         return results
 
