@@ -50,15 +50,18 @@
 
 #         # await asyncio.sleep(1.0)
 
+import machine
 import pico
 # pico.run(main)
 import uasyncio as asyncio
+from machine import Pin
 from mcp23017 import MCP23017
 from pico import i2c
 from pico.comms import LocalPeer
 from pico.logger import log
 from pico.modules import input
 from pico.modules.events import signal
+from vl53l0x import VL53L0X
 
 _button_on = signal('button_on')
 _button_off = signal('button_off')
@@ -73,13 +76,32 @@ _encoder_turn_right_fast = signal('encoder_turn_right_fast')
 
 
 class PicoSensors:
+    class LM393:
+        _out_pin: Pin
+
+        def __init__(self, out_pin: int) -> None:
+            self._out_pin = Pin(out_pin, mode=Pin.IN)
+
+        def value(self) -> int:
+            return self._out_pin.value()
+
     _last_event: str | None
     _count: int = 0
     _mcp: MCP23017 | None
     _comms: LocalPeer
     _loop_sleep_ms: int
+    _i2c_0: machine.I2C
+    _vl53: VL53L0X
+    _lm393: LM393
 
     def __init__(self) -> None:
+        self._i2c_0 = machine.I2C(0, scl=5, sda=4, freq=400000)
+
+        self._vl53 = VL53L0X(self._i2c_0)
+        self._vl53.measurement_timing_budget = 200000  # microseconds
+
+        self._lm393 = PicoSensors.LM393(3)
+
         self._comms = LocalPeer()
 
         self._mcp = None
@@ -162,6 +184,8 @@ class PicoSensors:
     async def main_events(self):
         self._mcp = i2c.expander_0
 
+        self._vl53.start_continuous()
+
         def button_on(button: str) -> None:
             # print(f'button on: {button}')
 
@@ -189,6 +213,17 @@ class PicoSensors:
                 # self._print_status()
 
                 self._need_update = False
+
+            distance = self._vl53.range
+
+            if not isinstance(distance, int):
+                self._comms.send(f'distance error type={type(distance)}')
+            else:
+                self._comms.send(f'distance {distance}')
+
+            # lm393 = self._lm393.value()
+
+            # self._comms.send(f'lm393 {lm393}')
 
             await asyncio.sleep_ms(self._loop_sleep_ms)
 
