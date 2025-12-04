@@ -90,6 +90,10 @@ do_build_rsync rotary_encoder \
     -avzr \
     lib/micropython_rotary_encoder/micropython_rotary_encoder/ _build/lib/rotary_encoder
 
+do_build_rsync vl53l0x \
+    -avzr \
+    lib/vl53l0x/vl53l0x.py _build/lib/vl53l0x.py
+
 do_build_rsync typing \
     -avzr \
     lib/typing/* _build/lib
