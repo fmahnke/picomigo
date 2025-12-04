@@ -1,4 +1,7 @@
+from os.path import isfile
+
 from mktech.error import Err, Error, Ok, Result
+from mktech.log import log
 
 from . import pico_sdk
 from .board import Board
@@ -22,7 +25,14 @@ def execute(target: str, board: Board,
 
             target_path = f'{top_build_path}-{board_path}/firmware.uf2'
         case _:
-            raise NotImplementedError
+            # Try target as a path on the filesystem
+
+            if isfile(target):
+                target_path = target
+            else:
+                return Err(Error(f'target file not found: {target}'))
+
+    log.info(f'load {target_path}')
 
     match picotool.load(f'-f {target_path}'):
         case Err(e):
